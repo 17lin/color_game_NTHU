@@ -36,7 +36,7 @@ function initCards() {
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
-                this.style.backgroundColor = "#232323";
+                this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
         });
@@ -54,6 +54,7 @@ function reset() {
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
+        cards[i].style.opacity = 1;
         if (colors[i]) {
             cards[i].style.display = "block"
             cards[i].style.backgroundColor = colors[i];
@@ -72,6 +73,7 @@ function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
         //change each color to match given color
+        cards[i].style.opacity = 1;
         cards[i].style.backgroundColor = color;
     }
 }
