@@ -118,5 +118,7 @@ button:hover {
     background-color: steelblue;
 }
 #mode button {
+	margin: 0;
+	padding: 0.3rem;
 	display: inline;
 }
