@@ -3,6 +3,8 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var numCardsHard = 6;
+var gameMode = new Number(0);
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,8 +15,17 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
 
 function init() {
+    easyButton.style.color = "white";
+    easyButton.style.background = "steelblue";
+    hardButton.style.color = "#484848";
+    hardButton.style.background = "white";
+    nightmareButton.style.color = "#484848";
+    nightmareButton.style.background = "white";
     initCards();
     reset();
 }
@@ -45,7 +56,8 @@ function initCards() {
 
 function reset() {
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    if(gameMode == 0) colors = generateRandomColors(numCards);
+    else colors = generateRandomColors(numCardsHard);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
@@ -66,7 +78,40 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+  reset();
+})
+
+easyButton.addEventListener("click", function() {
+  easyButton.style.color = "white";
+  easyButton.style.background = "steelblue";
+  hardButton.style.color = "#484848";
+  hardButton.style.background = "white";
+  nightmareButton.style.color = "#484848";
+  nightmareButton.style.background = "white";
+  gameMode = 0;
+  reset();
+})
+
+hardButton.addEventListener("click", function() {
+  easyButton.style.color = "#484848";
+  easyButton.style.background = "white";
+  hardButton.style.color = "white";
+  hardButton.style.background = "steelblue";
+  nightmareButton.style.color = "#484848";
+  nightmareButton.style.background = "white";
+  gameMode = 1;
+  reset();
+})
+
+nightmareButton.addEventListener("click", function() {
+  easyButton.style.color = "#484848";
+  easyButton.style.background = "white";
+  hardButton.style.color = "#484848";
+  hardButton.style.background = "white";
+  nightmareButton.style.color = "white";
+  nightmareButton.style.background = "steelblue";
+  gameMode = 2;
+  reset();
 })
 
 function changeColors(color) {
