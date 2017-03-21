@@ -32,7 +32,19 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
+.mode{
+	padding: 0 1rem;
+	display: inline;
+}
+.mode:hover{
+	color: steelblue;
+}
 
+.selected{
+	color:white;
+	background-color: steelblue;
+	border-radius: 1rem;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
