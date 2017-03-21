@@ -28,6 +28,27 @@ body {
 	flex-direction: row;
 }
 
+.mode {
+	display: inline-block;
+	width: 20%;	
+	border-radius: 1rem;
+	margin-left: 1%;
+	text-align: center;
+	cursor: pointer;
+}
+
+.mode:hover {
+	background: powderblue;
+	color: #343434;
+	font-weight: 900;
+}
+
+.selected {
+	font-weight: bold;
+	background-color: steelblue;
+	color: white;
+}
+
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
@@ -83,10 +104,6 @@ h1 {
 	cursor: pointer;
 }
 
-.selected {
-    color: white;
-    background: steelblue;
-}
 
 button {
 	display: block;
