@@ -1,6 +1,7 @@
 window.onload = function() {
     init();
 };
+var t;
 var count = 5;
 var gameOver = false;
 var colors = [];
@@ -38,6 +39,8 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+                document.getElementById("timer").innerHTML = "";
+                resetButton.style.display = "block";
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -52,7 +55,7 @@ function initCards() {
 }
 
 function reset() {
-    if(Mode==="Night"){
+    if(Mode==="Night" && gameOver===true){
       count = 5;
       clearInterval(counter);
       counter = setInterval(timer, 1000);
@@ -62,6 +65,8 @@ function reset() {
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
+    document.getElementById("timer").innerHTML = "";
+    resetButton.style.display = "block";
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
@@ -76,8 +81,6 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
-    document.getElementById("timer").innerHTML = "";
-    resetButton.style.display = "block";
 }
 
 resetButton.addEventListener("click", function() {
@@ -90,7 +93,6 @@ hardMode.addEventListener("click", function() {
     Mode = "Hard";
     init();
 
-    // timer();
 })
 
 easyMode.addEventListener("click", function() {
@@ -143,10 +145,12 @@ function randomColor() {
 }
 
 function timer() {
-    if (Mode === "Night") {
+    if (Mode === "Night" && gameOver === false) {
       document.getElementById("timer").innerHTML = count;
       resetButton.style.display = "none";
+      if(gameOver)return;
         if (count == 0) {
+          gameOver = true;
             document.getElementById("timer").innerHTML = "";
             messageDisplay.textContent = "TIMEOUT!";
             for (var i = 0; i < cards.length; i++) {
@@ -165,5 +169,15 @@ function timer() {
             return;
         }
         count = count - 1;
+        blink(1);
+    }
+}
+
+function blink(num) {
+    body.style.backgroundColor = "white";
+    if(num)
+      t=setTimeout("blink(0)", 100);
+    else {
+      body.style.backgroundColor = "#232323";
     }
 }
