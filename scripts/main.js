@@ -27,10 +27,12 @@ function initbtn(){
     easy.addEventListener("click",function(){
       mode = "easy";
       easy.style.backgroundColor = "steelblue";
+      hard.style.backgroundColor = "white";
     });
     hard.addEventListener("click",function(){
       mode = "hard";
-      hard.style.backgroundColor = "steelblueF";
+      hard.style.backgroundColor = "steelblue";
+      easy.style.backgroundColor = "white";
     });
 }
 function initCards() {
