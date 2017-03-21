@@ -18,7 +18,7 @@ var mode = document.querySelector(".mode");
 var easy = document.querySelector("#easy");
 var hard = document.querySelector("#hard");
 var nightmare = document.querySelector("#nightmare");
-var count = document.getElementById("countdown");
+var countdown = document.getElementById("#countdown");
 
 function init() {
     initModes();
@@ -50,9 +50,11 @@ function initModes() {
         easy.classList.remove('selected');
         hard.classList.remove('selected');
         numCards = 6;
+          resetButton.style.display = "none";
         var now = new Date().getSeconds();
         var start = now + 5;
         var id = setInterval(tick(start), 1000);
+
         initCards();
         reset();
     });
