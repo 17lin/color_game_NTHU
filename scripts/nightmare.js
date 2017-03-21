@@ -41,13 +41,13 @@ function initCards() {
                 gameOver = true;
                 resetButton.style.display="block";
                 right=1;
-                if(right==1){
-                /*  clearTimeout(setTimeout(T5, 0));
-                  clearTimeout(setTimeout(T4, 1000););
-                  clearTimeout(setTimeout(T3, 2000););
-                  clearTimeout(setTimeout(T2, 3000););
-                  clearTimeout(setTimeout(T1, 4000););
-                  clearTimeout(setTimeout(T0, 5000););*/
+                if(gameOver==true){
+                  clearTimeout(t5);
+                  clearTimeout(t4);
+                  clearTimeout(t3);
+                  clearTimeout(t2);
+                  clearTimeout(t1);
+                  clearTimeout(t0);
                 }
 
                 time.textContent ="";
@@ -122,15 +122,18 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+var t5,t4,t3,t2,t1,t0;
+
 function cntdn(){
-  var time=5;
+  gameOver=false;
+  right=0;
   resetButton.style.display="none";
-  setTimeout(T5, 0);
-  setTimeout(T4, 1000);
-  setTimeout(T3, 2000);
-  setTimeout(T2, 3000);
-  setTimeout(T1, 4000);
-  setTimeout(T0, 5000);
+  t5= setTimeout(T5, 0);
+  t4= setTimeout(T4, 1000);
+  t3= setTimeout(T3, 2000);
+  t2= setTimeout(T2, 3000);
+  t1= setTimeout(T1, 4000);
+  t0= setTimeout(T0, 5000);
 }
 
 function T5(){
