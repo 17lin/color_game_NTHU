@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -11,28 +11,29 @@
 	<title>Color Game</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
-
 <body>
 	<div id="stripe">
-		<div id="navbar" class="container">
-			<span id="brand" href="#">Color Game</span>
-			<span href="#" id="about">DataLab</span>
-		</div>
+		<span id="Color">Color Game</span>
+		<span id="message"></span>
+		<button id="Easy" class="mode">Easy</button>
+		<button id="Hard" class="mode">Hard</button>
+		<span id="DataLab">DataLab</span>
 	</div>
+	<h1><br>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+  <span id="colorDisplay">RGB</span><br>
+  WHAT'S THE COLOR?</h1>
 
-	<div id="card-container" class="container">
-		<div class="card"></div>
-		<div class="card"></div>
-		<div class="card"></div>
-	</div>
-
-	<div id="footer">
-		<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
-	</div>
-
-	<script type="text/javascript" src="scripts/main.js"></script>
+<div id="container">
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+</div>
+<button id="reset">New Color</button>
+<script type="text/javascript" src="scripts/main.js"></script>
 </body>
 
 </html>
