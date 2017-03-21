@@ -28,6 +28,12 @@ body {
 	flex-direction: row;
 }
 
+.mode {
+	display: inline;
+	margin: 0rem 0rem;
+	padding: 0rem 1rem;
+}
+
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
@@ -108,4 +114,8 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+.selected {
+	background-color: rgb(159, 103, 198);
 }
