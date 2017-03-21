@@ -89,23 +89,36 @@ h1 {
 }
 
 button {
-	display: block;
+	display: inline;
 	margin: 3rem auto;
 	padding: 1rem;
 	outline: none;
 	border: none;
-    border-radius: 999rem;
-    background-color: white;
+  border-radius: 999rem;
 	font-size: 1rem;
     font-weight: 700;
-    color: #484848;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+button#reset{
+	display: block;
+	 color: #484848;
+}
 
-button:hover {
+#reset:hover {
     color: white;
     background-color: steelblue;
+}
+button.mode {
+	margin: 0;
+	font-weight: bold;
+	padding: 0 1rem;
+	color: black;
+	background-color:white;
+}
+button.mode:hover{
+	color:red;
+	background-color: white;
 }
