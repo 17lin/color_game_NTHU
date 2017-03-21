@@ -109,3 +109,29 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+.mode{
+    color:black;
+    margin: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding:0;
+    display: inline;
+    
+}
+.modeselected{
+    color:black;
+    margin: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding:0;
+    display: inline;
+}
+.modeselected2{
+    color:black;
+    margin: 1rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding:0;
+    display: inline;
+}
