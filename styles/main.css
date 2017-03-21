@@ -18,15 +18,16 @@ body {
 
 #stripe {
 	background: white;
-	padding: 1rem;
+	height: 30px;
+	text-align: center;
 	color: #484848;
 }
 
-#navbar {
+/*#navbar {
 	display: -webkit-flex;
     display: flex;
 	flex-direction: row;
-}
+}*/
 
 #brand {
 	font-weight: bold;
@@ -88,7 +89,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+#reset{
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -108,4 +109,21 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+.mode{outline: none;
+	color: #2C8E99;
+	font-family: "Raleway", Sans-serif;
+	/*text-transform: uppercase;*/
+	font-size: 1em;
+	background-color: white;
+	height: 100%;
+	letter-spacing: 1px;
+	transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	o-transition: all 0.3s;
+}
+.selected {
+	background-color: #2C8E99;
+	color: white;
 }
