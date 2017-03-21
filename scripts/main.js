@@ -13,13 +13,25 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
+var time = document.querySelector("#time");
+var nightmareTrigger = false;
 function init() {
     initCards();
+    
     reset();
+    if(nightmareTrigger === true){
+        time.textContent = 46;
+    }
+    else{
+        time.textContent = 44444;
+    }
 }
 
 function initCards() {
+    
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -41,9 +53,12 @@ function initCards() {
             }
         });
     }
+    
+    
 }
 
 function reset() {
+    //time.textContent = 5;
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -104,3 +119,45 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+
+
+
+easyButton.addEventListener("click", function() {
+    easyButton.style.backgroundColor = "gray";
+    easyButton.style.borderRadius= "25px";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.borderRadius= "0px";
+    nightmareButton.style.backgroundColor = "white";
+    nightmareButton.style.borderRadius = "0px";
+    numCards = 3;
+    nightmareTrigger = false;
+    reset();
+})
+
+hardButton.addEventListener("click", function() {
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.borderRadius= "0px";
+    hardButton.style.backgroundColor = "gray";
+    hardButton.style.borderRadius= "25px";
+    nightmareButton.style.backgroundColor = "white";
+    nightmareButton.style.borderRadius = "0px";
+    numCards = 6;
+    nightmareTrigger = false;
+    reset();
+})
+
+nightmareButton.addEventListener("click", function() {
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.borderRadius= "0px";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.borderRadius= "0px";
+    nightmareButton.style.backgroundColor = "gray";
+    nightmareButton.style.borderRadius = "25px";
+    numCards = 6;
+    nightmareTrigger = true;
+    
+    reset();
+})
+
+
