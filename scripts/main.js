@@ -2,7 +2,8 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var t;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,9 +15,45 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var md = document.querySelectorAll(".mode");
+var mode;
+
 function init() {
     initCards();
+    initMd();
     reset();
+    resetMd(0);
+}
+
+function initMd() {
+    for(var i=0; i<md.length; i++){
+        md[i].addEventListener("click", function(){
+            resetMd(this.textContent);
+            reset();
+        });
+    }
+    resetMd("Easy");
+}
+
+function resetMd(n) {
+    for(var i=0; i<md.length; i++){
+        md[i].style.backgroundColor = "white";
+    }
+    switch(n){
+        case "Easy":
+            mode = 0;
+            break;
+        case "Hard":
+            mode = 1;
+            break;
+        case "Nightmare":
+            mode = 2;
+            break;
+        default:
+            mode = 0;
+            break;
+    }
+    md[mode].style.backgroundColor = "rgb(22, 240, 227)";
 }
 
 function initCards() {
@@ -31,7 +68,8 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
+                resetDisplay.textContent = "Play Again";
+                resetButton.style.opacity = 1;
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -45,6 +83,7 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    numCards = mode==0?3:6;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -63,6 +102,8 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+    if(mode==2)
+        nightmare();
 }
 
 resetButton.addEventListener("click", function() {
@@ -103,4 +144,24 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function nightmare() {
+    t = 5;
+    resetButton.style.opacity = 0;
+    timeout();
+}
+
+function timeout(){
+    setTimeout(function(){
+        t = 0;
+        if(!gameOver){
+            messageDisplay.textContent = "Timeout !";
+            resetDisplay.textContent = "Play Again"
+            changeColors("#FFF");
+            body.style.backgroundColor = pickedColor;
+            gameOver = true;
+            resetButton.style.opacity = 1;
+        }
+    }, 5000);
 }

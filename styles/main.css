@@ -109,3 +109,16 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+.mode {
+	font-size: 1rem;
+	margin: 0 0.5rem;
+	display: inline;
+	background-color: white;
+	padding: 0.2rem 0.4rem;
+	border-radius: 0.5rem;
+}
+
+.mode:hover {
+	color: rgb(22, 240, 227);
+}
