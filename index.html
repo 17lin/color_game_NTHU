@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<title>Color Game</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
@@ -15,23 +15,35 @@
 <body>
 	<div id="stripe">
 		<div id="navbar" class="container">
-			<span id="brand" href="#">Color Game</span>
+			<span id="brand" href="#">Color Game</span>			
+			<button id="easy_mode"><span>Easy</span></button>
+			<button id="hard_mode"><span>Hard</span></button>
+			<button id="nightmare_mode"><span>Nightmare</span></button>
 			<span href="#" id="about">DataLab</span>
+
 		</div>
 	</div>
+	<div class = "blink" id = "blink">
+		<h1>
+			<span id="color-picked">RGB</span>
+			<br>
+			<span id="message">What's the color?</span>
+			<span class = "timer" id = "timer">5</span>
+		</h1>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+		<div id="card-container" class="container">
+			<div class="card"></div>
+			<div class="card"></div>
+			<div class="card"></div>
+			<div class="card"></div>
+			<div class="card"></div>
+			<div class="card"></div>		
+		</div>
 
-	<div id="card-container" class="container">
-		<div class="card"></div>
-		<div class="card"></div>
-		<div class="card"></div>
+		<div id="footer">
+			<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
+		</div>
 	</div>
-
-	<div id="footer">
-		<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
-	</div>
-
 	<script type="text/javascript" src="scripts/main.js"></script>
 </body>
 
