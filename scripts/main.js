@@ -3,7 +3,7 @@ window.onload = function() {
 };
 
 var timer, tmpTimer, remain, timeBoard;
-var mode = 1;
+var mode = 1, pre=0;
 var btns = [];
 var numCards = 3;
 var gameOver = false;
@@ -33,6 +33,7 @@ function initBtns() {
     if (mode===3) {
       clearInterval(timer);
     }
+    pre=mode;
     mode=1;
     event.target.classList.add("selected");
     numCards=3;
@@ -48,6 +49,7 @@ function initBtns() {
     if (mode===3) {
       clearInterval(timer);
     }
+    pre=mode;
     mode=2;
     event.target.classList.add("selected");
     numCards=6;
@@ -63,6 +65,7 @@ function initBtns() {
     if (mode===3) {
       clearInterval(timer);
     }
+    pre=mode;
     mode=3;
     event.target.classList.add("selected");
     numCards=6;
@@ -121,7 +124,10 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
 
-    if (mode==3) {
+    if (pre===3) {
+      clearInterval(timer);
+    }
+    if (mode===3) {
       timer=setInterval(countdown,1000);
       resetButton.style.visibility="hidden";
       timeBoard.style.visibility="visible";
