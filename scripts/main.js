@@ -14,6 +14,7 @@ var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
+var numDisplay = document.querySelector("#num");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
@@ -33,30 +34,54 @@ function init() {
 }
 
 function count4() {
-    messageDisplay.textContent = "What's the Color? 4";
+    setTimeout(function() {
+      body.style.backgroundColor = "#232323";
+    }, 120);
+    body.style.backgroundColor = "#FFFFFF";
+    timer = 4;
+    numDisplay.textContent = timer;
     count = setTimeout(count3, 1000);
 }
 
 function count3() {
-    messageDisplay.textContent = "What's the Color? 3";
+    setTimeout(function() {
+      body.style.backgroundColor = "#232323";
+    }, 120);
+    body.style.backgroundColor = "#FFFFFF";
+    timer = 3;
+    numDisplay.textContent = timer;
     count = setTimeout(count2, 1000);
 }
 
 function count2() {
-    messageDisplay.textContent = "What's the Color? 2";
+    setTimeout(function() {
+      body.style.backgroundColor = "#232323";
+    }, 120);
+    body.style.backgroundColor = "#FFFFFF";
+    timer = 2;
+    numDisplay.textContent = timer;
     count = setTimeout(count1, 1000);
 }
 
 function count1() {
-    messageDisplay.textContent = "What's the Color? 1";
+    setTimeout(function() {
+      body.style.backgroundColor = "#232323";
+    }, 120);
+    body.style.backgroundColor = "#FFFFFF";
+    timer = 1;
+    numDisplay.textContent = timer;
     count = setTimeout(count0, 1000);
 }
 
 function count0() {
     messageDisplay.textContent = "TIMEOUT!";
+    numDisplay.textContent = "";
     changeColors("#FFF");
     body.style.backgroundColor = pickedColor;
-    count = gameOver = true;
+    gameOver = true;
+    resetDisplay.textContent = "Play Again"
+    resetButton.style.display = "block";
+    clearTimeout(count);
 }
 
 function initCards() {
@@ -71,13 +96,20 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
+                numDisplay.textContent = "";
                 resetDisplay.textContent = "Play Again"
+                resetButton.style.display = "block";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                clearTimeout(count);
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
+                if(gameMode == 2) {
+                  messageDisplay.textContent = "Try Again "
+                  numDisplay.textContent = timer;
+                }
             }
         });
     }
@@ -91,13 +123,15 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "New Color";
+    messageDisplay.textContent = "What's the Color?";
     if(gameMode == 2) {
       timer = 5;
+      messageDisplay.textContent = "What's the Color? ";
       count = setTimeout(count4, 1000);
-      messageDisplay.textContent = "What's the Color? 5";
-    }else {
-      messageDisplay.textContent = "What's the Color?";
+      numDisplay.textContent = timer;
+      resetButton.style.display = "none";
+      resetDisplay.textContent = "";
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -125,6 +159,9 @@ easyButton.addEventListener("click", function() {
   nightmareButton.style.color = "#484848";
   nightmareButton.style.background = "white";
   clearTimeout(count);
+  numDisplay.textContent = "";
+  resetDisplay.textContent = "New Color";
+  resetButton.style.display = "block";
   gameMode = 0;
   reset();
 })
@@ -137,6 +174,9 @@ hardButton.addEventListener("click", function() {
   nightmareButton.style.color = "#484848";
   nightmareButton.style.background = "white";
   clearTimeout(count);
+  numDisplay.textContent = "";
+  resetDisplay.textContent = "New Color";
+  resetButton.style.display = "block";
   gameMode = 1;
   reset();
 })
@@ -149,6 +189,9 @@ nightmareButton.addEventListener("click", function() {
   nightmareButton.style.color = "white";
   nightmareButton.style.background = "steelblue";
   clearTimeout(count);
+  numDisplay.textContent = "";
+  resetDisplay.textContent = "New Color";
+  resetButton.style.display = "block";
   gameMode = 2;
   reset();
 })

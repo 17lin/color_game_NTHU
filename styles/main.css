@@ -112,8 +112,7 @@ button:hover {
 
 #easy {
 	display: block;
-	margin: auto;
-	padding: 0 0.5rem;
+	padding: 0 0.8rem;
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -134,8 +133,7 @@ button:hover {
 
 #hard {
 	display: block;
-	margin: auto;
-	padding: 0 0.5rem;
+	padding: 0 0.8rem;
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -157,8 +155,7 @@ button:hover {
 
 #nightmare {
 	display: block;
-	margin: auto;
-	padding: 0 0.5rem;
+	padding: 0 0.8rem;
 	outline: none;
 	border: none;
     border-radius: 999rem;
