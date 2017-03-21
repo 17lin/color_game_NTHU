@@ -6,6 +6,16 @@ var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
+
+var mode_flag = false;
+var time_flag = true;
+var timecount = 5;
+var easyButton = document.getElementById('easy');
+var hardButton = document.getElementById('hard');
+var timeDisplay = document.getElementById('timer');
+
+
+
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
@@ -13,11 +23,77 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var card_container = document.querySelector('#card-container');
 
+setInterval(timer,1000);
+//setInterval(Blink,1000);
 function init() {
+    
+    timecount = 5;
+    time_flag = true;
+    timeDisplay.textContent = " "+timecount;
+    if(mode_flag == false){
+        easyButton.style.color = "white";
+        easyButton.style.backgroundColor = "steelblue";
+        hardButton.style.backgroundColor = "white";
+        hardButton.style.color = "black";
+
+    }else{
+         easyButton.style.backgroundColor = "white";
+        easyButton.style.color = "black";
+        hardButton.style.backgroundColor = "steelblue";
+        hardButton.style.color = "white";
+    }
     initCards();
     reset();
 }
+function Blink(){
+    var d = new Date();
+
+    if(gameOver != true){
+        if(d.getSeconds()%2 == 1)
+        body.style.backgroundColor = "white";
+        else
+        body.style.backgroundColor = "#232323";
+    }
+}
+function timer(){
+    var d = new Date();
+    if(time_flag == false){
+        timecount = 5;
+    }else{
+        if(gameOver != true){
+    
+            timecount--;
+            timeDisplay.textContent = "  "+timecount;
+            if(timecount == 0){
+                gameOver = true;
+                time_flag = false;
+                messageDisplay.textContent = "TimeOut!";
+                resetDisplay.textContent = "Play Again"
+                timeDisplay.textContent = " ";
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
+            }
+        }
+    }
+}
+
+function addCards(num){
+    
+    for(var i=0; i<num; i++){
+        var node = document.createElement('div');
+        node.setAttribute('class','card');
+        card_container.appendChild(node);
+    }
+    cards = document.querySelectorAll('.card');
+}
+
+function removeCards(){
+    while(card_container.firstChild){card_container.removeChild(card_container.firstChild);}
+    cards = document.querySelectorAll('.card');
+}
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -32,6 +108,7 @@ function initCards() {
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                timeDisplay.textContent = " ";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -44,6 +121,9 @@ function initCards() {
 }
 
 function reset() {
+    timecount = 5;
+    timeDisplay.textContent = " "+timecount;
+    time_flag = true;
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -104,3 +184,58 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+/*    Button   */
+
+easyButton.addEventListener('mouseover',function(){
+    if(mode_flag == true){
+        this.style.color = "blue";
+    }
+});
+easyButton.addEventListener('mouseout',function(){
+    if(mode_flag == true){
+        this.style.color = "black";
+    }
+});
+easyButton.addEventListener('click',function(){
+    if(mode_flag == true){
+        removeCards();
+        addCards(3);
+        numCards = 3;
+        init();
+        mode_flag = false;
+    }
+    this.style.backgroundColor = "steelblue";
+    this.style.color = "white";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.color = "black";
+});
+
+
+
+
+hardButton.addEventListener('mouseover',function(){
+    if(mode_flag == false){
+        this.style.color = "blue";
+    }
+});
+hardButton.addEventListener('mouseout',function(){
+    if(mode_flag == false){
+        this.style.color = "black";
+    }
+});
+hardButton.addEventListener('click',function(){
+    if(mode_flag == false){
+        this.style.color = "white";
+        removeCards();
+        addCards(6);
+        numCards = 6;
+        init();
+        mode_flag = true;
+
+    }
+    this.style.backgroundColor = "steelblue";
+    this.style.color = "white";
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.color = "black";
+});
