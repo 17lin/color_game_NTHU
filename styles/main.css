@@ -83,6 +83,10 @@ h1 {
 	cursor: pointer;
 }
 
+.ham {
+	opacity: 1;
+}
+
 .selected {
     color: white;
     background: steelblue;
@@ -108,4 +112,18 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+#easy {
+	display: inline;
+	margin : auto auto auto auto;
+	padding: 0.5rem;
+}
+
+#hard {
+	display: inline;
+	margin : auto auto auto auto;
+	padding: 0.5rem;
+	background-color: blue;
+	color: white;
 }
