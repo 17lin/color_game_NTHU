@@ -13,10 +13,14 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy = document.getElementById("easy");
+var hard = document.getElementById("hard");
+var nightmare = document.getElementById("nightmare");
 
 function init() {
     initCards();
     reset();
+    setDifficulty();
 }
 
 function initCards() {
@@ -103,4 +107,32 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+
+function setDifficulty() {
+    easy.addEventListener("mouseover", mouseover);
+    easy.addEventListener("click", click);
+    easy.addEventListener("mouseout", mouseout);
+    hard.addEventListener("mouseover", mouseover);
+    hard.addEventListener("click", click);
+    hard.addEventListener("mouseout", mouseout);
+    nightmare.addEventListener("mouseover", mouseover);
+    nightmare.addEventListener("click", click);
+    nightmare.addEventListener("mouseout", mouseout);
+}
+
+function click() {
+    this.style.color = 'white';
+    this.style.backgroundColor = '#9999EE';
+}
+
+function mouseover() {
+    this.style.color = '#EEEEAA';
+    this.style.backgroundColor = 'transparent';
+}
+
+function mouseout() {
+    this.style.color = 'gray';
+    this.style.backgroundColor = 'transparent';
 }
