@@ -17,7 +17,10 @@ var resetDisplay = document.querySelector("#reset span");
 var easyButton = document.querySelector("#easy-mode");
 var hardButton = document.querySelector("#hard-mode");
 var nightmareButton = document.querySelector("#nightmare");
+
 var timerDisplay = document.querySelector("#timer");
+var flashInterval;
+var timerInterval;
 var time = 5;
 
 
@@ -41,9 +44,11 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
+                timerDisplay.textContent = "";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                resetButton.style.visibility = "visible";
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -55,10 +60,14 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    time = 5;
     if (state == 3){
       resetButton.style.visibility = 'hidden';
+      timerDisplay.textContent = time;
+      timerStart();
+    } else{
+      resetButton.style.visibility = 'visible';
     }
-    time = 5;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -83,6 +92,30 @@ hardButton.addEventListener("click", function() {
   if(state!=2){
     state = 2;
     numCards = 6;
+    document.getElementById("hard-mode").onmouseover = function()
+    {
+      this.style.color = "white";
+    }
+    document.getElementById("hard-mode").onmouseleave = function()
+    {
+      this.style.color = "white";
+    }
+    document.getElementById("nightmare").onmouseover = function()
+    {
+      this.style.color = "steelblue";
+    }
+    document.getElementById("easy-mode").onmouseover = function()
+    {
+      this.style.color = "steelblue";
+    }
+    document.getElementById("nightmare").onmouseleave = function()
+    {
+      this.style.color = "black";
+    }
+    document.getElementById("easy-mode").onmouseleave = function()
+    {
+      this.style.color = "black";
+    }
     hardButton.style.backgroundColor = "steelblue";
     hardButton.style.color = "white";
     easyButton.style.backgroundColor = "white";
@@ -99,6 +132,30 @@ easyButton.addEventListener("click", function() {
     if(state != 1){
       state = 1;
       numCards = 3;
+      document.getElementById("easy-mode").onmouseover = function()
+      {
+        this.style.color = "white";
+      }
+      document.getElementById("easy-mode").onmouseleave = function()
+      {
+        this.style.color = "white";
+      }
+      document.getElementById("hard-mode").onmouseover = function()
+      {
+        this.style.color = "steelblue";
+      }
+      document.getElementById("nightmare").onmouseover = function()
+      {
+        this.style.color = "steelblue";
+      }
+      document.getElementById("hard-mode").onmouseleave = function()
+      {
+        this.style.color = "black";
+      }
+      document.getElementById("nightmare").onmouseleave = function()
+      {
+        this.style.color = "black";
+      }
       easyButton.style.backgroundColor = "steelblue";
       easyButton.style.color = "white";
       hardButton.style.backgroundColor = "white";
@@ -116,6 +173,31 @@ nightmareButton.addEventListener("click", function() {
       state = 3;
       numCards = 6;
       time = 5;
+      resetButton.style.visibility = 'hidden';
+      document.getElementById("nightmare").onmouseover = function()
+      {
+        this.style.color = "white";
+      }
+      document.getElementById("nightmare").onmouseleave = function()
+      {
+        this.style.color = "white";
+      }
+      document.getElementById("hard-mode").onmouseover = function()
+      {
+        this.style.color = "steelblue";
+      }
+      document.getElementById("easy-mode").onmouseover = function()
+      {
+        this.style.color = "steelblue";
+      }
+      document.getElementById("hard-mode").onmouseleave = function()
+      {
+        this.style.color = "black";
+      }
+      document.getElementById("easy-mode").onmouseleave = function()
+      {
+        this.style.color = "black";
+      }
       nightmareButton.style.backgroundColor = "steelblue";
       nightmareButton.style.color = "white";
       easyButton.style.backgroundColor = "white";
@@ -124,40 +206,46 @@ nightmareButton.addEventListener("click", function() {
       hardButton.style.color = "black";
       initCards();
       reset();
-      resetButton.style.visibility = 'hidden';
-      var timeoutVar = setTimeout(myTimeout, 5000);
-      var timerVar = setInterval(myTimer, 1000);
+      timerStart();
       timerDisplay.textContent = time;
     }
 })
 function timerStart(){
-//  var timeoutVar = setTimeout(myTimeout, 5000);
-  var timerVar = setInterval(myTimer, 1000);
+  clearInterval(timerInterval);
+  timerInterval = setInterval(myTimer, 1000);
+  setTimeout(flashStart, 100);
+
 }
-function myTimeout(){
-//  clearInterval(timeVar);
-  messageDisplay.textContent = "Timeout!"
-  timerDisplay.textContent = "";
-  resetDisplay.textContent = "Play Again"
-  changeColors("#FFF");
-  body.style.backgroundColor = pickedColor;
-  gameOver = true;
-  resetButton.style.visibility = 'visible';
-  time = 5;
+function flashStart(){
+  clearInterval(flashInterval);
+  flashInterval = setInterval(myFlash, 1000);
 }
+function myFlash(){
+  if(state == 3 && gameOver == false){
+    body.style.backgroundColor = "#232323";
+  }
+}
+
+
 function myTimer(){
   if(state == 3 && gameOver == false){
-    timerDisplay.textContent = time;
     time--;
     if(time > 0){
       timerDisplay.textContent = time;
+      body.style.backgroundColor = "white";
     }
     else{
-
-//      cleatInterval(timerVar);
+      messageDisplay.textContent = "Timeout!"
+      timerDisplay.textContent = "";
+      resetDisplay.textContent = "Play Again"
+      changeColors("#FFF");
+      body.style.backgroundColor = pickedColor;
+      gameOver = true;
+      resetButton.style.visibility = 'visible';
     }
   }
 }
+
 resetButton.addEventListener("click", function() {
     reset();
 })
