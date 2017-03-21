@@ -1,9 +1,11 @@
 # Lab4 Quiz - Color Game
 
+## 離開前請簽名！！！！
+
 ## Grading
 #### 1. Hard mode <b>(60%)</b>
 * Mode Button
-    * Selected button can display another css form (25%)
+    * Selected button can display another css form (25%) <br/>
     ![Mode button](img/modeBut.png)
     * Hoverable Buttons (5%) <br/>
     ![Mode button hover](img/modeButHover.png)
