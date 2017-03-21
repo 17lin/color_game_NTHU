@@ -104,6 +104,27 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+.normal {
+	display: block;
+	margin: 0;
+	padding: 4px;
+    background-color: white;
+    color: black;
+}
+
+.selected{
+    display: block;
+	margin: 0;
+	padding: 4px;
+    color: white;
+    background-color: steelblue;
+}
+
+.normal:hover
+{
+    color: blue;
+    background-color: white;
+}
 
 button:hover {
     color: white;
