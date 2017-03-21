@@ -86,9 +86,11 @@ function initCards() {
                   clearInterval(timer);
                 }
                 messageDisplay.textContent = "Correct!";
+                timeBoard.style.visibility="hidden";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                resetButton.style.visibility="visible";
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -119,15 +121,14 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
 
-    var res=document.querySelector("#reset");
     if (mode==3) {
       timer=setInterval(countdown,1000);
-      res.style.visibility="hidden";
+      resetButton.style.visibility="hidden";
       timeBoard.style.visibility="visible";
       remain=5;
       timeBoard.textContent="5";
     } else {
-      res.style.visibility="visible";
+      resetButton.style.visibility="visible";
       timeBoard.style.visibility="hidden";
     }
 }
@@ -141,9 +142,11 @@ function countdown() {
     body.style.backgroundColor = pickedColor;
     timeBoard.style.visibility="hidden";
     clearInterval(timer);
+    messageDisplay.textContent = "TIMEOUT!!";
+    resetButton.style.visibility="visible";
   } else {
     body.style.backgroundColor = "#FFF";
-    tmpTimer=setInterval(blink,75);
+    tmpTimer=setInterval(blink,90);
   }
 }
 
