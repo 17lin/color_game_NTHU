@@ -150,7 +150,7 @@ function tick() {
         body.style.backgroundColor = pickedColor;
         time = 6;
         resetButton.style.visibility = 'visible';
-        messageDisplay.textContent = 'timeover';
+        messageDisplay.textContent = 'timeout!';
     }
 }
 
