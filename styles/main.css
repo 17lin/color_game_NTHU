@@ -33,6 +33,26 @@ body {
 	padding: 0 1rem;
 }
 
+#easy {
+	font-weight: normal;
+	padding: 0 1rem;
+}
+
+#easy:hover {
+		font-weight: bold;
+    color: steelblue;
+}
+
+#hard {
+	font-weight: normal;
+	padding: 0 1rem;
+}
+
+#hard:hover {
+		font-weight: bold;
+    color: steelblue;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -88,6 +108,55 @@ h1 {
     background: steelblue;
 }
 
+#easymode {
+	margin: 0rem;
+	padding: 0rem;
+}
+
+#easymode:hover {
+		font-weight: bold;
+    color: steelblue;
+}
+
+#easymode:active {
+		font-weight: bold;
+    color: white;
+		background-color: steelblue;
+}
+
+#hardmode {
+	margin: 0rem;
+	padding: 0rem;
+}
+
+#hardmode:hover {
+		font-weight: bold;
+    color: steelblue;
+}
+
+#hardmode:active {
+		font-weight: bold;
+    color: white;
+		background-color: steelblue;
+}
+
+#nightmaremode {
+	margin: 0rem;
+	padding: 0rem;
+}
+
+#nightmaremode:hover {
+		font-weight: bold;
+    color: steelblue;
+}
+
+#nightmaremode:active {
+		font-weight: bold;
+    color: white;
+		background-color: steelblue;
+}
+
+
 button {
 	display: block;
 	margin: 3rem auto;
@@ -105,7 +174,13 @@ button {
 	cursor: pointer;
 }
 
+#reset:hover {
+    color: white;
+    background-color: steelblue;
+}
+/*
 button:hover {
     color: white;
     background-color: steelblue;
 }
+*/
