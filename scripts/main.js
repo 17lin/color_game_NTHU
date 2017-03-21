@@ -2,6 +2,7 @@ window.onload = function() {
     init();
 };
 
+var mode = 0;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -13,6 +14,15 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy_mode_button = document.querySelector("#easy_mode");
+var hard_mode_button = document.querySelector("#hard_mode");
+var nightmare_mode_button = document.querySelector("#nightmare_mode");
+var card_container = document.getElementById("card-container");
+var card = document.querySelector("#card");
+var timer = document.getElementById("timer");
+var time = 5;
+
+easy_mode_button.style.backgroundColor = "green";
 
 function init() {
     initCards();
@@ -35,6 +45,9 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                time = 6;
+                resetButton.style.visibility = 'visible';
+                timer.style.visibility = 'hidden';
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -69,6 +82,162 @@ resetButton.addEventListener("click", function() {
     reset();
 })
 
+
+easy_mode_button.addEventListener("click", change_easy_mode)
+
+function change_easy_mode(){
+    mode = 0;
+    select_mode();
+}
+
+hard_mode_button.addEventListener("click", change_hard_mode)
+
+function change_hard_mode(){
+    mode = 1;
+    select_mode();   
+}
+
+
+nightmare_mode_button.addEventListener("click", change_nightmare_mode)
+
+function change_nightmare_mode(){
+    mode = 2;
+    select_mode();
+}
+
+function select_mode(){
+    if(mode == 0){
+        numCards = 3;
+        reset();
+        resetButton.style.visibility = 'visible';
+        easy_mode_button.style.backgroundColor = "green";
+        hard_mode_button.style.backgroundColor = "white";
+        nightmare_mode_button.style.backgroundColor = "white";
+        timer.style.visibility = 'hidden';
+    }
+    else if(mode == 1){
+        numCards = 6;
+        reset();
+        resetButton.style.visibility = 'visible';
+        easy_mode_button.style.backgroundColor = "white";
+        nightmare_mode_button.style.backgroundColor = "white";        
+        hard_mode_button.style.backgroundColor = "green";
+        timer.style.visibility = 'hidden';
+    }
+    else if(mode == 2){
+        numCards = 6;
+        reset();
+        timer.style.visibility = 'visible';
+        easy_mode_button.style.backgroundColor = "white";
+        nightmare_mode_button.style.backgroundColor = "green";       
+        hard_mode_button.style.backgroundColor = "white";         
+    }
+}
+
+function tick() {
+    if(time != 0 && gameOver == false && mode == 2){
+        timer.textContent = 5;
+        time--;
+        timer.textContent = time;
+        resetButton.style.visibility = 'hidden';
+        timer.style.visibility = 'visible';
+    }
+    if(time == 0 && mode == 2){
+        timer.textContent = 5;
+        gameOver = true;
+        timer.style.visibility = 'hidden';
+        changeColors("#FFF");
+        body.style.backgroundColor = pickedColor;
+        time = 6;
+        resetButton.style.visibility = 'visible';
+        messageDisplay.textContent = 'timeover';
+    }
+}
+
+var id = setInterval(tick, 1000);
+
+// easy_mode_button.addEventListener("click", change_easy_mode)
+
+// function change_easy_mode(){
+//     if(mode != 0){
+//         numCards = 3;
+//         reset();
+//         easy_mode_button.style.backgroundColor = "green";
+//         hard_mode_button.style.backgroundColor = "white";
+//         nightmare_mode_button.style.backgroundColor = "white";
+//         mode = 0;
+//         clearInterval(id);
+//     }else{
+//         numCards = 3;
+//         reset();       
+//     }
+// }
+
+// hard_mode_button.addEventListener("click", change_hard_mode)
+
+// function change_hard_mode(){
+//     if(mode != 1){
+//         numCards = 6;
+//         reset();
+//         easy_mode_button.style.backgroundColor = "white";
+//         nightmare_mode_button.style.backgroundColor = "white";        
+//         hard_mode_button.style.backgroundColor = "green";
+//         mode = 1;
+//         clearInterval(id);
+//     }else{
+//         numCards = 6;
+//         reset();        
+//     }    
+// }
+
+
+// nightmare_mode_button.addEventListener("click", change_nightmare_mode)
+
+// function change_nightmare_mode(){
+//     if(mode != 2){
+//         numCards = 6;
+//         reset();
+//         var id = setInterval(tick, 1000);
+//         timer.style.visibility = 'visible';
+//         easy_mode_button.style.backgroundColor = "white";
+//         nightmare_mode_button.style.backgroundColor = "green";       
+//         hard_mode_button.style.backgroundColor = "white"; 
+//         mode = 2;      
+//     }else{
+//         numCards = 6;
+//         reset();         
+//     }
+
+// }
+
+// function tick() {
+//     if(time != 0 && gameOver == false){
+//         time--;
+//         timer.textContent = time;
+//         resetButton.style.visibility = 'hidden';
+//         timer.style.visibility = 'visible';
+//     }
+//     if(time == 0){
+//         gameOver = true;
+//         timer.style.visibility = 'hidden';
+//         changeColors("#FFF");
+//         body.style.backgroundColor = pickedColor;
+//         time = 5;
+//         resetButton.style.visibility = 'visible';
+//         messageDisplay.textContent = 'timeover';
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
@@ -85,11 +254,11 @@ function pickColor() {
 
 function generateRandomColors(num) {
     //make an array
-    var arr = []
+    var arr = [];
     //repeat num times
     for (var i = 0; i < num; i++) {
         //get random color and push into arr
-        arr.push(randomColor())
+        arr.push(randomColor());
     }
     //return that array
     return arr;
