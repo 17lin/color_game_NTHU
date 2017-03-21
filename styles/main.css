@@ -104,8 +104,36 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
-
+#mode1{
+	display: inline;
+	margin-top:0;
+	margin-bottom: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	padding: none;
+}
+#mode2{
+	display: inline;
+	margin-top:0;
+	margin-bottom: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	padding: none;
+}
+#mode3{
+	display: inline;
+	margin-top:0;
+	margin-bottom: 0;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	padding: none;
+}
 button:hover {
-    color: white;
+    color: blue;
     background-color: steelblue;
+}
+#Timer{
+	color: white;
+	text-align: center;
+	font-size: 3rem;
 }
