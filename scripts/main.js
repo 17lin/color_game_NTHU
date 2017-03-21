@@ -14,9 +14,21 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var mode; // "Easy" or "Hard"
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nmButton = document.querySelector("#nm");
+
 function init() {
     initCards();
     reset();
+
+    easyButton.style.backgroundColor = "blue";
+    easyButton.style.color = "red";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.color = "black";
+    mode = "Easy";
+
 }
 
 function initCards() {
@@ -24,7 +36,10 @@ function initCards() {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
             if (gameOver)
-                return;
+                {
+                  clearInterval(CDing);
+                  return;
+                }
             //grab color of clicked card
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
@@ -35,6 +50,7 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -45,6 +61,8 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    resetButton.style.display = "block";
+    clearInterval(CDing);
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -63,11 +81,127 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+    if(mode == "NM"){
+      console.log("IN NM");
+      nmset();
+    }
 }
 
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+easyButton.addEventListener("click", function() {
+    easyButton.style.backgroundColor = "blue";
+    easyButton.style.color = "red";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.color = "black";
+    nmButton.style.backgroundColor = "white";
+    nmButton.style.color = "black";
+    rmb = easyButton.style.backgroundColor;
+    rmc = easyButton.style.color;
+    mode = "Easy";
+    numCards = 3;
+    reset();
+})
+
+hardButton.addEventListener("click", function() {
+    hardButton.style.backgroundColor = "blue";
+    hardButton.style.color = "red";
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.color = "black";
+    nmButton.style.backgroundColor = "white";
+    nmButton.style.color = "black";
+    rmb = hardButton.style.backgroundColor;
+    rmc = hardButton.style.color;
+    mode = "Hard";
+    numCards = 6;
+    reset();
+})
+
+nmButton.addEventListener("click", function() {
+    nmButton.style.backgroundColor = "blue";
+    nmButton.style.color = "red";
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.color = "black";
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.color = "black";
+    rmb = nmButton.style.backgroundColor;
+    rmc = nmButton.style.color;
+    mode = "NM";
+
+    numCards = 6;
+    reset();
+})
+
+var rmb;
+var rmc;
+
+easyButton.addEventListener("mouseover", function() {
+    rmb = easyButton.style.backgroundColor;
+    rmc = easyButton.style.color;
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.color = "green";
+})
+
+easyButton.addEventListener("mouseout", function() {
+    easyButton.style.backgroundColor = rmb;
+    easyButton.style.color = rmc;
+})
+
+hardButton.addEventListener("mouseover", function() {
+    rmb = hardButton.style.backgroundColor;
+    rmc = hardButton.style.color;
+    hardButton.style.backgroundColor = "white";
+    hardButton.style.color = "green";
+})
+
+hardButton.addEventListener("mouseout", function() {
+    hardButton.style.backgroundColor = rmb;
+    hardButton.style.color = rmc;
+})
+
+nmButton.addEventListener("mouseover", function() {
+    rmb = nmButton.style.backgroundColor;
+    rmc = nmButton.style.color;
+    nmButton.style.backgroundColor = "white";
+    nmButton.style.color = "green";
+})
+
+nmButton.addEventListener("mouseout", function() {
+    nmButton.style.backgroundColor = rmb;
+    nmButton.style.color = rmc;
+})
+
+var countdown;
+var CDing;
+var or = messageDisplay.textContent;
+
+function nmset()
+{
+  countdown = 5;
+  messageDisplay.textContent = or + countdown;
+  CDing = setInterval(CD, 1000);
+}
+
+function CD()
+{
+  countdown -= 1;
+  resetButton.style.display = "none";
+  if(countdown < 0)
+  {
+    messageDisplay.textContent = "TIMEOUT!";
+    resetDisplay.textContent = "Play Again"
+    changeColors("#FFF");
+    resetButton.style.display = "block";
+    //body.style.backgroundColor = clickedColor;
+    gameOver = true;
+    clearInterval(CDing);
+  }
+  else messageDisplay.textContent = or + countdown;
+}
+
+
 
 function changeColors(color) {
     //loop through all cards
