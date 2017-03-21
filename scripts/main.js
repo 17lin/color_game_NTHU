@@ -102,6 +102,8 @@ function reset() {
     if (mode == 2) {
       messageDisplay.textContent += " " + count;
       resetButton.style.display = "none";
+    } else {
+      resetButton.style.display = "block";
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -124,7 +126,7 @@ function countDown() {
 
   if (count > 1) {
     body.style.backgroundColor = "#FFF";
-    setTimeout(bgReset, 200);
+    setTimeout(bgReset, 100);
     count--;
     messageDisplay.textContent = "What's the Color? " + count;
   } else {
