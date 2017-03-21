@@ -33,6 +33,21 @@ body {
 	padding: 0 1rem;
 }
 
+#easy {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
+#hard {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
+#nm {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -83,12 +98,25 @@ h1 {
 	cursor: pointer;
 }
 
+.more_card {
+    width: 30%;
+    background: white;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+	border-radius: 1rem;
+    transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+	cursor: pointer;
+}
+
 .selected {
     color: white;
     background: steelblue;
 }
 
-button {
+#reset {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -98,6 +126,20 @@ button {
     background-color: white;
 	font-size: 1rem;
     font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+.level {
+	display: block;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
     color: #484848;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
