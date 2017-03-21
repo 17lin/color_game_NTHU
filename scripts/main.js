@@ -15,7 +15,10 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 var Mode_button=document.querySelectorAll(".mode_select");
 var count=5;
+var counterDisplay = document.querySelector("#counter");
+var counter;
 var mode=1;//simple:1 hard:2 nightmare:3
+var timeout=false;
 function init() {
     initCards();
     reset();
@@ -36,8 +39,12 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                counterDisplay.textContent=" ";
+                resetButton.style.display="block";
                 gameOver = true;
-            } else {
+            } else if(timeout===true){
+
+            }else{
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
@@ -80,6 +87,8 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    timeout=false;
+    count=5;
     if(mode===1)
       colors = generateRandomColors(3);
     else
@@ -101,7 +110,31 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+    if(mode===3){
+      counterDisplay.textContent=count;
+      resetButton.style.display="none";
+      counter=setInterval(function(){
 
+                  if(count>1 && gameOver==false){
+                    setTimeout(function(){
+                      body.style.display = (body.style.display == 'none' ? '' : 'none');
+                    },10);
+                    body.style.display = (body.style.display == 'none' ? '' : 'none');
+                    count--;
+                    counterDisplay.textContent=count;
+                  }else if(count<=1){
+                    timeout=true;
+                    messageDisplay.textContent="TIMEOUT!";
+                    body.style.backgroundColor=pickedColor;
+                    changeColors("#FFF");
+                    counterDisplay.textContent=" ";
+                    resetButton.style.display="block";
+                  }
+                }, 1000);
+    }else {
+      counterDisplay.textContent=" ";
+      clearInterval(counter);
+    }
 
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -113,10 +146,13 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+
     body.style.backgroundColor = "#232323";
 }
 
 resetButton.addEventListener("click", function() {
+
+    clearInterval(counter);
     reset();
 })
 
