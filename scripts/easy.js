@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 6;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,9 +14,13 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+
+
 function init() {
     initCards();
     reset();
+  
+
 }
 
 function initCards() {

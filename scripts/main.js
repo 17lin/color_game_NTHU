@@ -15,13 +15,14 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 var timeout=5000;
-var t=5;
-
+var t=6;
+var switchblock = 500;
+var blinktime = 1;
 
 function init() {
     initCards();
     reset();
-    if(t!=0){
+    if(t!=0 && gameOver==false){
       showTime();
     }
 
@@ -58,7 +59,7 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "Try Again"
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -70,11 +71,15 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+
     body.style.backgroundColor = "#232323";
 }
 
+
+
 resetButton.addEventListener("click", function() {
-    reset();
+    t=6;
+    init();
 })
 
 function changeColors(color) {
@@ -116,6 +121,7 @@ function randomColor() {
 function showTime()
 {
     t -= 1;
+    if(gameOver==false){
     if(t<0){
       t=0;
     }
@@ -126,13 +132,51 @@ function showTime()
       messageDisplay.textContent = "Time out";
       body.style.backgroundColor = pickedColor;
       t=0;
-      document.getElementById('reset').style.display = "none";
+
+      document.getElementById('reset').style.display = "block";
+
       changeColors("#FFF");
       gameOver = true;
     }
     else{
       document.getElementById('div1').innerHTML= t;
       document.getElementById('reset').style.display = "none";
+      blink1();
       setTimeout("showTime()",1000);
+
     }
+  }
+  else if(gameOver === true){
+     document.getElementById('div1').innerHTML= " ";
+     body.style.backgroundColor = pickedColor;
+   }
+}
+
+
+function blink1(){
+
+    if(blinktime==1){
+        body.style.backgroundColor = "#FFFFFF";
+        blinktime = 0;
+    }
+    else{
+        blinktime = 1;
+        body.style.backgroundColor ="#232323";
+    }
+    setTimeout("blink2()",100);
+
+}
+
+function blink2(){
+
+      if(blinktime==1){
+          body.style.backgroundColor = "#FFFFFF";
+          blinktime = 0;
+      }
+      else{
+          blinktime = 1;
+          body.style.backgroundColor ="#232323";
+      }
+
+
 }

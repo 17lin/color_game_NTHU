@@ -90,7 +90,7 @@ h1 {
 
 button#reset {
 	display: block;
-	margin: 3rem auto;
+	margin: 2rem auto;
 	padding: 1rem;
 	outline: none;
 	border: none;
@@ -129,9 +129,10 @@ button#up{
 button#up.now{
 		color:white;
 		background-color: steelblue;
+		margin: 0;
 }
 button#up:hover {
-    color: white;
+    color: grey;
     text-shadow: 0.2rem 0.2rem 0.2rem black ;
 }
 
