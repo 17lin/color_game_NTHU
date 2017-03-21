@@ -13,40 +13,59 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var hardModeButton = document.querySelector(".hard");
-var easyModeButton = document.querySelector(".easy");
+var modeButtons = document.querySelectorAll(".mode");
+var cd = 5;
 
 function init() {
+    reset();
+    setupButtons();
     initCards();
     reset();
-    //var mode = 0;
-    hardModeButton.addEventListener("click", function(e) {
+    /*hardModeButton.addEventListener("click", function(e) {
       for(var i=0; i<3; i++){
         var newColor = document.createElement('div');
         newColor.className = "card";
         document.getElementById('card-container').appendChild(newColor);
       }
-
-        initCards();
-        reset();
-      //  mode = 1;
+      cards = document.querySelectorAll(".card");
+      initCards();
+      reset();
     })
     easyModeButton.addEventListener("click", function(e) {
        reset();
-      //mode = 0;
-    })
+    })*/
+}
 
-  /*  if(mode == 1){
-      for(var i=0; i<3; i++){
-        var newColor = document.createElement('div');
-        newColor.className = "card";
-        document.getElementById('card-container').appendChild(newColor);
-      }
-        initCards();
-        reset();
-    }else if(mode == 0){
-        reset();
-    }*/
+function setupButtons(){
+  modeButtons[0].addEventListener("click", function(){
+    numCards=3;
+    reset();
+  });
+  modeButtons[1].addEventListener("click", function(){
+    numCards=6;
+    reset();
+  });
+  modeButtons[2].addEventListener("click", function(){
+    numCards=6;
+    nmMode();
+    reset();
+  });
+}
+
+function nmMode(){
+
+  function countdown(){
+    cd--;
+    console.log(cd);
+  }
+  var showTime = setInterval(this.countdown, 1000);
+  var newShowTime = document.createElement('div');
+  newShowTime.className = "timer";
+  newShowTime.textContent = showTime;
+  document.getElementById('message').appendChild(newShowTime);
+  if(cd === 0){
+    gameOver =true;
+  }
 }
 
 function initCards() {
@@ -96,6 +115,7 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
+    cd = 5;
     reset();
 })
 
