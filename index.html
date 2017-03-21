@@ -10,15 +10,32 @@
 
 	<title>Color Game</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/mainHard.css">
+	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 </head>
+
 
 <body>
 	<div id="stripe">
 		<div id="navbar" class="container">
-			<span id="brand" href="#">Color Game</span>
+			<span id="brand" href="#">Color Game
+				<button class="modeSelect" id="easy"> Easy</button>
+				<button class="modeSelect" id="hard"> Hard</button>
+				<button class="modeSelect" id="nightmare" > NightmareMode</button>
+			</span>
+
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
+
+
+
+
+
+
+
 
 	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
 
@@ -26,6 +43,9 @@
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
+		<div class="card anotherThree"></div>
+		<div class="card anotherThree"></div>
+		<div class="card anotherThree"></div>
 	</div>
 
 	<div id="footer">
