@@ -62,6 +62,7 @@ function tick() {
     resetDisplay.textContent = "Play Again"
     changeColors("#FFF");
     body.style.backgroundColor = pickedColor;
+    resetButton.style.display = "block";
     gameOver = true;
   }
 }
@@ -121,6 +122,14 @@ function initCards() {
 function reset() {
     // initialize timer here
     countDown = 5;
+    if(mode === 2) { // nightmare mode
+      countDownText.style.display = "inline";
+      countDownText.textContent = String(countDown);
+      resetButton.style.display = "none";
+    } else {
+      countDownText.style.display = "none";
+      resetButton.style.display = "block";
+    }
 
     gameOver = false;
     colors = generateRandomColors(numCards);
