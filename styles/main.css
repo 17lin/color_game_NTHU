@@ -33,6 +33,34 @@ body {
 	padding: 0 1rem;
 }
 
+#Easy {
+	font-weight: lighter;
+	color: #333333;
+	padding: 0 1rem;
+}
+
+#Easy:hover {
+	font-weight: lighter;
+	color: green;
+	padding: 0 1rem;
+}
+
+#Hard {
+	border-radius: 4rem;
+	background-color: #555555;
+	font-weight: bold;
+	color: #333333;
+	padding: 0 1rem;
+}
+
+#Hard:hover {
+	border-radius: 2rem;
+	background-color: #555555;
+	font-weight: bold;
+	color: red;
+	padding: 0 1rem;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;

@@ -1,7 +1,10 @@
 window.onload = function() {
-    init();
+    init(0);
 };
 
+var Mode = 0;
+var t;
+var Count = 6;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -13,10 +16,16 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyMode = document.querySelector("#Easy");
+var hardMode = document.querySelector("#Hard");
+var nightmareMode = document.querySelector("#nightmare");
+var counterControl = document.querySelector("#counter");
 
-function init() {
+function init(mode) {
+    Mode = mode;
     initCards();
-    reset();
+    reset(mode);
+    countdownfuc();
 }
 
 function initCards() {
@@ -43,14 +52,21 @@ function initCards() {
     }
 }
 
-function reset() {
+function reset(mode) {
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    colors = generateRandomColors(cards.length);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    if(mode == 0)
+      resetDisplay.textContent = "New Color"
+      // counterControl.textContent = "";
+    else{
+      Count = 5;
+      resetDisplay.textContent = "";
+    }
+
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -66,8 +82,46 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+    if(Mode == 0 && Count == -1)
+      reset(0);
 })
+
+easyMode.addEventListener("click", function(){
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div>';
+    cards = document.querySelectorAll(".card");
+    init(0);
+})
+
+hardMode.addEventListener("click", function(){
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div>';
+    cards = document.querySelectorAll(".card");
+    init(0);
+})
+
+nightmareMode.addEventListener("click", function(){
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div>';
+    cards = document.querySelectorAll(".card");
+    init(1);
+})
+
+function countdownfuc(){
+  if(Mode == 1)
+  counterControl.textContent = Count;
+  else
+  counterControl.textContent = "";
+  Count = Count - 1;
+  if(Mode == 1 && Count != -1 && !gameOver)
+    t=setTimeout("countdownfuc()",1000);
+  if(Count == -1){
+    messageDisplay.textContent = "Time Out!";
+    counterControl.textContent = "";
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+  }
+  if(gameOver)
+  counterControl.textContent = "";
+}
 
 function changeColors(color) {
     //loop through all cards
