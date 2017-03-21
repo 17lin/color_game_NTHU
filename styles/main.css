@@ -27,7 +27,97 @@ body {
     display: flex;
 	flex-direction: row;
 }
+#easy{
+	display: inline;
+	margin: 0px auto;
+	padding: 0rem;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
 
+#easy:hover
+{
+	color: steelblue;
+	background-color: white;
+}
+#easy:active{
+	color: white;
+	background-color: steelblue;
+}
+#easy:focus{
+	color: white;
+	background-color: steelblue;
+}
+#hard{
+	display: inline;
+	margin: 0px auto;
+	padding: 0rem;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#hard:hover
+{
+	color: steelblue;
+	background-color: white;
+}
+#hard:active{
+	color: white;
+	background-color: steelblue;
+}
+#hard:focus{
+	color: white;
+	background-color: steelblue;
+}
+
+#nightmare{
+	display: inline;
+	margin: 0px auto;
+	padding: 0rem;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#nightmare:hover
+{
+	color: steelblue;
+	background-color: white;
+}
+#nightmare:active{
+	color: white;
+	background-color: steelblue;
+}
+#nightmare:focus{
+	color: white;
+	background-color: steelblue;
+}
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
