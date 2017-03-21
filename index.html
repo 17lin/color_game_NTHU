@@ -13,16 +13,29 @@
 </head>
 
 <body>
+
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
+			<button id="Easy" href="#"><span>Easy</span></button>
+			<button id="Hard" href="#"><span>Hard</span></button>
+			<button id="Night" href="#"><span>Nigthmare</span></button>
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id="countdown"></span></h1>
 
 	<div id="card-container" class="container">
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
+	</div>
+
+	<div id="sixcard-container" class="container">
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
