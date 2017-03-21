@@ -204,9 +204,18 @@ function reset() {
                 seconds--;
                 strsec = ' '+seconds;
                 countdown.textContent = strsec;
+                //body.blink();
+            }
+            else {
+                countdown.textContent = '';
+                messageDisplay.textContent = "TIMEOUT!";
+                resetButton.style.display = "block";
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
+                gameOver = true;
             }
         }, 1000);
-        var gg = setInterval(function () {
+        /*var gg = setInterval(function () {
             if (seconds < 1) {
                 countdown.textContent = '';
                 messageDisplay.textContent = "TIMEOUT!";
@@ -215,7 +224,7 @@ function reset() {
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             }
-        }, 10);
+        }, 10);*/
     }
     body.style.backgroundColor = "#232323";
 }
