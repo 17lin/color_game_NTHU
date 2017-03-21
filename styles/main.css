@@ -33,6 +33,18 @@ body {
 	padding: 0 1rem;
 }
 
+#easy {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
+#hard {
+	font-weight: bold;
+	padding: 0 1rem;
+	background-color: #ACF;
+	border-radius: 1rem;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -88,7 +100,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+#reset {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -105,7 +117,67 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#easy {
+	display: block;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: blue;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#hard {
+	display: block;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: black;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#nightmare {
+	display: block;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: white;
+	font-size: 1rem;
+    font-weight: 700;
+    color: black;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#reset:hover {
     color: white;
     background-color: steelblue;
+}
+
+#easy:hover {
+    color: white;
+    background-color: steelblue;
+}
+
+#hard:hover {
+		color: white;
+		background-color: steelblue;
+}
+
+#nightmare:hover {
+		color: white;
+		background-color: steelblue;
 }
