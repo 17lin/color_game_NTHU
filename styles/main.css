@@ -120,6 +120,11 @@ button:hover {
 	padding: 0.5rem;
 }
 
+#easy:hover {
+	color:blue;
+	background-color: white;
+}
+
 #hard {
 	display: inline;
 	margin : auto auto auto auto;
@@ -128,10 +133,21 @@ button:hover {
 	color: white;
 }
 
+#hard:hover {
+	background-color: white;
+	color: blue;
+}
+
 #night {
+	font-style: italic;
 	display: inline;
 	margin : auto auto auto auto;
 	padding: 0.5rem;
 	background-color: black;
 	color: white;
+}
+
+#night:hover {
+	background-color: red;
+	color: black;
 }

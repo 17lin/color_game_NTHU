@@ -7,6 +7,7 @@ var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
+var btn = document.querySelector("button");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
