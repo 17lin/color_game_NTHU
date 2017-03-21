@@ -1,6 +1,7 @@
 window.onload = function() {
     buttoncontrol();
     init();
+    setInterval(timecount, 1000);
 };
 
 var numCards = 3;
@@ -40,6 +41,7 @@ function buttoncontrol() {
       b2.style.background = 'white';
       b3.style.color = 'black';
       b3.style.background = 'white';
+      count.style.opacity = 0;
       resetButton.style.opacity = 1;
       reset();
   });
@@ -61,6 +63,7 @@ function buttoncontrol() {
       b1.style.color = 'black';
       b3.style.background = 'white';
       b3.style.color = 'black';
+      count.style.opacity = 0;
       resetButton.style.opacity = 1;
       reset();
   });
@@ -76,11 +79,13 @@ function buttoncontrol() {
   });
   b3.addEventListener('click',function(e){
       issel = 111;
+        time=5;
       b3.style.background = 'steelblue';
       b1.style.background = 'white';
       b1.style.color = 'black';
       b2.style.background = 'white';
       b2.style.color = 'black';
+      count.style.opacity = 1;
       resetButton.style.opacity = 0;
       reset();
   });
@@ -109,7 +114,9 @@ function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
 
+
         cards[i].addEventListener("click", function() {
+
             if (gameOver)
                 return;
             //grab color of clicked card
@@ -119,6 +126,8 @@ function initCards() {
             if (clickedColor === pickedColor) {
                messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                resetButton.style.opacity = 1;
+                count.style.opacity = 0;
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -134,6 +143,14 @@ function timecount(){
   count.textContent = time;
   if(time===0){
     to=0;
+    time = 5;
+    messageDisplay.textContent = "TIMEOUT";
+    count.style.opacity = 0;
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+    resetDisplay.textContent = "Play Again"
+    resetButton.style.opacity = 1;
     clearInterval(id);
   }
   else time--;
@@ -141,13 +158,15 @@ function timecount(){
 
 
 function reset() {
-
-
-  if(issel===111&&to){
-      id = setInterval(timecount, 1000);
-      if(to===0) messageDisplay.textContent = "TIMEOUT";
-  }
-
+    time=5;
+    if(issel===111){
+      count.style.opacity = 1;
+      resetButton.style.opacity = 0;
+    }
+    else{
+      count.style.opacity = 0;
+      resetButton.style.opacity = 1;
+    }
     gameOver = false;
     if(issel===100) numCards = 3;
     else numCards = 6;
