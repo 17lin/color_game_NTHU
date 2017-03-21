@@ -32,7 +32,13 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
-
+#easy ,#hard, #night{
+	padding: 0 1rem;
+	margin: inherit;
+	border-radius: 15px;
+	color: #CCC;
+	display: inline;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -71,6 +77,18 @@ h1 {
 }
 
 .card {
+    width: 30%;
+    background: white;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+	border-radius: 1rem;
+    transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+	cursor: pointer;
+}
+.card_h {
     width: 30%;
     background: white;
     padding-bottom: 30%;
