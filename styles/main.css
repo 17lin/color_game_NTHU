@@ -24,7 +24,7 @@ body {
 
 #navbar {
 	display: -webkit-flex;
-    display: flex;
+  display: flex;
 	flex-direction: row;
 }
 
@@ -76,11 +76,11 @@ h1 {
     padding-bottom: 30%;
     float: left;
     margin: 1.66%;
-	border-radius: 1rem;
+		border-radius: 1rem;
     transition: all 0.6s;
     -webkit-transition: all 0.6s;
     -moz-transition: all 0.6s;
-	cursor: pointer;
+		cursor: pointer;
 }
 
 .selected {
@@ -108,4 +108,23 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+
+#easy {
+		margin-left: 1rem;
+		display: inline-block;
+		font-weight: bold;
+}
+
+#hard {
+		margin-left: 1rem;
+		display: inline-block;
+		font-weight: bold;
+}
+
+#nightmare  {
+		margin-left: 1rem;
+		display: inline-block;
+		font-weight: bold;
 }
