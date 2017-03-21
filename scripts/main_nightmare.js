@@ -13,6 +13,8 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var countdownnumber;
+var countdownid,x;
 
 function init() {
     initCards();
@@ -37,7 +39,7 @@ function initCards() {
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                messageDisplay.textContent = "What's the color?  ";
             }
         });
     }
@@ -104,3 +106,15 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 6;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
