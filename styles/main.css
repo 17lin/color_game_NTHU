@@ -38,6 +38,18 @@ body {
 	color: #bbb;
 }
 
+#easy{
+    padding: 0 1.5rem;
+}
+
+#hard{
+    padding: 0 1.5rem;
+}
+
+#night{
+    padding: 0 1.5rem;
+}
+
 .container {
     margin-left: auto;
 	margin-right: auto;
@@ -88,7 +100,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+#reset {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -105,7 +117,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#reset:hover {
     color: white;
     background-color: steelblue;
 }
