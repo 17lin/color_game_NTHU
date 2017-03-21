@@ -2,7 +2,8 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var countnumber = 5;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -31,13 +32,13 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
+                resetDisplay.textContent = "Play Again";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                messageDisplay.textContent = "Try Again";
             }
         });
     }
@@ -50,13 +51,13 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "New Color";
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
-            cards[i].style.display = "block"
+            cards[i].style.display = "block";
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
@@ -68,7 +69,10 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
+function myTimer() {
+  var d = new Date();
 
+}
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
@@ -89,7 +93,7 @@ function generateRandomColors(num) {
     //repeat num times
     for (var i = 0; i < num; i++) {
         //get random color and push into arr
-        arr.push(randomColor())
+        arr.push(randomColor());
     }
     //return that array
     return arr;
