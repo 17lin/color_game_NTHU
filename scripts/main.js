@@ -18,6 +18,7 @@ var mode;
 var easy = document.querySelector("#easy");
 var hard = document.querySelector("#hard");
 var night = document.querySelector("#night");
+var footer = document.querySelector("#footer");
 
 function init() {
     initbtn();
@@ -31,6 +32,7 @@ function initbtn(){
       easy.style.backgroundColor = "steelblue";
       hard.style.backgroundColor = "white";
       night.style.backgroundColor = "white";
+      reset();
     });
     hard.addEventListener("click",function(){
       mode = "hard";
@@ -38,6 +40,7 @@ function initbtn(){
       hard.style.backgroundColor = "steelblue";
       easy.style.backgroundColor = "white";
       night.style.backgroundColor = "white";
+      reset();
     });
     easy.addEventListener("mouseenter",function(){
       easy.style.color = "black";
@@ -57,6 +60,7 @@ function initbtn(){
       night.style.backgroundColor = "steelblue";
       hard.style.backgroundColor = "white";
       easy.style.backgroundColor = "white";
+      reset();
     });
     night.addEventListener("mouseenter",function(){
       night.style.color = "black";
@@ -135,15 +139,41 @@ function reset() {
         cards[i].style.display = "none";
       }
     }
-    // for (var i = 0; i < card_h.length; i++) {
-    //     card_h[i].style.opacity = 1;
-    //     if (colors[i+3]) {
-    //         card_h[i].style.display = "block"
-    //         card_h[i].style.backgroundColor = colors[i+3];
-    //     } else {
-    //         card_h[i].style.display = "none";
-    //     }
-    // }
+    if(mode ==="night"){
+      footer.style.display = "none";
+
+      setInterval(function blink(){
+        if(gameOver) body.style.backgroundColor="#232323";
+        var toggle = 1;
+        if(toggle == 1){
+          body.style.backgroundColor="555";
+          toggle = 0;
+        }
+        else {
+          body.style.backgroundColor="#232323"
+          toggle = 1;
+        }
+      },500);
+      setInterval(function countdown(){
+        var count = 5;
+        if(count>=0){
+          body.style.backgroundColor = "#AAA";
+          body.style.backgroundColor = "#232323";
+          messageDisplay.textContent = "What's the Color?" +count;
+          count--;
+        }
+        else{
+          gameOver = true;
+          messageDisplay.textContent = "Time Out!";
+          footer.style.display = "block";
+          body.style.backgroundColor = "#232323";
+        }
+      },1000);
+      function stop(){
+        closeInterval(countdown);
+        closeInterval(blink);
+      }
+    }
     body.style.backgroundColor = "#232323";
 }
 
