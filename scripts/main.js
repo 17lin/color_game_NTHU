@@ -69,6 +69,25 @@ resetButton.addEventListener("click", function() {
     reset();
 })
 
+easy.addEventListener("click",function(){
+  document.getElementById("easy").className="easy"
+  document.getElementById("hard").className=
+  document.getElementById("nightmare").className=
+  numCards=3;
+  reset();
+})
+
+hard.addEventListener("click", function(){
+  document.getElementById("easy").className=
+  document.getElementById("hard").className=
+  document.getElementById("nightmare").className=
+  document.getElementById("hardcard").style.display="block";
+  numCards = 6;
+  reset();
+})
+
+
+
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
