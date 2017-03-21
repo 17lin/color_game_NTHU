@@ -34,7 +34,7 @@ body {
 	padding: 0 1rem;
 }
 
-.easy{
+#easy{
 	outline: none;
 	border: none;
   border-radius: 999rem;
@@ -48,12 +48,12 @@ body {
 }
 
 
-button.easy:hover{
+#easy:hover{
 	color: white;
 	background-color: steelblue;
 }
 
-.hard{
+#hard{
 	outline: none;
 	border: none;
   border-radius: 999rem;
@@ -61,15 +61,34 @@ button.easy:hover{
 	color: white;
 	font-size: 1rem;
   font-weight: 700;
-  
+
 	-webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
 	cursor: pointer;
 }
 
-.hard:hover{
+#hard:hover{
 	color: steelblue;
 	background-color: white;
+}
+
+#nm{
+	outline: none;
+	border: none;
+  border-radius: 999rem;
+  background-color: white;
+	color: purple;
+	font-size: 1rem;
+  font-weight: 700;
+
+	-webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+#nm:hover{
+	color: white;
+	background-color: purple;
 }
 
 #about {
@@ -148,4 +167,11 @@ h1 {
 #reset:hover {
     color: white;
     background-color: steelblue;
+}
+
+
+.timer{
+	font-weight: bold;
+  font-size: 120%;
+
 }
