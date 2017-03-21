@@ -16,16 +16,16 @@
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
-			<span id="mode">
-				<button id="easy">Easy</button>
-				<button id="hard">Hard</button>
-				<button id="nightmare">Nightmare</button>
+			<span class="mode">
+				<button id="easy" onmouseover="style.color='red'" onmouseout="style.color='black'">Easy</button>
+				<button id="hard" onmouseover="style.color='red'" onmouseout="style.color='black'">Hard</button>
+				<button id="nightmare"  onmouseover="style.color='red'" onmouseout="style.color='black'">Nightmare</button>
 			</span>
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id="counter">5</span></h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
