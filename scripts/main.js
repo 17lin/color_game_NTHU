@@ -25,6 +25,8 @@ var card3 = document.querySelector("#card3");
 var card4 = document.querySelector("#card4");
 var card5 = document.querySelector("#card5");
 var card6 = document.querySelector("#card6");
+var blink1;
+var blink2;
 
 function init() {
     initCards();
@@ -53,6 +55,8 @@ function initCards() {
                 clearInterval(t);
                 timer_text.style.display = "none";
                 resetButton.style.display = "block";
+                clearTimeout(blink1);
+                clearTimeout(blink2);
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again";
@@ -102,10 +106,10 @@ function main_timer() {
         seconds = seconds - 1;
         // blink
         if (!gameOver && seconds >= 0) {
-            setTimeout(function() {
+            blink1 = setTimeout(function() {
                 body.style.backgroundColor = "#FFFFFF";
             }, 0);
-            setTimeout(function() {
+            blink2 = setTimeout(function() {
                 body.style.backgroundColor = "#232323";
             }, 50);
         }
