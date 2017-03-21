@@ -88,10 +88,10 @@ h1 {
     background: steelblue;
 }
 
-button {
+ button {
 	display: block;
-	margin: 3rem auto;
-	padding: 1rem;
+	margin:  auto;
+	/*padding: 1rem;*/
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -104,8 +104,19 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+#reset{
+	padding: 1rem;
+}
+#Hard{
+	background-color:  steelblue;
+	color: white;
+}
 
-button:hover {
+button:hover{
+	color:steelblue;
+}
+
+#reset button:hover {
     color: white;
     background-color: steelblue;
 }
