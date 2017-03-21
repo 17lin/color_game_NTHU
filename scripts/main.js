@@ -1,8 +1,16 @@
 window.onload = function() {
     init();
 };
-
+var mode = 1;//1 easy, 2 hard, 3 nightmare
+var easy = document.getElementById("easy");
+var hard = document.getElementById("hard");
+var night = document.getElementById("night");
+var hide = document.getElementById("hide");
 var numCards = 3;
+var num = 5;
+var cdd = document.getElementById("cd");
+var count;
+
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,9 +22,75 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+    easy.addEventListener("click", function(){
+        discount();
+        messageDisplay.innerHTML = "What's the color?";
+        mode = 1;
+        numCards = 3;
+        easy.style.backgroundColor = "red";
+        hard.style.backgroundColor = "white";
+        night.style.backgroundColor = "white";
+        hide.style.visibility = "hidden";
+        resetButton.disabled = false;
+        reset();
+    });
+    hard.addEventListener("click", function(){
+        discount();
+        messageDisplay.innerHTML = "What's the color?";
+        mode = 2;
+        numCards = 6;
+        easy.style.backgroundColor = "white";
+        hard.style.backgroundColor = "red";
+        night.style.backgroundColor = "white";
+        hide.style.visibility = "visible";
+        resetButton.disabled = false;
+        reset();
+    });
+    night.addEventListener("click", function(){
+        mode = 3;
+        numCards = 6;
+        easy.style.backgroundColor = "white";
+        hard.style.backgroundColor = "white";
+        night.style.backgroundColor = "red";
+        hide.style.visibility = "visible";
+        resetButton.disabled = true;
+        initCards();
+        reset();
+        num = 5;
+        count = setInterval(countdown, 1000);
+    });
+
+function countdown(){
+    if(!gameOver){
+        messageDisplay.innerHTML = "What's the color? " + num;
+        num--;
+    }
+    if(num == -2){
+        gameOver = true;
+        messageDisplay.textContent = "Time out";
+        discount();
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].style.backgroundColor = "white";
+        }
+        body.style.backgroundColor = pickedColor;
+    }
+}
+
+//var myVar = setInterval(function(){ setColor() }, 300);
+
+
+function discount(){
+    clearInterval(count);
+}
+
 function init() {
     initCards();
     reset();
+    mode = 1;
+    numCards = 3;
+    num = 5;
+    easy.style.backgroundColor = "red";
+    hide.style.visibility = "hidden";
 }
 
 function initCards() {
@@ -37,11 +111,13 @@ function initCards() {
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
+                console.log(this);
                 messageDisplay.textContent = "Try Again"
             }
         });
     }
 }
+
 
 function reset() {
     gameOver = false;
