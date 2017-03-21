@@ -13,8 +13,13 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy = document.querySelector("#easy");
+var hard = document.querySelector("#hard");
+var nightmare = document.querySelector("#nightmare");
 
 function init() {
+    showCard3();
+    initButtons();
     initCards();
     reset();
 }
@@ -41,6 +46,41 @@ function initCards() {
             }
         });
     }
+}
+
+function initButtons(){
+  easy.addEventListener("click", function(){
+    easy.classList.add("active");
+    hard.classList.remove("active");
+    nightmare.classList.remove("active");
+    numCards = 3;
+    reset();
+  });
+  hard.addEventListener("click", function(){
+    easy.classList.remove("active");
+    hard.classList.add("active");
+    nightmare.classList.remove("active");
+    numCards = 6;
+    reset();
+  });
+  nightmare.addEventListener("click", function(){
+    easy.classList.remove("active");
+    hard.classList.remove("active");
+    nightmare.classList.add("active");
+    numCards = 6;
+    reset();
+  });
+}
+
+function showCard6(){
+  cards[3].style.display = "block";
+  cards[4].style.display = "block";
+  cards[5].style.display = "block";
+}
+function showCard3(){
+  cards[3].style.display = "none";
+  cards[4].style.display = "none";
+  cards[5].style.display = "none";
 }
 
 function reset() {
