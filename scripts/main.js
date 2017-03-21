@@ -3,18 +3,26 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var hardnumCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
+var hardcards=document.querySelectorAll(".hardcard");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var night_button=document.getElementById("nightmare");
+var hard_button=document.getElementById("hard");
+var easy_button=document.getElementById("easy");
+var mode=1;
+
 function init() {
+    mode=1;
     initCards();
     reset();
 }
@@ -22,6 +30,8 @@ function init() {
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
+
+
         cards[i].addEventListener("click", function() {
             if (gameOver)
                 return;
@@ -62,10 +72,165 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+    for (i=0; i<hardcards.length; i++)
+    {
+      hardcards[i].style.display="none";
+    }
     body.style.backgroundColor = "#232323";
+    footer.style.display="block"
+}
+
+function hardinitCards(){
+  for (var i = 0; i < hardcards.length; i++) {
+      //add click listeners to cards
+      //hardcards[i].style.width=30%;
+      hardcards[i].addEventListener("click", function() {
+          if (gameOver)
+              return;
+          //grab color of clicked card
+          var clickedColor = this.style.backgroundColor;
+          // alert(this.style.backgroundColor);
+          //compare color to pickedColor
+          if (clickedColor === pickedColor) {
+              messageDisplay.textContent = "Correct!";
+              resetDisplay.textContent = "Play Again"
+              hardchangeColors("#FFF");
+              body.style.backgroundColor = clickedColor;
+              gameOver = true;
+          } else {
+              this.style.opacity = 0;
+              messageDisplay.textContent = "Try Again"
+          }
+      });
+  }
+}
+
+function hardreset(){
+  gameOver = false;
+  colors = generateRandomColors(hardnumCards);
+  //pick a new random color from array
+  pickedColor = pickColor();
+  //change colorDisplay to match picked Color
+  colorDisplay.textContent = pickedColor;
+  resetDisplay.textContent = "New Color"
+  messageDisplay.textContent = "What's the Color?";
+  //change colors of cards
+  for (var j=0; j<cards.length; j++)
+  {
+    cards[j].style.display="none";
+  }
+  for (var i = 0; i < hardcards.length; i++) {
+      hardcards[i].style.opacity = 1;
+      if (colors[i]) {
+          hardcards[i].style.display = "block"
+          hardcards[i].style.backgroundColor = colors[i];
+      } else {
+          hardcards[i].style.display = "none";
+      }
+  }
+  body.style.backgroundColor = "#232323";
+  footer.style.display="block"
+}
+
+
+function nightinitCards(){
+  messageDisplay.textContent = "What's the Color? "+t ;
+  flag=0;
+  for (var i = 0; i < hardcards.length; i++) {
+      //add click listeners to cards
+      //hardcards[i].style.width=30%;
+      function tick() {
+        console.log(new Date().getSeconds());
+        }
+/* call tick every 1000ms */
+        var t = setInterval(tick, 1000);
+        messageDisplay.textContent = "What's the Color? "+t ;
+
+        if (flag){
+          messageDisplay.textContent = "TIMEOUT!";
+        break;
+      }
+      hardcards[i].addEventListener("click", function() {
+          if (gameOver)
+              return;
+          //grab color of clicked card
+          var clickedColor = this.style.backgroundColor;
+          // alert(this.style.backgroundColor);
+          //compare color to pickedColor
+          if (clickedColor === pickedColor) {
+              messageDisplay.textContent = "Correct!";
+              resetDisplay.textContent = "Play Again";
+              footer.style.display="block";
+              hardchangeColors("#FFF");
+              body.style.backgroundColor = clickedColor;
+              gameOver = true;
+          } else {
+              this.style.opacity = 0;
+              messageDisplay.textContent = "Try Again"
+          }
+      });
+  }
+}
+
+function nightreset(){
+  flag=0;
+  gameOver = false;
+  colors = generateRandomColors(hardnumCards);
+  //pick a new random color from array
+  pickedColor = pickColor();
+  //change colorDisplay to match picked Color
+
+  colorDisplay.textContent = pickedColor;
+  resetDisplay.textContent = "New Color"
+  messageDisplay.textContent = "What's the Color?" ;
+  //change colors of cards
+  for (var j=0; j<cards.length; j++)
+  {
+    cards[j].style.display="none";
+  }
+  for (var i = 0; i < hardcards.length; i++) {
+      hardcards[i].style.opacity = 1;
+      if (colors[i]) {
+          hardcards[i].style.display = "block"
+          hardcards[i].style.backgroundColor = colors[i];
+      } else {
+          hardcards[i].style.display = "none";
+      }
+  }
+  body.style.backgroundColor = "#232323";
+  footer.style.display="none";
+
+
 }
 
 resetButton.addEventListener("click", function() {
+    if (mode == 1)
+      reset();
+    else if (mode == 2)
+        hardreset();
+    else if (mode == 3)
+      nightreset();
+})
+var flag=0;
+night_button.addEventListener("click", function(){
+  mode=3;
+  nightinitCards();
+  nightreset();
+})
+
+night_button.addEventListener("click", function(){
+  setTimeout(flag=1,5000);
+})
+
+hard_button.addEventListener("click", function(){
+    mode =2;
+    hardinitCards();
+    hardreset();
+})
+
+easy_button.addEventListener("click", function(){
+    mode = 1;
+    initCards();
     reset();
 })
 
@@ -76,6 +241,13 @@ function changeColors(color) {
         cards[i].style.opacity = 1;
         cards[i].style.backgroundColor = color;
     }
+}
+
+function hardchangeColors(color){
+  for (var i=0; i<hardcards.length; i++){
+    hardcards[i].style.opacity = 1;
+    hardcards[i].style.backgroundColor = color;
+  }
 }
 
 function pickColor() {
