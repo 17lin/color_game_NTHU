@@ -17,14 +17,18 @@
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
-			<button class="but" href="#" >Easy</button>
-			<button class="but" href="#" >Hard</button>
-			<button class="but" href="#" >Nightmare</button>
+			<div>
+					<button class="but" href="#" id="easy">Easy</button>
+					<button class="but" href="#" id="hard">Hard</button>
+					<button class="but" href="#" id="nightmare">Nightmare</button>
+			</div>
 			<span id="about" href="#">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message" onload="initial();">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br>
+			<span id="message">What's the color?</span>
+			<span id="count"  onload="initial();"></span></h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
@@ -43,24 +47,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="scripts/main.js"></script>
-	<script> window.setTimeout("window.focus();", 1000)</script>
-	<script type="text/javascript">
-			var countdownnumber=5;
-			var countdownid,x;
-			function initial(){
-			  x=document.getElementById("message");
-			  x.innerHTML=countdownnumber;
-			  countdownnumber--;
-			  countdownid=window.setInterval(countdownfunc,1000);
-			}
-			function countdownfunc(){
-			  x.innerHTML=countdownnumber;
-			  if (countdownnumber==0){
-			    clearInterval(countdownid);
-			  }
-			  countdownnumber--;
-			}
-</script>
 </body>
 
 </html>

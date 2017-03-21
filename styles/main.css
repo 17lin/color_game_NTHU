@@ -27,7 +27,9 @@ body {
 }
 
 #navbar {
-		display: block;
+		display: -webkit-flex;
+		display: flex;
+		flex-direction: row;
 
 }
 
@@ -37,7 +39,6 @@ body {
 }
 .but {
 	display: inline;
-	padding: 1rem;
 	outline: none;
 	border: none;
 	border-radius: 999rem;
@@ -49,10 +50,11 @@ body {
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	cursor: pointer;
+	/*position: absolute;*/
 }
 .but:hover {
-		background-color: steelblue;
-		color: white;
+		background-color: white;
+		color: steelblue;
 }
 #about {
 		/*font-weight: bold;*/
