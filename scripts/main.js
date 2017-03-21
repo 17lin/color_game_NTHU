@@ -2,6 +2,7 @@ window.onload = function() {
     init();
 };
 
+var mode = 1;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -46,6 +47,7 @@ function initCards() {
 }
 
 function reset() {
+
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -68,27 +70,34 @@ function reset() {
 }
 
 function easy() {
+      mode = 1;
       numCards = 3;
       reset();
 
 }
 
 function hard(){
+    mode = 2;
     numCards = 6;
     reset();
 
 }
 
 function nightmare(){
+  mode = 3;
   numCards = 6;
   reset();
-
+  countdown(6);
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
-    clearInterval(count);
-
+    if(mode==3){
+      clearInterval(count);
+      nightmare();
+    }
+    else{
+      reset();
+    }
 })
 modes[0].addEventListener("click", function() {
     easy();
@@ -105,20 +114,23 @@ modes[2].addEventListener("click", function() {
 })
 
 function countdown(time){
+  if(mode==3){
   count = setInterval(function(){
     time =time-1;
     messageDisplay.textContent = "What's the Color? " +time;
-    if (time != 1 && gameOver == true){
-      clearInterval(count);
+    if (gameOver == true || mode!=3){
+        clearInterval(count);
     }
-    else if(time == 1){
+    else if(time == 0){
       messageDisplay.textContent = "Timeout!";
       changeColors("#FFF");
       body.style.backgroundColor = pickedColor;
       gameOver = true;
       clearInterval(count);
     }
-  }, 1000);
+  }, 1000);}
+  else
+    clearInterval(count);
 
 }
 
