@@ -33,6 +33,21 @@ body {
 	padding: 0 1rem;
 }
 
+#Easy {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
+#Hard {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
+#Night {
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -45,6 +60,12 @@ body {
 }
 
 #card-container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+#sixcard-container::after {
 	content: "";
 	display: block;
 	clear: both;
@@ -90,7 +111,7 @@ h1 {
 
 button {
 	display: block;
-	margin: 3rem auto;
+margin:0px auto;
 	padding: 1rem;
 	outline: none;
 	border: none;

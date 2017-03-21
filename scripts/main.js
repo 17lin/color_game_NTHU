@@ -14,6 +14,36 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var EasyButton = document.querySelector("#Easy");
+var HardButton = document.querySelector("#Hard");
+var NightButton = document.querySelector("#Night");
+
+/*function ShowTime(){
+　document.getElementById('showbox').innerHTML = new Date();
+　setTimeout('ShowTime()',1000);
+}*/
+
+var countdownnumber=5;
+var countdownid;
+function initial(){ countdownfunc(); }
+function countdownfunc(){
+ var x=document.getElementById("countdown");
+ x.innerHTML=countdownnumber;
+ if (countdownnumber==0){
+  body.style.backgroundColor = pickedColor;
+  gameOver = true;
+  changeColors("#FFF");
+  messageDisplay.textContent = "TIMEOUT!";
+  clearTimeout(countdownid);
+ }else{
+  countdownnumber--;
+  if(countdownid){
+   clearTimeout(countdownid);
+  }
+  countdownid=setTimeout(countdownfunc,1000);
+ }
+}
+
 function init() {
     initCards();
     reset();
@@ -65,9 +95,108 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+function Easymode() {
+  Easy.style.backgroundColor = "#4682b4";
+  Easy.style.color = "#ffffff";
+  Hard.style.backgroundColor = "#ffffff";
+  Hard.style.color = "#000000";
+  Night.style.backgroundColor = "#ffffff";
+  Night.style.color = "#000000";
+    gameOver = false;
+    colors = generateRandomColors(numCards);
+    //pick a new random color from array
+    pickedColor = pickColor();
+    //change colorDisplay to match picked Color
+    colorDisplay.textContent = pickedColor;
+    resetDisplay.textContent = "New Color"
+    messageDisplay.textContent = "What's the Color?";
+    //change colors of cards
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].style.opacity = 1;
+        if (colors[i]) {
+            cards[i].style.display = "block"
+            cards[i].style.backgroundColor = colors[i];
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+    body.style.backgroundColor = "#232323";
+}
+
+function Hardmode() {
+  Hard.style.backgroundColor = "#4682b4";
+  Hard.style.color = "#ffffff";
+  Easy.style.backgroundColor = "#ffffff";
+  Easy.style.color = "#000000";
+  Night.style.backgroundColor = "#ffffff";
+  Night.style.color = "#000000";
+    gameOver = false;
+    colors = generateRandomColors(numCards+3);
+    //pick a new random color from array
+    pickedColor = pickColor();
+    //change colorDisplay to match picked Color
+    colorDisplay.textContent = pickedColor;
+    resetDisplay.textContent = "New Color"
+    messageDisplay.textContent = "What's the Color?";
+    //change colors of cards
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].style.opacity = 1;
+        if (colors[i]) {
+            cards[i].style.display = "block"
+            cards[i].style.backgroundColor = colors[i];
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+    body.style.backgroundColor = "#232323";
+}
+
+function Nightmode() {
+
+    initial();
+    Night.style.backgroundColor = "#4682b4";
+    Night.style.color = "#ffffff";
+    Hard.style.backgroundColor = "#ffffff";
+    Hard.style.color = "#000000";
+    Easy.style.backgroundColor = "#ffffff";
+    Easy.style.color = "#000000";
+    gameOver = false;
+    colors = generateRandomColors(6);
+    //pick a new random color from array
+    pickedColor = pickColor();
+    //change colorDisplay to match picked Color
+    colorDisplay.textContent = pickedColor;
+    resetDisplay.textContent = "New Color"
+    messageDisplay.textContent = "What's the Color?";
+    //change colors of cards
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].style.opacity = 1;
+        if (colors[i]) {
+            cards[i].style.display = "block"
+            cards[i].style.backgroundColor = colors[i];
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+    body.style.backgroundColor = "#232323";
+}
+
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+EasyButton.addEventListener("click", function() {
+    Easymode();
+})
+
+HardButton.addEventListener("click", function() {
+    Hardmode();
+})
+
+NightButton.addEventListener("click", function() {
+   Nightmode();
+})
+
 
 function changeColors(color) {
     //loop through all cards
