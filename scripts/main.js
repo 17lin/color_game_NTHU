@@ -18,16 +18,12 @@ var hardButton = document.querySelector("#hard");
 var nightmareButton = document.querySelector("#nightmare");
 var time = document.querySelector("#time");
 var nightmareTrigger = false;
+var t;
+
 function init() {
     initCards();
     
     reset();
-    if(nightmareTrigger === true){
-        time.textContent = 46;
-    }
-    else{
-        time.textContent = 44444;
-    }
 }
 
 function initCards() {
@@ -42,6 +38,10 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+                 clearInterval(timer);
+                 clearInterval(black);
+                 clearInterval(white);
+                time.innerHTML = "";
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -54,11 +54,14 @@ function initCards() {
         });
     }
     
-    
 }
 
+
 function reset() {
-    //time.textContent = 5;
+    clearInterval(black);
+    clearInterval(white);
+    clearInterval(counting);
+    clearInterval(timer);
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -78,6 +81,59 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+    //time.textContent = 5;
+    if(nightmareTrigger){
+        t = 6;
+        counting = setInterval(end, 5000);
+        showtime();
+    }
+    
+    
+}
+//var initCount;
+var counting;
+var timer;
+var black;
+var white;
+function showtime(){
+    clearInterval(black);
+    clearInterval(white);
+    clearInterval(timer);
+    t -= 1;
+    document.getElementById("time").innerHTML = t;
+    if(t === 0){
+        clearInterval(timer);
+        clearInterval(black);
+        clearInterval(white);
+        document.getElementById("time").innerHTML = "";
+        return;
+    }
+    timer = setInterval(showtime, 1000);
+    white = setInterval(beWhite, 0);
+    black = setInterval(beBlack, 250);
+
+
+}
+function end(){
+    if(!gameOver){
+        changeColors("#FFF");
+        body.style.backgroundColor = pickedColor;
+        gameOver = true;
+        messageDisplay.textContent = "TIMEOUT!"
+        resetDisplay.textContent = "Play Again"
+    }
+    clearInterval(counting);
+}
+function beBlack(){
+    body.style.backgroundColor = "black";
+    clearInterval(black);
+    
+}
+
+function beWhite(){
+    body.style.backgroundColor = "white";
+    
+    clearInterval(white);
 }
 
 resetButton.addEventListener("click", function() {
@@ -124,39 +180,32 @@ function randomColor() {
 
 
 easyButton.addEventListener("click", function() {
-    easyButton.style.backgroundColor = "gray";
-    easyButton.style.borderRadius= "25px";
-    hardButton.style.backgroundColor = "white";
-    hardButton.style.borderRadius= "0px";
-    nightmareButton.style.backgroundColor = "white";
-    nightmareButton.style.borderRadius = "0px";
+    easyButton.classList.add("choose");
+    hardButton.classList.remove("choose");
+    nightmare.classList.remove("choose");
     numCards = 3;
     nightmareTrigger = false;
+    document.getElementById("time").innerHTML = " ";
     reset();
 })
 
 hardButton.addEventListener("click", function() {
-    easyButton.style.backgroundColor = "white";
-    easyButton.style.borderRadius= "0px";
-    hardButton.style.backgroundColor = "gray";
-    hardButton.style.borderRadius= "25px";
-    nightmareButton.style.backgroundColor = "white";
-    nightmareButton.style.borderRadius = "0px";
+    easyButton.classList.remove("choose");
+    hardButton.classList.add("choose");
+    nightmare.classList.remove("choose");
     numCards = 6;
     nightmareTrigger = false;
+    document.getElementById("time").innerHTML = " ";
     reset();
 })
 
 nightmareButton.addEventListener("click", function() {
-    easyButton.style.backgroundColor = "white";
-    easyButton.style.borderRadius= "0px";
-    hardButton.style.backgroundColor = "white";
-    hardButton.style.borderRadius= "0px";
-    nightmareButton.style.backgroundColor = "gray";
-    nightmareButton.style.borderRadius = "25px";
+    easyButton.classList.remove("choose");
+    hardButton.classList.remove("choose");
+    nightmare.classList.add("choose");
     numCards = 6;
     nightmareTrigger = true;
-    
+    //document.getElementById("time").innerHTML = "5";
     reset();
 })
 
