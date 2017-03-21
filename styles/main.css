@@ -131,7 +131,7 @@ button.mode_selected{
 	-moz-transition: all 0.3s;
 	cursor: pointer;
 }
-button:hover {
+button:hover#reset {
     color: white;
     background-color: steelblue;
 }
