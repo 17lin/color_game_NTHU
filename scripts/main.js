@@ -1,23 +1,94 @@
 window.onload = function() {
     init();
 };
-
+var mode = [0, 1, 2] ;
+var curMode = 0 ;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
+var mode = document.querySelectorAll(".mode");
+var easy = document.querySelector("#Easy");
+var hard = document.querySelector("#Hard");
+var nightmare = document.querySelector("#Nightmare");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
+var h2 = document.querySelector("h2");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var count = 5 ;
+var t = 6 ;
 function init() {
+  /*SelectModes()*/
+
+
+  if(curMode==0)
+    numCards = 3;
+  else
+    numCards = 6;
+
     initCards();
     reset();
+
 }
+
+easy.onclick = function (easy) {
+  if(curMode!==0){
+    numCards = 3 ;
+    initCards() ;
+    reset() ;
+    curMode=0 ;
+    gameOver=false;
+    messageDisplay.textContent = "what is the color?" ;
+    resetDisplay.textContent = "New Color"
+  }
+}
+
+hard.onclick = function (hard) {
+  if(curMode!==1){
+    numCards = 6 ;
+    initCards() ;
+    reset() ;
+    curMode=1 ;
+    messageDisplay.textContent = 'what is the color?' ;
+    resetDisplay.textContent = "New Color"
+    gameOver=false;
+  }
+}
+
+nightmare.onclick = function (nightmare) {
+  if(curMode!==2){
+    numCards = 6 ;
+    initCards() ;
+    reset() ;
+    curMode=2 ;
+     t = 6 ;
+    showTime() ;
+    resetDisplay.style.display = "none"
+/*    resetDisplay.textContent = '' ;*/
+  }
+}
+
+    function showTime()
+    {
+
+      if(t>0  && curMode==2){
+        t -= 1;
+      messageDisplay.textContent = 'what is the color?  ' + t;
+      }
+      if(t<1 && curMode==2){
+        messageDisplay.textContent = 'Time is Up!'  ;
+      clearTimeout(go) ;
+      changeColors("#FFF");
+      body.style.backgroundColor = pickedColor;
+      gameOver=true ;
+
+      }
+    go = setTimeout("showTime()",1000) ;
+  }
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -50,8 +121,11 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
+
     resetDisplay.textContent = "New Color"
-    messageDisplay.textContent = "What's the Color?";
+
+
+
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -64,10 +138,9 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
 }
-
-resetButton.addEventListener("click", function() {
+  resetButton.addEventListener("click", function() {
     reset();
-})
+  })
 
 function changeColors(color) {
     //loop through all cards
