@@ -2,10 +2,11 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
+var mode_var = 1;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
@@ -13,13 +14,102 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy = document.getElementById("easy");
+var hard = document.getElementById("hard");
+var nightmare = document.getElementById("nightmare");
+var mode = document.getElementById("mode");
+var timer = document.getElementById("timer");
 
-function init() {
+function init()
+{
     initCards();
     reset();
 }
 
-function initCards() {
+function modeclicked()
+{
+    if(mode_var === 1)
+    {
+        easy.style.backgroundColor = "#ff8080";
+        hard.style.backgroundColor = "#0066ff";
+        nightmare.style.backgroundColor = "#0066ff";
+    }
+    else if (mode_var === 2)
+    {
+      easy.style.backgroundColor = "#0066ff";
+      hard.style.backgroundColor = "#ff8080";
+      nightmare.style.backgroundColor = "#0066ff";
+    }
+    else if (mode_var === 3)
+    {
+      easy.style.backgroundColor = "#0066ff";
+      hard.style.backgroundColor = "#0066ff";
+      nightmare.style.backgroundColor = "#ff8080";
+    }
+}
+
+function Easy()
+{
+  easy.style.backgroundColor = "#ff8080";
+  hard.style.backgroundColor = "#0066ff";
+  nightmare.style.backgroundColor = "#0066ff";
+  timer.style.opacity = 0;
+    mode_var = 1;
+    numCards = 3;
+    reset();
+}
+function Hard()
+{
+  easy.style.backgroundColor = "#0066ff";
+  hard.style.backgroundColor = "#ff8080";
+  nightmare.style.backgroundColor = "#0066ff";
+  timer.style.opacity = 0;
+    mode_var = 2;
+    numCards = 6;
+    reset();
+}
+
+function NightMare()
+{
+  easy.style.backgroundColor = "#0066ff";
+  hard.style.backgroundColor = "#0066ff";
+  nightmare.style.backgroundColor = "#ff8080";
+  timer.style.opacity = 1;
+  timer.text = Countdown()
+    mode_var =3;
+    numCards = 6;
+    reset();
+}
+function  Countdown()
+{
+  window.setTimeout(function()
+  {
+    
+  }
+,1000);
+
+}
+function whichMode()
+{
+  if(mode_var === 1)
+  {
+    if(numCards !== 3)
+      Easy();
+  }
+  else if (mode_var === 2)
+  {
+    if(numCards !== 6)
+    Hard();
+  }
+  else if (mode_var === 3)
+  {
+    if(numCards !== 6)
+    NightMare();
+  }
+}
+
+function initCards()
+{
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -43,9 +133,13 @@ function initCards() {
     }
 }
 
-function reset() {
+function reset()
+{
+
+    whichMode();
     gameOver = false;
     colors = generateRandomColors(numCards);
+
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
@@ -68,6 +162,25 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+easy.addEventListener("click",function()
+{
+    modeclicked();
+    mode_var = 1;
+    Easy();
+});
+hard.addEventListener("click",function()
+{
+    modeclicked();
+    mode_var = 2;
+    Hard();
+});
+nightmare.addEventListener("click",function()
+{
+    modeclicked();
+    mode_var = 3;
+    NightMare();
+});
 
 function changeColors(color) {
     //loop through all cards
