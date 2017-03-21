@@ -13,12 +13,43 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var Ez_Button= document.querySelector("#Ez_btn");
+var Hrd_Button= document.querySelector("#hrd_btn");
+var NM_Button= document.querySelector("#NM_btn");
+var display=document.querySelector("#card-container");
+var bool=fales;
 function init() {
     initCards();
     reset();
 }
+function mode1() {
 
+  var div = document.createElement("div");      // Create a <button> element
+  div.className ="card";
+  div.idName="hard";                          // Append the text to <button>
+document.getElementById("card-1").appendChild(div);
+var div = document.createElement("div");      // Create a <button> element
+div.className ="card";
+div.idName="hard";                         // Append the text to <button>
+document.getElementById("card-1").appendChild(div);
+var div = document.createElement("div");      // Create a <button> element
+div.className ="card";
+div.idName="hard";                         // Append the text to <button>
+document.getElementById("card-1").appendChild(div);
+bool=true;
+numCards = 6;
+
+   //numCards=6;
+}
+function mode0() {
+  if(bool===true)
+  {
+    var parent = document.getElementById("card-container");
+    var child = document.getElementById("card-1");
+    parent.removeChild(child);
+   //numCards=6;
+ }
+}
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -45,8 +76,10 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+
+
     colors = generateRandomColors(numCards);
-    //pick a new random color from array
+    //pick a new random color from arra
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
