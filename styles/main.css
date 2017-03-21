@@ -123,6 +123,3 @@ cursor: pointer;
 button.mode:hover{
 	color: blue;
 }
-button:focus{
-	font-family: 'Baloo Bhaina', cursive;
-}
