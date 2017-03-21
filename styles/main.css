@@ -27,8 +27,21 @@ body {
     display: flex;
 	flex-direction: row;
 }
+ul{
+	margin: 0px 5px;
+	list-style: none;
+	display:inline-block;
+}
+ul li{
+	display:inline-block;
+	margin-right: auto;
+}
+ul button{
+	display:inline-block;
+	vertical-align: text-top;
+}
 
-button.MODE{
+#easy {
 	vertical-align: text-top;
 	display: block;
 	margin: none;
@@ -36,7 +49,7 @@ button.MODE{
 	outline: none;
 	border: none;
     border-radius: 999rem;
-    background-color: gray;
+    background-color: none;
 	font-size: 1rem;
     font-weight: 700;
     color: #484848;
@@ -44,16 +57,72 @@ button.MODE{
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
 	cursor: pointer;
+	display:inline-block;
+}
+#easy:hover{
+	color:white;
+	background-color: #484848;
+	padding:5px;
+}
+#hard {
+	vertical-align: text-top;
+	display: block;
+	margin: none;
+	padding: none;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: none;
+	font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+	display:inline-block;
+}
+#hard:hover{
+	color:white;
+	background-color: #484848;
+	padding:5px;
+}
+#nightmare {
+	vertical-align: text-top;
+	display: block;
+	margin: none;
+	padding: none;
+	outline: none;
+	border: none;
+    border-radius: 999rem;
+    background-color: none;
+	font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+	cursor: pointer;
+	display:inline-block;
+}
+#nightmare:hover{
+	color:white;
+	background-color: #484848;
+	padding:5px;
 }
 
 #brand {
 	font-weight: bold;
-	padding: 0 1rem;
+	padding: auto;
+	margin-left:auto;
+	vertical-align: text-bottom;
 }
 
 #about {
 	margin-left: auto;
 	color: #bbb;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .container {

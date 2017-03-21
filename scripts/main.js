@@ -132,25 +132,32 @@ function hardreset(){
   footer.style.display="block"
 }
 
+var t=5;
+var flag=0;
+function countdown(){
+  if (t>=0 && gameOver == false)
+  {
+    gameover=false;
+    messageDisplay.textContent="What's the Color? "+t;
+    t--;
+    setTimeout(countdown,1000);
+  }
+  else if (gameOver == false){
+    messageDisplay.textContent="TIMEOUT!";
+    resetDisplay.textContent="Play Again";
+    footer.style.display="block";
+    hardchangeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+  }
+}
 
 function nightinitCards(){
-  messageDisplay.textContent = "What's the Color? "+t ;
-  flag=0;
-  for (var i = 0; i < hardcards.length; i++) {
-      //add click listeners to cards
-      //hardcards[i].style.width=30%;
-      function tick() {
-        console.log(new Date().getSeconds());
-        }
-/* call tick every 1000ms */
-        var t = setInterval(tick, 1000);
-        messageDisplay.textContent = "What's the Color? "+t ;
+//  messageDisplay.textContent = "What's the Color? "+t ;
 
-        if (flag){
-          messageDisplay.textContent = "TIMEOUT!";
-        break;
-      }
-      hardcards[i].addEventListener("click", function() {
+  for (var i = 0; i < hardcards.length; i++) {
+
+        hardcards[i].addEventListener("click", function() {
           if (gameOver)
               return;
           //grab color of clicked card
@@ -166,23 +173,22 @@ function nightinitCards(){
               gameOver = true;
           } else {
               this.style.opacity = 0;
-              messageDisplay.textContent = "Try Again"
+              messageDisplay.textContent = "Try Again"+t;
           }
       });
   }
 }
 
 function nightreset(){
-  flag=0;
   gameOver = false;
   colors = generateRandomColors(hardnumCards);
   //pick a new random color from array
   pickedColor = pickColor();
   //change colorDisplay to match picked Color
-
+  //var t = 5;
   colorDisplay.textContent = pickedColor;
   resetDisplay.textContent = "New Color"
-  messageDisplay.textContent = "What's the Color?" ;
+  messageDisplay.textContent = "What's the Color?  " +t;
   //change colors of cards
   for (var j=0; j<cards.length; j++)
   {
@@ -199,8 +205,6 @@ function nightreset(){
   }
   body.style.backgroundColor = "#232323";
   footer.style.display="none";
-
-
 }
 
 resetButton.addEventListener("click", function() {
@@ -209,17 +213,19 @@ resetButton.addEventListener("click", function() {
     else if (mode == 2)
         hardreset();
     else if (mode == 3)
+    {
       nightreset();
+      t=5;
+      countdown();
+    }
 })
-var flag=0;
+
 night_button.addEventListener("click", function(){
   mode=3;
   nightinitCards();
   nightreset();
-})
-
-night_button.addEventListener("click", function(){
-  setTimeout(flag=1,5000);
+  t=5;
+  countdown();
 })
 
 hard_button.addEventListener("click", function(){
