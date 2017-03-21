@@ -61,6 +61,11 @@ body {
 	}
 }
 
+#countdown{
+    font-weight: bold;
+	font-size: 120%;
+}
+
 h1 {
     text-align: center;
     font-weight: normal;
