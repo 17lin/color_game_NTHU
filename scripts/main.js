@@ -182,12 +182,15 @@ resetButton.addEventListener("click", function() {
 })
 
 easyButton.addEventListener("click", function() {
+  mode=1;
   reset();
 })
 hardButton.addEventListener("click", function() {
+  mode=2;
   resetHard();
 })
 nightmareButton.addEventListener("click", function() {
+  mode=3;
   resetNightmare();
 })
 
