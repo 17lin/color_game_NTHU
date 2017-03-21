@@ -45,6 +45,7 @@ function initCards() {
                 clearInterval(intervalTimer);
                 resetButton.style.visibility = "visible";
                 messageDisplay.textContent = "Correct!";
+                secondsDisplay.textContent = "";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
