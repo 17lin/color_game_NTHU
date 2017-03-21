@@ -22,6 +22,8 @@ var counter = 5;
 var dc = document.querySelector("#counter");
 var count = 0;
 /*down-counter*/
+var id;
+var bl, bl2;
 
 
 function init() {
@@ -59,11 +61,17 @@ function setupMode() {
 modeButtons[0].addEventListener("click", function() {
     dc.textContent = null;
     count = 6;
+    clearInterval(id);
+    clearInterval(bl);
+    clearInterval(bl2);
 });
 
 modeButtons[1].addEventListener("click", function() {
     dc.textContent = null;
     count = 6;
+    clearInterval(id);
+    clearInterval(bl);
+    clearInterval(bl2);
 });
 
 
@@ -85,7 +93,7 @@ modeButtons[2].addEventListener("click", function() {
         dc.textContent="";
     }
   }
-  var id = setInterval(tick, 1000);
+  id = setInterval(tick, 1000);
 
 
 });
@@ -97,6 +105,7 @@ modeButtons[2].addEventListener("click", function() {
 /*bling*/
 modeButtons[2].addEventListener("click", function() {
 
+
   function bling () {
     body.style.backgroundColor = "white";
   }
@@ -105,8 +114,8 @@ modeButtons[2].addEventListener("click", function() {
     body.style.backgroundColor = "#232323";
   }
 
-  var bl = setInterval(bling, 1000);
-  var bl2 = setInterval(bling2,1020);
+  bl = setInterval(bling, 1000);
+  bl2 = setInterval(bling2,1020);
 
 });
 /*bling*/
@@ -159,9 +168,7 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
-    clearInterval(id);
-    clearInterval(bl);
-    clearInterval(bl2);
+    count = 0;
 }
 
 resetButton.addEventListener("click", function() {
