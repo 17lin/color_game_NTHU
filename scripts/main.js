@@ -153,6 +153,8 @@ function initCards() {
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
                 clearTimeout(count);
+                resetButton.style.display = 'inherit';
+                resetDisplay.style.display = 'inline';
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
