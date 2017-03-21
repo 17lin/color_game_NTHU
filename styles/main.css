@@ -38,6 +38,27 @@ body {
 	color: #bbb;
 }
 
+#easy {
+	margin-top: -0.3rem;
+	margin-left: 0.3rem;
+	padding: 0.5rem;
+	color: "black";
+}
+
+#hard {
+	margin-top: -0.3rem;
+	margin-left: 0.3rem;
+	padding: 0.5rem;
+	color: "black";
+}
+
+#night{
+	margin-top: -0.3rem;
+	margin-left: 0.3rem;
+	padding: 0.5rem;
+	color: "black";
+}
+
 .container {
     margin-left: auto;
 	margin-right: auto;
@@ -90,8 +111,8 @@ h1 {
 
 button {
 	display: block;
-	margin: 3rem auto;
-	padding: 1rem;
+  /*margin: 3rem auto;*/
+	/*padding: 1rem;*/
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -105,7 +126,27 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#reset{
+	margin: 3rem auto;
+	padding: 1rem;
+}
+
+#reset:hover{
     color: white;
     background-color: steelblue;
+}
+
+#easy:hover{
+	color: white;
+	background-color: green;
+}
+
+#hard:hover{
+	color: white;
+	background-color: red;
+}
+
+#night:hover{
+	color: white;
+	background-color: black;
 }

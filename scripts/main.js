@@ -2,21 +2,45 @@ window.onload = function() {
     init();
 };
 
+// window.onload = function easyclick() {
+//     init();
+// };
+//
+// window.onload = function hardclick() {
+//     hardinit();
+// };
+
 var numCards = 3;
+var hardCards = 6;
 var gameOver = false;
 var colors = [];
+var hardcolors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
+var hardcard = document.querySelectorAll(".hardcard");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy =   document.getElementById("easy");
+var hard =   document.getElementById("hard");
+var night =   document.getElementById("night");
 
 function init() {
     initCards();
     reset();
+}
+
+function hardinit() {
+  initCards();
+  reset();
+}
+
+function night(){
+  initCards();
+  reset();
 }
 
 function initCards() {
@@ -43,6 +67,8 @@ function initCards() {
     }
 }
 
+
+
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -65,8 +91,21 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+
 resetButton.addEventListener("click", function() {
-    reset();
+    init();
+})
+
+easy.addEventListener("click", function() {
+    init();
+})
+
+hard.addEventListener("click", function() {
+    hardinit();
+})
+
+night.addEventListener("click", function() {
+    init();
 })
 
 function changeColors(color) {
@@ -78,10 +117,12 @@ function changeColors(color) {
     }
 }
 
+
 function pickColor() {
     var random = Math.floor(Math.random() * colors.length);
     return colors[random];
 }
+
 
 function generateRandomColors(num) {
     //make an array
