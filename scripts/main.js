@@ -1,9 +1,9 @@
 window.onload = function() {
     init();
 };
-
+var mode = easy;
 var countnumber = 5;
-var numCards = 6;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,6 +14,9 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
 
 function init() {
     initCards();
@@ -36,6 +39,8 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                document.getElementById("count").textContent = "";
+                resetButton.style.visibility = "visible";
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again";
@@ -53,6 +58,11 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color";
     messageDisplay.textContent = "What's the Color?";
+    if (mode == nightmare) countDown(5);
+    else {
+      document.getElementById("count").textContent = "";
+      resetButton.style.visibility = "visible";
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -69,9 +79,64 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
-function myTimer() {
-  var d = new Date();
 
+easyButton.addEventListener("click", function() {
+    mode = easy;
+    easyButton.style.color = "white";
+    easyButton.style.backgroundColor = "steelblue";
+    hardButton.style = "";
+    nightmareButton.style = "";
+    numCards = 3;
+    reset();
+})
+
+hardButton.addEventListener("click", function() {
+    mode = hard;
+    numCards = 6;
+    easyButton.style = "";
+    hardButton.style.color = "white";
+    hardButton.style.backgroundColor = "steelblue";
+    nightmareButton.style = "";
+    reset();
+})
+
+nightmareButton.addEventListener("click", function() {
+    mode = nightmare;
+    numCards = 6;
+    easyButton.style = "";
+    hardButton.style = "";
+    nightmareButton.style.color = "white";
+    nightmareButton.style.backgroundColor = "steelblue";
+    reset();
+    countDown(countnumber);
+})
+function countDown(num) {
+    var counter = setInterval(function () {
+        if (mode == nightmare && gameOver == false) {
+          document.getElementById("count").innerHTML = num;
+          resetButton.style.visibility = "hidden";
+          if (num == 0) {
+            messageDisplay.textContent = "TimeOut!";
+            resetDisplay.textContent = "Play Again";
+            changeColors("#FFF");
+            body.style.backgroundColor = pickedColor;
+            gameOver = true;
+            document.getElementById("count").textContent = "";
+            resetButton.style.visibility = "visible";
+          } else {
+            body.style.backgroundColor = "#232323";
+          }
+          // num-- || clearInterval(counter);  黑魔法
+          num--;
+          if (num == -1) clearInterval(counter);
+          setTimeout(function() {
+              if (num > 0 && mode == nightmare && gameOver == false)
+                  body.style.backgroundColor = "grey";
+          }, 900);
+        } else {
+          clearInterval(counter);
+        }
+    }, 1000);
 }
 function changeColors(color) {
     //loop through all cards
