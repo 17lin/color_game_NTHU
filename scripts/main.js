@@ -1,8 +1,8 @@
 window.onload = function() {
-    init();
+      init();
 };
-
-var numCards;
+var count = 0;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -15,37 +15,28 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+
+function clicked_e(){
+    document.getElementById("hard").style.background="white";
+    document.getElementById("hard").style.color="black";
+    document.getElementById("easy").style.background="steelblue";
+    document.getElementById("easy").style.color="white";
+}
+
+function clicked_h(){
+    document.getElementById("hard").style.background="steelblue";
+    document.getElementById("hard").style.color="white";
+    document.getElementById("easy").style.background="white";
+    document.getElementById("easy").style.color="black";
+    var new_card = document.createElement("div");
+    document.body.appendChild(new_card);
+}
+
 function init() {
-    initLevel();
-    if(count=0){
-      console.log('0');
-      numCards = 3;
-      initCards();
-      reset();
-    }else if (count=1){
-      console.log('1');
-    //  body.classList.add('card');
-    //  body.classList.add('card');
-      cards_num.classList.add('card');
-      numCards = 6;
-      initCards();
-      reset();
-    }
-
-
+     initCards();
+     reset();
 }
 
-function initLevel(){
-      count=0;
-      document.onclick=function(){
-      var obj = event.srcElement;
-      if(obj.id == "hard"){
-        count=1;
-      }else{
-        count=0;
-      }
-      }
-}
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
