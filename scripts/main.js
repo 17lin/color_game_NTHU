@@ -187,7 +187,16 @@ function randomColor() {
 
 /*    Button   */
 
-
+easyButton.addEventListener('mouseover',function(){
+    if(mode_flag == true){
+        this.style.color = "blue";
+    }
+});
+easyButton.addEventListener('mouseout',function(){
+    if(mode_flag == true){
+        this.style.color = "black";
+    }
+});
 easyButton.addEventListener('click',function(){
     if(mode_flag == true){
         removeCards();
@@ -205,9 +214,19 @@ easyButton.addEventListener('click',function(){
 
 
 
-
+hardButton.addEventListener('mouseover',function(){
+    if(mode_flag == false){
+        this.style.color = "blue";
+    }
+});
+hardButton.addEventListener('mouseout',function(){
+    if(mode_flag == false){
+        this.style.color = "black";
+    }
+});
 hardButton.addEventListener('click',function(){
     if(mode_flag == false){
+        this.style.color = "white";
         removeCards();
         addCards(6);
         numCards = 6;
