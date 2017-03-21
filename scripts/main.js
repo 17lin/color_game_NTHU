@@ -34,6 +34,7 @@ function changeEasy(){
     	resetButton.style.display = 'block';
 
     	clearInterval(myTimer);
+        clearInterval(on);
 
     	numCards = 3;
 		gameMod = 0;
@@ -56,6 +57,7 @@ function changeHard(){
 	    gameMod = 1;
 
 	    clearInterval(myTimer);
+        clearInterval(on);
 
 	    reset();
 	}
@@ -161,7 +163,7 @@ resetButton.addEventListener("click", function() {
 		time = 5;
 		timerDisplay.textContent = time;
 		myTimer = setInterval(my_func, 1000);
-
+        blinking();
 
     	reset();
     }
@@ -216,7 +218,6 @@ function timeout(){
 	clearInterval(myTimer);
 	gameOver = true;
     clearInterval(on);
-    clearInterval(off);
 }
 
 function blinking(){
