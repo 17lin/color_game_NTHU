@@ -109,7 +109,7 @@ button {
 	cursor: pointer;
 }
 
-#reset:hover {
+button:hover {
     color: white;
     background-color: steelblue;
 }
