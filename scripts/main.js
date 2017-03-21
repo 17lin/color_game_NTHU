@@ -26,9 +26,9 @@ function initModeButtons() {
   for (var i=0; i<modeButtons.length; i++) {
     modeButtons[i].addEventListener("click", function() {
       // refresh all other mode buttons
-      reset();
       refreshModeButtons();
       this.classList.add("selected-mode-button");
+      reset();
     })
   }
 }
