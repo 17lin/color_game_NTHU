@@ -23,6 +23,15 @@ function init() {
 }
 
 function initModeButtons() {
+  modeButtons[0].addEventListener("click", function() {
+    numCards = 3;
+  })
+  modeButtons[1].addEventListener("click", function() {
+    numCards = 6;
+  })
+  modeButtons[2].addEventListener("click", function() {
+    numCards = 6;
+  })
   for (var i=0; i<modeButtons.length; i++) {
     modeButtons[i].addEventListener("click", function() {
       // refresh all other mode buttons
