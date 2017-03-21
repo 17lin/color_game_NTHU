@@ -28,7 +28,7 @@ body {
 	flex-direction: row;
 }
 
-#brand {
+.brand {
 	font-weight: bold;
 	padding: 0 1rem;
 }
@@ -83,12 +83,26 @@ h1 {
 	cursor: pointer;
 }
 
+.card2 {
+    width: 30%;
+    background: white;
+    padding-bottom: 30%;
+    float: left;
+    margin: 1.66%;
+    border-radius: 1rem;
+    transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    cursor: pointer;
+    height: 0;
+}
+
 .selected {
     color: white;
     background: steelblue;
 }
 
-button {
+#reset {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -105,7 +119,24 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+.modebutt {
+    display: block;
+    margin:auto;
+    padding: 0.3rem;
+    outline: none;
+    border: none;
+    border-radius: 999rem;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #484848;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    cursor: pointer;
+}
+
+#reset:hover {
     color: white;
     background-color: steelblue;
 }
