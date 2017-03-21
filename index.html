@@ -16,20 +16,29 @@
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
+			<span><button onclick="changeGameMode(0)" id="easybtn" style="padding:0;margin:0 auto;display:inline">easy</button>
+			<button id="hardbtn" onclick="changeGameMode(1)" style="padding:0;margin:0 auto;display:inline"> hard </button>
+			<button id="nightbtn" onclick="changeGameMode(2)" style="padding:0;margin:0 auto;display:inline"> nightmare </button></span>
+
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
-
+	
 	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
+		<div class="card" style="display:none"></div>
+		<div class="card" style="display:none"></div>
+		<div class="card" style="display:none"></div>
 	</div>
-
-	<div id="footer">
-		<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
+	<div class="container" id="timer">
+		<br>
+	</div>
+	<div id="footer" style="text-align:center">
+		<button id="reset" style="display:inline"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
 	</div>
 
 	<script type="text/javascript" src="scripts/main.js"></script>
