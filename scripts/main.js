@@ -13,10 +13,43 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyDisplay = document.getElementById("easymode");
+var hardDisplay = document.getElementById("hardmode");
+
+function change_div(id){
+  if (id == 'easy' )
+  {
+     //hardDisplay.style.display = 'none' ;
+     //easyDisplay.style.display = 'block' ;
+     easyDisplay.style.backgroundColor = "#4482e5";
+     easyDisplay.style.color = "white";
+     easyDisplay.style.fontWeight = "bold";
+     hardDisplay.style.backgroundColor = "white";
+     hardDisplay.style.color = "black";
+     hardDisplay.style.fontWeight = "normal";
+     document.getElementById("hard").style.display= 'none';
+     reset(3);
+     numCards = 3;
+  }
+  else if (id == 'hard' )
+  {
+     //easyDisplay.style.display = 'none' ;
+     //hardDisplay.style.display = 'block' ;
+     document.getElementById("hard").style.display= 'block';
+     hardDisplay.style.backgroundColor = "#4482e5";
+     hardDisplay.style.color = "white";
+     hardDisplay.style.fontWeight = "bold";
+     easyDisplay.style.backgroundColor = "white";
+     easyDisplay.style.color = "black";
+     easyDisplay.style.fontWeight = "normal";
+     reset(6);
+     numCards = 6;
+  }
+}
 
 function init() {
     initCards();
-    reset();
+    reset(3);
 }
 
 function initCards() {
@@ -43,7 +76,7 @@ function initCards() {
     }
 }
 
-function reset() {
+function reset(numCards) {
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -66,7 +99,7 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+    reset(numCards);
 })
 
 function changeColors(color) {
