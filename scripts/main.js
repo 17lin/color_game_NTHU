@@ -16,6 +16,7 @@ var resetDisplay = document.querySelector("#reset span");
 var easybutton = document.querySelector("#easybutton");
 var hardbutton = document.querySelector("#hardbutton");
 var nightmare = document.querySelector("#nightmare");
+var isnightmare = false;
 
 function init() {
     initCards();
@@ -44,8 +45,8 @@ function initCards() {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
-            if (gameOver===false)
-            setTimeout(GGWP, 5000);
+            if (gameOver===false&&isnightmare===true)
+            setTimeout(GGWP, 500);
         });
     }
 }
@@ -91,6 +92,7 @@ easybutton.addEventListener("click", function() {
   document.getElementById("nightmare").className="unchoosebutton";
   document.getElementById("hardcard").style.display="none";
   numCards=3;
+  isnightmare=false;
     reset();
 })
 hardbutton.addEventListener("click", function() {
@@ -99,6 +101,7 @@ hardbutton.addEventListener("click", function() {
   document.getElementById("easybutton").className="unchoosebutton";
   document.getElementById("nightmare").className="unchoosebutton";
   numCards=6;
+  isnightmare=false;
   reset();
 })
 
@@ -108,6 +111,7 @@ nightmare.addEventListener("click", function() {
   document.getElementById("easybutton").className="unchoosebutton";
   document.getElementById("hardbutton").className="unchoosebutton";
   numCards=6;
+  isnightmare=true;
   reset();
 })
 function changeColors(color) {
