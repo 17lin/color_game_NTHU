@@ -13,7 +13,8 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var Easy = document.querySelector("#Easy");
+var Hard = document.querySelector("#Hard");
 function init() {
     initCards();
     reset();
@@ -42,7 +43,11 @@ function initCards() {
         });
     }
 }
-
+function changeMode(mode){
+if(mode=="Easy"){numCards = 3;reset()}
+if(mode=="Hard"){numCards = 6;reset()}
+    
+}
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -68,6 +73,13 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
+Easy.addEventListener("click", function() {
+    changeMode("Easy");
+})
+Hard.addEventListener("click", function() {
+    changeMode("Hard");
+})
+
 
 function changeColors(color) {
     //loop through all cards
@@ -102,5 +114,6 @@ function randomColor() {
     var g = Math.floor(Math.random() * 256);
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
+       
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
