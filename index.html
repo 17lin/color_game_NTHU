@@ -16,25 +16,22 @@
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
-			<button id="easy" href="#">Easy</button>
-			<button id="hard" href="#">Hard</button>
-			<button id="night" href="#">Nightmare</button>
+			<button id="easy" href="#" onclick="easyfunction()" onmouseover="style.color='blue'" onmouseout="style.color='black'">Easy</button>
+			<button id="hard" href="#" onclick="hardfunction()" onmouseover="style.color='blue'" onmouseout="style.color='black'">Hard</button>
+			<button id="night" href="#" onclick="nightfunction()" onmouseover="style.color='blue'" onmouseout="style.color='black'">Nightmare</button>
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id=count></span></h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
-		<div class="hardcard"></div>
-		<div class="hardcard"></div>
-		<div class="hardcard"></div>
-		<div class="hardcard"></div>
-		<div class="hardcard"></div>
-		<div class="hardcard"></div>
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
 	</div>
 
 	<div id="footer">
