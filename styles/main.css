@@ -127,3 +127,11 @@ button:hover {
 	background-color: blue;
 	color: white;
 }
+
+#night {
+	display: inline;
+	margin : auto auto auto auto;
+	padding: 0.5rem;
+	background-color: black;
+	color: white;
+}
