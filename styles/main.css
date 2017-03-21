@@ -18,20 +18,34 @@ body {
 
 #stripe {
 	background: white;
-	padding: 1rem;
+	padding: 0.5rem;
 	color: #484848;
 }
 
 #navbar {
 	display: -webkit-flex;
-    display: flex;
-	flex-direction: row;
+    display: row;
+	flex-direction:row;
 }
 
 #brand {
 	font-weight: bold;
-	padding: 0 1rem;
+	padding: 0 0.5rem;
 }
+
+#easy{
+	margin: 0,0.5rem;
+	padding: 0,0.5rem;
+}
+#hard{
+	margin: 0,0.5rem;
+	padding: 0,0.5rem;
+}
+#nightmare{
+	margin: 0,0.5rem;
+	padding: 0,0.5rem;
+}
+
 
 #about {
 	margin-left: auto;
@@ -39,8 +53,9 @@ body {
 }
 
 .container {
+		display: row;
     margin-left: auto;
-	margin-right: auto;
+	  margin-right: auto;
     max-width: 520px;
 }
 
@@ -90,8 +105,8 @@ h1 {
 
 button {
 	display: block;
-	margin: 3rem auto;
-	padding: 1rem;
+	margin: 0,0.5rem;
+	padding: 0,0.5rem;
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -104,8 +119,14 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+#reset{
+	margin: 1rem auto;
+	padding: 1rem;
+}
 
 button:hover {
     color: white;
-    background-color: steelblue;
+    background-color: orange;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
 }
