@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,8 +14,19 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+//
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+var night = document.getElementById("nightmare");
+var sTime = new Date().getTime();
+var countDown = 5; // Number of seconds to count down from.        
+var timeshow =document.getElementById("countdowntimertxt");
+//
+
 function init() {
     initCards();
+    //setupSquares();
+    setupMode();
     reset();
 }
 
@@ -43,6 +54,33 @@ function initCards() {
     }
 }
 
+function setupMode() {
+    for(var i = 0; i < modeButtons.length; i++) {
+        modeButtons[i].addEventListener("click", function() {
+            for (var i = 0; i < modeButtons.length; i++) {
+                modeButtons[i].classList.remove("selected");
+            }
+            this.classList.add("selected");
+            if (this.textContent === "Easy") {
+                numCards = 3;
+                //timeshow.style.display = "none";
+                countDown = 0; 
+            }
+            else if(this.textContent === "nightmare"){
+                numCards = 6;
+                resetButton.style.display ="none";
+                countDown = 5; 
+            }
+            else {
+                numCards = 6;
+                //timeshow.style.display = "none";
+                countDown = 0; 
+            }
+            reset();
+        });
+    }
+}
+
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -54,7 +92,7 @@ function reset() {
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
-        cards[i].style.opacity = 1;
+        //cards[i].style.opacity = 1;
         if (colors[i]) {
             cards[i].style.display = "block"
             cards[i].style.backgroundColor = colors[i];
@@ -104,3 +142,28 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+
+
+    function UpdateCountDownTime() {
+        var cTime = new Date().getTime();
+        var diff = cTime - sTime;
+        var timeStr = '';
+        var seconds = countDown - Math.floor(diff / 1000);
+        if (seconds > 0) {
+            var hours = Math.floor(seconds / 3600);
+            var minutes = Math.floor( (seconds-(hours*3600)) / 60);
+            seconds -= (hours*3600) + (minutes*60);
+
+            if( seconds < 10){
+             
+                timeStr =+ seconds;
+            }
+            document.getElementById("countdowntimertxt").innerHTML = timeStr;
+        }else{
+            document.getElementById("countdowntimertxt").style.display="none";
+            clearInterval(counter);
+        }
+    }
+    UpdateCountDownTime();
+    var counter = setInterval(UpdateCountDownTime, 500);
