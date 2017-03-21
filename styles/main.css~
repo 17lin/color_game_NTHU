@@ -29,8 +29,6 @@ body {
 .mode_on{
     color:white;
     background-color:black;
-    font-weight: bold;
-	padding: 0 1rem;
 }
 
 #stripe {

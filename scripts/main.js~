@@ -168,4 +168,7 @@ function bg_blink(){
         color_blink = !color_blink;
     }
 }
-
+function bg_blink2(){
+    body.style.backgroundColor="#aaaaaa";
+    setTimeout('bg_blink()',500);
+}
