@@ -173,15 +173,15 @@ modeButton[2].addEventListener("mouseover", function() {
 });
 
 modeButton[0].addEventListener("mouseout", function() {
-	this.style.color = selectedMode === "Easy" ? "white" : "steelBlue";
+	this.style.color = selectedMode === "Easy" ? "white" : "black";
 });
 
 modeButton[1].addEventListener("mouseout", function() {
-	this.style.color = selectedMode === "Hard" ? "white" : "steelBlue";
+	this.style.color = selectedMode === "Hard" ? "white" : "black";
 });
 
 modeButton[2].addEventListener("mouseout", function() {
-	this.style.color = selectedMode === "Nightmare" ? "white" : "steelBlue";
+	this.style.color = selectedMode === "Nightmare" ? "white" : "black";
 });
 
 function setMode() {
