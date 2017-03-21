@@ -58,7 +58,7 @@ nightMareModeBtn.addEventListener("click", function(){
     var id = setInterval(function(){
         var y = 0;
         var iid = setInterval(function(){
-            if(y == 0) {
+            if(y % 20 === 0) {
                 if(gameOver == true)
                     body.style.backgroundColor = "pickedColor";
                 else
@@ -70,7 +70,7 @@ nightMareModeBtn.addEventListener("click", function(){
                     body.style.backgroundColor = "#232323";
             }
             y = y + 1;
-        }, 100);
+        }, 50);
         count = count - 1;
         if(state === false){
             messageDisplay.innerHTML = "What's the Color?  " + count;
