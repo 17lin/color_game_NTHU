@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var mode = 1;
+var mode = 0;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -40,7 +40,8 @@ function initCards() {
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                if (mode!=2)
+                  messageDisplay.textContent = "Try Again"
             }
         });
     }
@@ -70,28 +71,28 @@ function reset() {
 }
 
 function easy() {
-      mode = 1;
+      mode = 0;
       numCards = 3;
       reset();
 
 }
 
 function hard(){
-    mode = 2;
+    mode = 1;
     numCards = 6;
     reset();
 
 }
 
 function nightmare(){
-  mode = 3;
+  mode = 2;
   numCards = 6;
   reset();
   countdown(6);
 }
 
 resetButton.addEventListener("click", function() {
-    if(mode==3){
+    if(mode==2){
       clearInterval(count);
       nightmare();
     }
@@ -100,26 +101,34 @@ resetButton.addEventListener("click", function() {
     }
 })
 modes[0].addEventListener("click", function() {
+
     easy();
-    this.style.color = white;
-    this.style.background = steelblue;
+    clearInterval(count);
+
 })
 modes[1].addEventListener("click", function() {
+
     hard();
+    clearInterval(count);
 
 })
 modes[2].addEventListener("click", function() {
+
     nightmare();
+
 
 })
 
 function countdown(time){
-  if(mode==3){
+  if(mode==2){
   count = setInterval(function(){
     time =time-1;
     messageDisplay.textContent = "What's the Color? " +time;
-    if (gameOver == true || mode!=3){
+    if (mode!=2)
+      clearInterval(count);
+    else if (gameOver == true){
         clearInterval(count);
+        messageDisplay.textContent = "Correct!";
     }
     else if(time == 0){
       messageDisplay.textContent = "Timeout!";
@@ -128,9 +137,8 @@ function countdown(time){
       gameOver = true;
       clearInterval(count);
     }
-  }, 1000);}
-  else
-    clearInterval(count);
+
+    }, 1000);}
 
 }
 
