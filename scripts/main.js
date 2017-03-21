@@ -56,22 +56,20 @@ nightMareModeBtn.addEventListener("click", function(){
     nightInitCards();
     nightResetEasy();
     var id = setInterval(function(){
-        var i= 0
+        var y = 0;
         var iid = setInterval(function(){
-            if(i == 0) {
+            if(y == 0) {
                 if(gameOver == true)
                     body.style.backgroundColor = "pickedColor";
                 else
-                    body.style.backgroundColor = "#white";
-                clearInterval(iid);
+                    body.style.backgroundColor = "white";
             } else {
                 if(gameOver == true)
                     body.style.backgroundColor = "pickedColor";
                 else
                     body.style.backgroundColor = "#232323";
-                clearInterval(iid);
             }
-            i = i + 1;
+            y = y + 1;
         }, 100);
         count = count - 1;
         if(state === false){
