@@ -59,7 +59,7 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "Try Again"
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -78,7 +78,8 @@ function reset() {
 
 
 resetButton.addEventListener("click", function() {
-    reset();
+    t=6;
+    init();
 })
 
 function changeColors(color) {
@@ -131,7 +132,9 @@ function showTime()
       messageDisplay.textContent = "Time out";
       body.style.backgroundColor = pickedColor;
       t=0;
-      document.getElementById('reset').style.display = "none";
+
+      document.getElementById('reset').style.display = "block";
+
       changeColors("#FFF");
       gameOver = true;
     }
