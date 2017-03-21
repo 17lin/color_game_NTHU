@@ -8,6 +8,7 @@ var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
+var nightmare = false;
 var timer_text = document.querySelector(".timer_text");
 var button = document.querySelector("button");
 var body = document.querySelector("body");
@@ -16,6 +17,7 @@ var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
+var resetbutton = document.querySelector(".reset_button");
 var resetDisplay = document.querySelector("#reset span");
 var card1 = document.querySelector("#card1");
 var card2 = document.querySelector("#card2");
@@ -30,6 +32,9 @@ function init() {
 }
 
 function initCards() {
+    if (nightmare) {
+        resetButton.style.display = "none";
+    }
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -45,6 +50,9 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                clearInterval(t);
+                timer_text.style.display = "none";
+                resetButton.style.display = "block";
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again";
@@ -75,54 +83,15 @@ function reset() {
     body.style.backgroundColor = "#232323";
     timer_text.textContent = "";
     resetButton.display = "block";
-}
 
-function initCards_hightmare() {
-    for (var i = 0; i < cards.length; i++) {
-        //add click listeners to cards
-        cards[i].addEventListener("click", function() {
-            if (gameOver)
-                return;
-            //grab color of clicked card
-            var clickedColor = this.style.backgroundColor;
-            // alert(this.style.backgroundColor);
-            //compare color to pickedColor
-            if (clickedColor === pickedColor) {
-                messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
-                changeColors("#FFF");
-                body.style.backgroundColor = clickedColor;
-                gameOver = true;
-            } else {
-                this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
-            }
-        });
+    if (nightmare) {
+        seconds = 5;
+        timer_text.style.display = "inline";
+        main_timer();
+    } else {
+        timer_text.style.display = "none";
+        clearInterval(t);
     }
-}
-
-function reset_nightmare() {
-    gameOver = false;
-    colors = generateRandomColors(numCards);
-    //pick a new random color from array
-    pickedColor = pickColor();
-    //change colorDisplay to match picked Color
-    colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
-    messageDisplay.textContent = "What's the Color?";
-    //change colors of cards
-    for (var i = 0; i < cards.length; i++) {
-        cards[i].style.opacity = 1;
-        if (colors[i]) {
-            cards[i].style.display = "block"
-            cards[i].style.backgroundColor = colors[i];
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-    body.style.backgroundColor = "#232323";
-
-    resetButton.display = "none";
 }
 
 function main_timer() {
@@ -131,6 +100,17 @@ function main_timer() {
     t = setInterval(function () {
         timer_text.textContent = " " + seconds;
         seconds = seconds - 1;
+        // blink
+        if (!gameOver && seconds >= 0) {
+            setTimeout(function() {
+                body.style.backgroundColor = "#FFFFFF";
+            }, 0);
+            setTimeout(function() {
+                body.style.backgroundColor = "#232323";
+            }, 50);
+        }
+
+        // stop time interval
         if (seconds < 0) {
             seconds = 5;
             // ==========================================
@@ -140,6 +120,7 @@ function main_timer() {
             resetDisplay.textContent = "Play Again"
             changeColors("#FFF");
             body.style.backgroundColor = pickedColor;
+            resetButton.style.display = "block";
             gameOver = true;
             // ==========================================
             clearInterval(t);
@@ -148,6 +129,7 @@ function main_timer() {
 }
 
 resetButton.addEventListener("click", function() {
+    initCards();
     reset();
 })
 
@@ -189,6 +171,7 @@ function randomColor() {
 // ================================================================================
 // button
 function easy_press() {
+    nightmare = false;
     var tmp = document.querySelector("#easy");
     tmp.style.backgroundColor = "rgb(68, 158, 215)";
     tmp.style.color = "#FFF";
@@ -196,9 +179,10 @@ function easy_press() {
     nightmare_unpress();
 
     numCards = 3;
-    card4.display = "none";
-    card5.display = "none";
-    card6.display = "none";
+    card4.style.display = "none";
+    card5.style.display = "none";
+    card6.style.display = "none";
+    resetButton.style.display = "block";
     initCards();
     reset();
 }
@@ -210,6 +194,7 @@ function easy_unpress() {
 }
 
 function hard_press() {
+    nightmare = false;
     var tmp = document.querySelector("#hard");
     tmp.style.backgroundColor = "rgb(68, 158, 215)";
     tmp.style.color = "#FFF";
@@ -217,9 +202,10 @@ function hard_press() {
     nightmare_unpress();
 
     numCards = 6;
-    card4.display = "inline";
-    card5.display = "inline";
-    card6.display = "inline";
+    card4.style.display = "inline";
+    card5.style.display = "inline";
+    card6.style.display = "inline";
+    resetButton.style.display = "block";
     initCards();
     reset();
 }
@@ -231,6 +217,7 @@ function hard_unpress() {
 }
 
 function nightmare_press() {
+    nightmare = true;
     var tmp = document.querySelector("#nightmare");
     tmp.style.backgroundColor = "rgb(68, 158, 215)";
     tmp.style.color = "#FFF";
@@ -238,15 +225,11 @@ function nightmare_press() {
     hard_unpress();
 
     numCards = 6;
-    card4.display = "inline";
-    card5.display = "inline";
-    card6.display = "inline";
-    initCards_hightmare();
-    reset_nightmare();
-
-    seconds = 5;
-    resetButton.visibility = "hide";
-    main_timer();
+    card4.style.display = "inline";
+    card5.style.display = "inline";
+    card6.style.display = "inline";
+    initCards();
+    reset();
 }
 
 function nightmare_unpress() {
