@@ -8,6 +8,8 @@ var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
+var modes = document.querySelectorAll(".mode");
+var nightmareButton = document.getElementById("nightmare");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
@@ -65,9 +67,60 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+function easy() {
+      numCards = 3;
+      reset();
+
+}
+
+function hard(){
+    numCards = 6;
+    reset();
+
+}
+
+function nightmare(){
+  numCards = 6;
+  reset();
+
+}
+
 resetButton.addEventListener("click", function() {
     reset();
+    clearInterval(count);
+
 })
+modes[0].addEventListener("click", function() {
+    easy();
+    this.style.color = white;
+    this.style.background = steelblue;
+})
+modes[1].addEventListener("click", function() {
+    hard();
+
+})
+modes[2].addEventListener("click", function() {
+    nightmare();
+
+})
+
+function countdown(time){
+  count = setInterval(function(){
+    time =time-1;
+    messageDisplay.textContent = "What's the Color? " +time;
+    if (time != 1 && gameOver == true){
+      clearInterval(count);
+    }
+    else if(time == 1){
+      messageDisplay.textContent = "Timeout!";
+      changeColors("#FFF");
+      body.style.backgroundColor = pickedColor;
+      gameOver = true;
+      clearInterval(count);
+    }
+  }, 1000);
+
+}
 
 function changeColors(color) {
     //loop through all cards
