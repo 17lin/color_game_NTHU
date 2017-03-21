@@ -10,33 +10,35 @@
 
 	<title>Color Game</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
-
 </head>
 
 <body>
-	<body>
-		<div id="stripe">
-			<div id="navbar" class="container">
-				<span id="brand" href="#">Color Game</span>
-				<button id="up" class="now" href="#easy"> Easy </button>
-				<button id="up" href="hard.html"> Hard </button>
-				<button id="up" href="nightmare.html"> Nightmare </button>
-				<span href="#" id="about">DataLab</span>
-			</div>
+	<div id="stripe">
+		<div id="navbar" class="container">
+			<span id="brand" href="#">Color Game</span>
+			<button id="up" href="#easy"> Easy </button>
+			<button id="up" class="now" href="#"> Hard </button>
+			<button id="up" href="#hardware"> Nightmare </button>
+			<span href="#" id="about">DataLab</span>
 		</div>
+	</div>
 
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id=div1></span></h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
-
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
 	</div>
 
+
 	<div id="footer">
-		<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
+		<button id="reset" style=display:block><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
 	</div>
 
 	<script type="text/javascript" src="scripts/hard.js"></script>
