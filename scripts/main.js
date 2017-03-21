@@ -49,7 +49,7 @@ function initCards() {
                     resetButton.style.display = "block";
                     messageDisplay.textContent = "Correct!";
                     resetDisplay.textContent = "Play Again"
-
+                    body.classList.remove("blink");
                     clearTimeout(t);
 
                     changeColors("#FFF");
@@ -79,6 +79,7 @@ function initCards() {
                   messageDisplay.textContent = "Correct!";
                   resetDisplay.textContent = "Play Again";
                   changeColors("#FFF");
+                  body.classList.remove("blink");
                   body.style.backgroundColor = clickedColor;
                   gameOver = true;
               } else {
