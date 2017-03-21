@@ -110,3 +110,68 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+
+#easy {
+	display: block;
+	padding: 0 1rem;
+	outline: none;
+	border: none;
+		border-radius: 999rem;
+		backgroundColor: white;
+	font-size: 1rem;
+		font-weight: 700;
+		color: #484848;
+		transition: all 0.3s;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#easy:hover {
+    color: white;
+    background-color: steelblue;
+}
+
+#hard {
+	display: block;
+	padding: 0 1rem;
+	outline: none;
+	border: none;
+		border-radius: 999rem;
+		backgroundColor: white;
+	font-size: 1rem;
+		font-weight: 700;
+		color: #484848;
+		transition: all 0.3s;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+#hard:hover {
+    color: white;
+    background-color: steelblue;
+}
+
+#nightmare {
+	display: block;
+	padding: 0 1rem;
+	outline: none;
+	border: none;
+		border-radius: 999rem;
+		backgroundColor: white;
+	font-size: 1rem;
+		font-weight: 700;
+		color: #484848;
+		transition: all 0.3s;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+	cursor: pointer;
+}
+
+
+#nightmare:hover {
+    color: white;
+    background-color: steelblue;
+}

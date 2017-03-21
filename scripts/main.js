@@ -2,7 +2,10 @@ window.onload = function() {
     init();
 };
 
-var numCards = 6; //origional is 3
+var numCards = 3; //origional is 3
+var hardNumCards = 6;
+var count;
+var gameMode = new Number(0);
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -10,13 +13,26 @@ var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
+var timeDisplay = document.querySelector("time");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
+
 
 function init() {
-    initCards();
-    reset();
+  //init easyButton blue
+  easyButton.style.backgroundColor = "steelblue";
+  easyButton.style.color = "white";
+  hardButton.style.backgroundColor = "white";
+  hardButton.style.color = "#484848";
+  nightmareButton.style.backgroundColor = "white";
+  nightmareButton.style.color = "#484848";
+
+  initCards();
+  reset();
 }
 
 
@@ -36,6 +52,9 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                clearInterval(count);
+                resetDisplay.textContent = "Play Again";
+                resetButton.style.display = "inherit";
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -44,52 +63,85 @@ function initCards() {
     }
 }
 
+function count4(){
+  timer = 4;
+  var delayMillis = 100;
 
-function startTimer(duration, display) {
-    var timer = duration, seconds;
-    var id = setInterval(function () {
-        seconds = parseInt(timer % 60, 10);
-        seconds = seconds < 10 ? seconds : seconds;
-        display.textContent = seconds;
-        resetButton.style.display = "none";
-        //blinkbg();
-        //body.style.backgroundColor='#000000';
-        var delayMillis = 100;
+  setTimeout(function() {
+    body.style.backgroundColor= "#232323";
+  }, delayMillis);
+  body.style.backgroundColor = "#FFFFFF";
+  messageDisplay.textContent = "4";
+  count = setTimeout(count3, 1000);
+}
 
-        setTimeout(function() {
-            body.style.backgroundColor='#232323';
-        }, delayMillis);
-        body.style.backgroundColor = "#FFFFFF";
+function count3(){
+  timer = 3;
+  var delayMillis = 100;
 
+  setTimeout(function() {
+    body.style.backgroundColor= "#232323";
+  }, delayMillis);
+  body.style.backgroundColor = "#FFFFFF";
+  messageDisplay.textContent = "3";
+  count = setTimeout(count2, 1000);
+}
 
-        if (--timer < 0) {
-            //stop the timer
-            clearInterval(id);
-            display.textContent = "";
-            messageDisplay.textContent = "TIMEOUT";
-            body.style.backgroundColor = pickedColor;
-            changeColors("#FFF");
-            resetDisplay.textContent = "Play Again";
-            resetButton.style.display = "inherit";
+function count2(){
+  timer = 2;
+  var delayMillis = 100;
 
-        }
-    }, 1000);
+  setTimeout(function() {
+    body.style.backgroundColor= "#232323";
+  }, delayMillis);
+  body.style.backgroundColor = "#FFFFFF";
+  messageDisplay.textContent = "2";
+  count = setTimeout(count1, 1000);
+}
+
+function count1(){
+  timer = 1;
+  var delayMillis = 100;
+
+  setTimeout(function() {
+    body.style.backgroundColor= "#232323";
+  }, delayMillis);
+  body.style.backgroundColor = "#FFFFFF";
+  messageDisplay.textContent = "1";
+  count = setTimeout(count0, 1000);
+}
+
+function count0(){
+  timer = 0;
+
+  body.style.backgroundColor = pickedColor;
+  changeColors("#FFF");
+  messageDisplay.textContent = "TIMEOUT";
+  gameOver = true;
+  resetDisplay.textContent = "Play Again";
+  resetButton.style.display = "inherit";
 }
 
 function reset() {
-    //init timer
-    var fiveSecond = 5,
-        display = document.querySelector('#time');
-    startTimer(fiveSecond, display);
 
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    if (gameMode == 0) colors = generateRandomColors(numCards);
+    else colors = generateRandomColors(hardNumCards);
+
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+
+    if (gameMode == 2) {
+      timer = 5;
+      resetButton.style.display = "none";
+      messageDisplay.textContent = "5";
+      count = setTimeout(count4, 1000);
+    }
+
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -104,7 +156,51 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+  reset();
+})
+
+easyButton.addEventListener("click", function() {
+  easyButton.style.backgroundColor = "steelblue";
+  easyButton.style.color = "white";
+  hardButton.style.backgroundColor = "white";
+  hardButton.style.color = "#484848";
+  nightmareButton.style.backgroundColor = "white";
+  nightmareButton.style.color = "#484848";
+clearInterval(count);
+  gameMode = 0;
+  resetDisplay.textContent = "Play Again";
+  resetButton.style.display = "inherit";
+  reset();
+
+})
+
+hardButton.addEventListener("click", function() {
+  easyButton.style.backgroundColor = "white";
+  easyButton.style.color = "#484848";
+  hardButton.style.backgroundColor = "steelblue";
+  hardButton.style.color = "white";
+  nightmareButton.style.backgroundColor = "white";
+  nightmareButton.style.color = "#484848";
+clearInterval(count);
+  gameMode = 1;
+  resetDisplay.textContent = "Play Again";
+  resetButton.style.display = "inherit";
+  reset();
+
+})
+
+nightmareButton.addEventListener("click", function() {
+  easyButton.style.backgroundColor = "white";
+  easyButton.style.color = "#484848";
+  hardButton.style.backgroundColor = "white";
+  hardButton.style.color = "#484848";
+  nightmareButton.style.backgroundColor = "steelblue";
+  nightmareButton.style.color = "white";
+clearInterval(count);
+  gameMode = 2;
+  resetDisplay.textContent = "Play Again";
+  resetButton.style.display = "inherit";
+  reset();
 })
 
 function changeColors(color) {
