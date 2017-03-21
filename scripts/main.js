@@ -14,10 +14,77 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+var hardButton = document.querySelector(".mode");
+
+
 function init() {
     initCards();
+    Mode();
     reset();
 }
+
+function night()
+{
+    callme5();
+    
+    callme4();
+    
+
+    callme3();
+    
+    callme2();
+    
+
+    callme1();
+    
+    timeout();
+    
+}
+
+function callme5()
+{
+    messageDisplay.textContent = "What's the color? 5"
+    document.getElementById('reset').style.visibility = 'hidden'
+}
+function callme4()
+{
+    messageDisplay.textContent = "What's the color? 4"
+    document.getElementById('reset').style.visibility = 'hidden'
+}
+
+function callme3()
+{
+    messageDisplay.textContent = "What's the color? 3"
+    document.getElementById('reset').style.visibility = 'hidden'
+}
+
+function callme2()
+{
+    messageDisplay.textContent = "What's the color? 2"
+   document.getElementById('reset').style.visibility = 'hidden'
+}
+
+function callme1()
+{
+    messageDisplay.textContent = "What's the color? 1"
+    document.getElementById('reset').style.visibility = 'hidden'
+}
+function timeout()
+{
+    messageDisplay.textContent = "TIME OUT !"
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+    document.getElementById('reset').style.visibility = 'visible'
+
+}
+
+
+
+
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -43,8 +110,69 @@ function initCards() {
     }
 }
 
+
+
+
+
+
+
+
+
+function Mode()
+{
+    for(var i = 0; i < modeButtons.length; i++) {
+        modeButtons[i].addEventListener("click", function() {
+            for (var i = 0; i < modeButtons.length; i++) {
+                modeButtons[i].classList.remove("selected");
+            }
+            this.classList.add("selected");
+            if (this.textContent === "Easy") {
+                numCards = 3;
+               
+            }
+            else {
+                if(this.textContent === "Nightmare")
+                {    
+                    timeoutId5 = setTimeout("callme5()",0);
+                    timeoutId4 = setTimeout("callme4()",1000);
+                    timeoutId3 = setTimeout("callme3()",2000);
+                    timeoutId2 = setTimeout("callme2()",3000);
+                    timeoutId1 = setTimeout("callme1()",4000);
+                    timeoutId0 = setTimeout("timeout()",5000);
+                        
+                }
+                
+                numCards = 6;
+            }
+            reset();
+        });
+    }
+}
+
+
+
+
+
+
+
 function reset() {
     gameOver = false;
+
+    for(var i = 0; i < modeButtons.length; i++)
+    {
+        if(modeButtons[i].textContent==="Nightmare" && modeButtons[i] === 1)
+        {
+            timeoutId5 = setTimeout("callme5()",0);
+                    timeoutId4 = setTimeout("callme4()",1000);
+                    timeoutId3 = setTimeout("callme3()",2000);
+                    timeoutId2 = setTimeout("callme2()",3000);
+                    timeoutId1 = setTimeout("callme1()",4000);
+                    timeoutId0 = setTimeout("timeout()",5000);
+
+        }
+    }
+    
+
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -62,6 +190,7 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+    
     body.style.backgroundColor = "#232323";
 }
 
