@@ -14,9 +14,28 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var modeButtons = document.querySelectorAll(".mode-button")
+
 function init() {
+    initModeButtons();
     initCards();
     reset();
+}
+
+function initModeButtons() {
+  for (var i=0; i<modeButtons.length; i++) {
+    modeButtons[i].addEventListener("click", function() {
+      // refresh all other mode buttons
+      refreshModeButtons();
+      this.classList.add("selected-mode-button");
+    })
+  }
+}
+
+function refreshModeButtons() {
+  for (var i=0; i<modeButtons.length; i++) {
+    modeButtons[i].classList.remove("selected-mode-button");
+  }
 }
 
 function initCards() {

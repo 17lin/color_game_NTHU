@@ -33,6 +33,23 @@ body {
 	padding: 0 1rem;
 }
 
+.mode-button {
+	margin-right: 1rem;
+	padding: 0 0.5rem;
+	cursor: pointer;
+}
+
+.mode-button:hover {
+	color: green;
+}
+
+.selected-mode-button {
+	font-weight: bold;
+	background-color: steelblue;
+	color: white;
+	border-radius: 1rem;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
