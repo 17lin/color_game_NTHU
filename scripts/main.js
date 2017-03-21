@@ -13,8 +13,43 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var seconds_left = 10;
 var Nightmare = 0;
+var interval;
+
+var x;
+var y;
+
+var Time = document.querySelector("#Timer");
+
+function changecolors_bk() {
+    x = 1;
+    y = setInterval(change, 50);
+}
+
+function change() {
+    if (x === 1) {
+        color = "#232323";
+
+        x =  2;
+
+
+
+    } else if(x === 2){
+        color = "white";
+
+
+          x = 1;
+
+    }
+    else {
+        color = pickedColor;
+        clearInterval(y);
+    }
+
+    document.body.style.background = color;
+}
+
 
 function init() {
     initCards();
@@ -37,6 +72,9 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                resetButton.style.opacity = 1;
+                clearInterval(interval);
+                clearInterval(y);
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -47,6 +85,8 @@ function initCards() {
 }
 
 function reset() {
+    clearInterval(interval);
+    clearInterval(y);
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -109,34 +149,59 @@ function randomColor() {
 }
 
 function Easy_G(){
+  gameOver = false;
     document.getElementById('Easy').setAttribute("class", "clicked");
     document.getElementById('Hard').setAttribute("class", "unclicked");
     document.getElementById('Nightmare').setAttribute("class", "unclicked");
     numCards = 3;
     Nightmare = 0;
+    Time.style.opacity = 0;
     reset();
+    clearInterval(interval);
+    clearInterval(y);
 }
 
 function Hard_G(){
+  gameOver = false;
     document.getElementById('Hard').setAttribute("class", "clicked");
     document.getElementById('Easy').setAttribute("class", "unclicked");
     document.getElementById('Nightmare').setAttribute("class", "unclicked");
     numCards = 6;
     Nightmare = 0;
+    Time.style.opacity = 0;
     reset();
-
+    clearInterval(interval);
+    clearInterval(y);
 }
 
 function Nightmare_G(){
+  gameOver = false;
     document.getElementById('Nightmare').setAttribute("class", "clicked");
     document.getElementById('Hard').setAttribute("class", "unclicked");
     document.getElementById('Easy').setAttribute("class", "unclicked");
     numCards = 6;
     Nightmare = 1;
+    seconds_left = 10;
     reset();
     resetButton.style.opacity = 0;
-}
+    Time.style.opacity = 1;
+    interval = setInterval(function() {
+      Time.textContent = --seconds_left;
+      if(gameOver === false)
+      {
+        changecolors_bk();
+      }
 
-function Failed(){
-  messageDisplay.textContent = "Timeout!!"
+      if (seconds_left <= 0)
+      {
+          messageDisplay.textContent = 'Timeout!!';
+          x = 3;
+          clearInterval(interval);
+          clearInterval(y);
+          Time.style.opacity = 0;
+          changeColors("#FFF");
+          body.style.backgroundColor = pickedColor;
+          resetButton.style.opacity = 1;
+      }
+    }, 1000);
 }
