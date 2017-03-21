@@ -1,9 +1,11 @@
 window.onload = function() {
-  //  a.style.visibility=hidden;
+
     init();
 };
+var refreshIntervalId;
 var s=5;
-var countdownid
+var f=0;
+var countdownid,ids;
 var numCards = 6;
 var gameOver = false;
 var colors = [];
@@ -11,14 +13,14 @@ var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
-// var a=document.getElementById("reset");
+ var a=document.getElementById("reset");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 function init() {
-    // resetButton.style.display=none;
+    //  resetButton.style.display=none;
 
     initCards();
     reset();
@@ -38,6 +40,9 @@ function initCards() {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
+                 clearInterval(countdownid);
+                    a.style.display="block";
+                    s=5;
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
@@ -47,16 +52,35 @@ function initCards() {
         });
     }
 }
+function flash(){
+  f++;
+  body.style.backgroundColor ="#013ADF";
+  if(f==2){
+    f=0;
+    clearInterval(refreshIntervalId);
+     body.style.backgroundColor="#232323";
+     if(s==5){
+       body.style.backgroundColor = pickedColor;
+     }
+  }
+
+
+}
 
 function second(){
   s--;
     messageDisplay.textContent = "What's the Color?"+s;
+    refreshIntervalId = setInterval(flash, 100);
+
+  //   ids=window.setInterval(second,100);
     if(s==0){
          s=5;
+
          messageDisplay.textContent = "Time Out";
          changeColors("#FFF");
          body.style.backgroundColor = pickedColor;
          gameOver = true;
+           a.style.display="block";
         //  resetButton.style.display=block;
          clearInterval(countdownid);
 
@@ -64,6 +88,7 @@ function second(){
 }
 
 function reset() {
+    a.style.display="none";
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -83,7 +108,7 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
-    body.style.backgroundColor = "#232323";
+
 }
 
 resetButton.addEventListener("click", function() {
