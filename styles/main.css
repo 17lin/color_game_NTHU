@@ -89,7 +89,11 @@ h1 {
 }
 
 button {
+<<<<<<< HEAD
 	display: inline;
+=======
+	display: block;
+>>>>>>> 26089fffed4cfcea6699afc48419d911ab76736b
 	margin: 3rem auto;
 	padding: 1rem;
 	outline: none;
@@ -109,6 +113,7 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
 
 #changeMode{
 

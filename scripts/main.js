@@ -6,6 +6,7 @@ var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
+
 var gameMode = 0;
 var time = 5;
 var intervalTimer;
@@ -37,8 +38,10 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+
                 clearInterval(intervalTimer);
                 resetButton.style.display = "inline";
+
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -53,6 +56,7 @@ function initCards() {
 }
 
 function reset() {
+
     clearInterval(intervalTimer);
     resetButton.style.display = "inline";
     if (gameMode == 0) {
@@ -83,7 +87,11 @@ function reset() {
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
+
             cards[i].style.display = "inline"
+
+            cards[i].style.display = "block"
+
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
@@ -91,6 +99,7 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
 }
+
 
 function blink2(){
 
@@ -127,6 +136,7 @@ resetButton.addEventListener("click", function() {
 changeModeButton.addEventListener("click", function() {
     changeMode();
 })
+
 
 function changeColors(color) {
     //loop through all cards
