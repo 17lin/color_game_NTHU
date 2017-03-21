@@ -15,7 +15,7 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 var timeout=5000;
-var t=5;
+var t=6;
 var switchblock = 500;
 var blinktime = 1;
 
