@@ -89,9 +89,7 @@ h1 {
 }
 
 button {
-	display: block;
-	margin: 3rem auto;
-	padding: 1rem;
+	display: inline;
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -108,4 +106,11 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+#footer{
+	text-align: center;
+}
+#reset{
+	padding: 1rem;
+	margin: 1rem auto;
 }
