@@ -33,6 +33,7 @@ function initModes() {
         hard.classList.remove('selected');
         nightmare.classList.remove('selected');
         numCards = 3;
+          resetButton.style.display = "block";
         initCards();
         reset();
     });
@@ -41,6 +42,7 @@ function initModes() {
         easy.classList.remove('selected');
         nightmare.classList.remove('selected');
         numCards = 6;
+        resetButton.style.display = "block";
         initCards();
         reset();
     });
