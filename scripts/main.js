@@ -13,12 +13,30 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easymode")
+var hardButton = document.querySelector("#hardmode")
+var nightmareButton = document.querySelector("#nightmaremode")
 
 function init() {
     initCards();
     reset();
 }
 
+function easy(){
+  window.numCards = 3;
+  reset();
+  initCards();
+}
+function hard(){
+  window.numCards=6;
+  reset();
+  initCards();
+}
+function nightmare(){
+  window.numCards=6;
+  reset();
+  initCards();
+}
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -68,7 +86,15 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
-
+easyButton.addEventListener("click",function(){
+    easy();
+})
+hardButton.addEventListener("click",function(){
+    hard();
+})
+nightmareButton.addEventListener("click",function(){
+    nightmare();
+})
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
