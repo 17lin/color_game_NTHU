@@ -17,6 +17,7 @@ var timer = document.querySelector("#timer");
 var timerIntervalID;
 var modeButton = document.querySelectorAll("button.set-mode");
 var selectedMode;
+var tempBackgroundColor;
 
 function init() {
 	initMode();
@@ -117,15 +118,21 @@ function randomColor() {
 }
 
 function initTimer() {
-	timer.textContent = 5;
+	timer.textContent = " " + 5;
 	resetButton.style.display = "none";
 	timerIntervalID = setInterval(function() {
-		timer.textContent = String(Number(timer.textContent)-1);
-		if (timer.textContent === "0") {
+		timer.textContent = " " + String(Number(timer.textContent)-1);
+		if (timer.textContent === " 0") {
 			changeColors("white");
 			body.style.backgroundColor = pickedColor;
 			stopTimer("Timeout!")
 			gameOver = true;
+		} else {
+			tempBackgroundColor = body.style.backgroundColor;
+			body.style.backgroundColor = "white";
+			setTimeout(function() {
+				body.style.backgroundColor = tempBackgroundColor;
+			}, 100);
 		}
 	}, 1000);
 }
@@ -133,38 +140,74 @@ function initTimer() {
 function initMode() {
 	selectedMode = "Easy";
 	setMode();
-	modeButton[0].addEventListener("click", function() {
-		selectedMode = "Easy";
-		setMode();
-		reset();
-	});
-	modeButton[1].addEventListener("click", function() {
-		selectedMode = "Hard";
-		setMode();
-		reset();
-	});
-	modeButton[2].addEventListener("click", function() {
-		selectedMode = "Nightmare";
-		setMode();
-		reset();
-	});
 }
+
+modeButton[0].addEventListener("click", function() {
+	selectedMode = "Easy";
+	setMode();
+	reset();
+});
+
+modeButton[1].addEventListener("click", function() {
+	selectedMode = "Hard";
+	setMode();
+	reset();
+});
+
+modeButton[2].addEventListener("click", function() {
+	selectedMode = "Nightmare";
+	setMode();
+	reset();
+});
+
+modeButton[0].addEventListener("mouseover", function() {
+	this.style.color = "steelBlue";
+});
+
+modeButton[1].addEventListener("mouseover", function() {
+	this.style.color = "steelBlue";
+});
+
+modeButton[2].addEventListener("mouseover", function() {
+	this.style.color = "steelBlue";
+});
+
+modeButton[0].addEventListener("mouseout", function() {
+	this.style.color = selectedMode === "Easy" ? "white" : "steelBlue";
+});
+
+modeButton[1].addEventListener("mouseout", function() {
+	this.style.color = selectedMode === "Hard" ? "white" : "steelBlue";
+});
+
+modeButton[2].addEventListener("mouseout", function() {
+	this.style.color = selectedMode === "Nightmare" ? "white" : "steelBlue";
+});
 
 function setMode() {
 	if (selectedMode === "Easy") {
 		modeButton[0].style.backgroundColor = "steelBlue";
 		modeButton[1].style.backgroundColor = "white";
 		modeButton[2].style.backgroundColor = "white";
+		modeButton[0].style.color = "white";
+		modeButton[1].style.color = "black";
+		modeButton[2].style.color = "black";
 		numCards = 3;
 	} else if (selectedMode === "Hard") {
 		modeButton[0].style.backgroundColor = "white";
 		modeButton[1].style.backgroundColor = "steelBlue";
 		modeButton[2].style.backgroundColor = "white";
+		modeButton[0].style.color = "black";
+		modeButton[1].style.color = "white";
+		modeButton[2].style.color = "black";
 		numCards = 6;
 	} else if (selectedMode === "Nightmare") {
 		modeButton[0].style.backgroundColor = "white";
 		modeButton[1].style.backgroundColor = "white";
 		modeButton[2].style.backgroundColor = "steelBlue";
+		modeButton[0].style.color = "black";
+		modeButton[1].style.color = "black";
+		modeButton[2].style.color = "white";
 		numCards = 6;
 	}
 }
