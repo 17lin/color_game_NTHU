@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -27,7 +27,7 @@ function initCards() {
                 return;
             //grab color of clicked card
             var clickedColor = this.style.backgroundColor;
-            // alert(this.style.backgroundColor);
+            alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
@@ -37,7 +37,7 @@ function initCards() {
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                messageDisplay.textContent = "Try Again!"
             }
         });
     }
