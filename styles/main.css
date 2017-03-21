@@ -37,7 +37,7 @@ body {
 	margin: inherit;
 	border-radius: 15px;
 	color: #CCC;
-	display: flex;
+	display: inline;
 }
 #about {
 	margin-left: auto;
