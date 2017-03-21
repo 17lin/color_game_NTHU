@@ -124,24 +124,28 @@ function mode_change(target){
 function easy(){
     resetButton.style.display = "block";
     timer.style.display = "none";
+    clearInterval(bg_tid);
     numCards = 3;
     init();
 }
 function hard(){
     resetButton.style.display = "block";
     timer.style.display = "none";
+    clearInterval(bg_tid);
     numCards = 6;
     init();
 }
 
 function nightmare(){
     resetButton.style.display = "none";
+    numCards = 6;
+    init();
     //show timer
     var timer = document.getElementById("timer");
     timer.style.display = "block";
     timer.innerHTML = 5;
     tid = setInterval(timer_value,1000);        
-    bg_tid = setInterval(bg_blink,500);
+    bg_tid = setInterval(bg_blink,1000);
 }
 function timer_value(){
     if (timer.innerHTML > 1) timer.innerHTML = timer.innerHTML - 1;
