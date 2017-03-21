@@ -61,6 +61,10 @@ nightmareBtn.addEventListener('click', function(){
 
 function initCardsEasy() {
 
+  body.style.animation = "none";
+
+  var footer = document.querySelector("button");
+  footer.style.visibility = "visible";
 
   var count = document.querySelector('#count');
   count.style.fontSize = "0px";
@@ -103,7 +107,10 @@ function initCardsEasy() {
 
 function initCardsHard() {
 
+  body.style.animation = "none";
 
+  var footer = document.querySelector("button");
+  footer.style.visibility = "visible";
 
   var count = document.querySelector('#count');
   count.style.fontSize = "0px";
@@ -143,8 +150,11 @@ function initCardsHard() {
 
 function initCardsNightmare() {
 
+  body.style.animation = "blink 1s";
+  body.style.animationIterationCount = "infinite";
+
   var footer = document.querySelector("button");
-  footer.className = "hide";
+  footer.style.visibility = "hidden";
   easyBtn.addEventListener('click', function(){
     state = 1;
     init();
@@ -171,6 +181,7 @@ function initCardsNightmare() {
         messageDisplay.textContent = "TimeOut!";
         changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
+        body.style.animation = "none";
         return;
       }
     }
