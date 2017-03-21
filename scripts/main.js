@@ -75,6 +75,10 @@ function initCards() {
                   {
                     clearInterval(arr[i]);
                   }
+                  for(var i=0;i<arr1.length;i++)
+                  {
+                    clearInterval(arr1[i]);
+                  }
                 }
                 gameOver = true;
             } else {
