@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards=3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,8 +13,69 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var eyDisplay = document.getElementById('eymode');
+var hdDisplay = document.getElementById('hdmode');
+var ntDisplay = document.getElementById('ntmode');
+var modeButtonDisplay = document.getElementById('modebutton');
+var modeButtonODisplay = document.getElementById('modeButtonO');
+var countdown = document.getElementById('count');
+var countdownNum = 5;
+var countid;
+
+function count(){
+   countdownNum = 5;
+   count.innerHTML = countdownNum;
+   //countdownNum--;
+   countid = window.setInterval(down,1000);
+}
+
+function down(){
+   countdown.innerHTML = countdownNum;
+   countdownNum--;
+   if(countdownNum==0){
+      messageDisplay.textContent='Time out!';
+	  countdown.innerHTML='';
+	  clearInterval(countid);
+   }
+   //countdownNum--;
+}
+
+
+eyDisplay.addEventListener('mouseover',function(){
+	
+	eyDisplay.style.color = '#ffff77';
+	
+})
+
+eyDisplay.addEventListener('mouseout',function(){
+	
+	eyDisplay.style.color = '#000000';
+})
+
+hdDisplay.addEventListener('mouseover',function(){
+	
+	hdDisplay.style.color = '#ffff77';
+	
+})
+
+hdDisplay.addEventListener('mouseout',function(){
+	
+	hdDisplay.style.color = '#000000';
+})
+
+ntDisplay.addEventListener('mouseover',function(){
+	
+	ntDisplay.style.color = '#ffff77';
+	
+})
+
+ntDisplay.addEventListener('mouseout',function(){
+	
+	ntDisplay.style.color = '#000000';
+})
 
 function init() {
+	
     initCards();
     reset();
 }
@@ -104,3 +165,22 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+
+
+eyDisplay.addEventListener('click',function(){
+		 numCards = 3;count.innerHTML='';
+		 reset();
+})	
+		
+hdDisplay.addEventListener('click',function(){
+		 
+         numCards = 6;
+		 reset();
+})	
+
+ntDisplay.addEventListener('click',function(){
+		 
+         numCards = 6;
+		 reset();count();
+})
