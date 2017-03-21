@@ -44,6 +44,7 @@ function initCards() {
                 time.innerHTML = "";
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                resetButton.style.display = "block";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -58,6 +59,7 @@ function initCards() {
 
 
 function reset() {
+    resetButton.style.display = "block";
     clearInterval(black);
     clearInterval(white);
     clearInterval(counting);
@@ -83,6 +85,7 @@ function reset() {
     body.style.backgroundColor = "#232323";
     //time.textContent = 5;
     if(nightmareTrigger){
+        resetButton.style.display = "none";
         t = 6;
         counting = setInterval(end, 5000);
         showtime();
@@ -119,6 +122,7 @@ function end(){
         changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
         gameOver = true;
+        resetButton.style.display = "block";
         messageDisplay.textContent = "TIMEOUT!"
         resetDisplay.textContent = "Play Again"
     }
