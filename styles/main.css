@@ -105,6 +105,13 @@ button {
 	cursor: pointer;
 }
 
+#navbar button{
+	margin: auto;
+	margin-bottom: auto;
+	font-weight: bold;
+	padding: 0 1rem;
+}
+
 button:hover {
     color: white;
     background-color: steelblue;
