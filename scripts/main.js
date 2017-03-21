@@ -78,18 +78,19 @@ resetButton.addEventListener("click", function() {
 })
 
 easyMode.addEventListener("click", function() {
-    mode=1;
+    mode=0;
     reset();
 })
 
 
 hardMode.addEventListener("click", function() {
-    mode=2;
+    mode=1;
     reset();
 })
 
 
 nightMode.addEventListener("click", function() {
+    mode=2;
     reset();
 })
 
