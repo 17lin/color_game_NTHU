@@ -30,11 +30,51 @@ body {
 
 #brand {
 	font-weight: bold;
+	text-align: center;
 	padding: 0 1rem;
+}
+
+.easy{
+	outline: none;
+	border: none;
+  border-radius: 999rem;
+  background-color: white;
+	font-size: 1rem;
+  font-weight: 700;
+  color: #484848;
+	-webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+
+button.easy:hover{
+	color: white;
+	background-color: steelblue;
+}
+
+.hard{
+	outline: none;
+	border: none;
+  border-radius: 999rem;
+  background-color: steelblue;
+	color: white;
+	font-size: 1rem;
+  font-weight: 700;
+  
+	-webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.hard:hover{
+	color: steelblue;
+	background-color: white;
 }
 
 #about {
 	margin-left: auto;
+	text-align: center;
 	color: #bbb;
 }
 
@@ -88,7 +128,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+#reset {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -105,7 +145,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#reset:hover {
     color: white;
     background-color: steelblue;
 }

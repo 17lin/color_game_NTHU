@@ -13,10 +13,40 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var hardModeButton = document.querySelector(".hard");
+var easyModeButton = document.querySelector(".easy");
 
 function init() {
     initCards();
     reset();
+    //var mode = 0;
+    hardModeButton.addEventListener("click", function(e) {
+      for(var i=0; i<3; i++){
+        var newColor = document.createElement('div');
+        newColor.className = "card";
+        document.getElementById('card-container').appendChild(newColor);
+      }
+
+        initCards();
+        reset();
+      //  mode = 1;
+    })
+    easyModeButton.addEventListener("click", function(e) {
+       reset();
+      //mode = 0;
+    })
+
+  /*  if(mode == 1){
+      for(var i=0; i<3; i++){
+        var newColor = document.createElement('div');
+        newColor.className = "card";
+        document.getElementById('card-container').appendChild(newColor);
+      }
+        initCards();
+        reset();
+    }else if(mode == 0){
+        reset();
+    }*/
 }
 
 function initCards() {
