@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,11 +13,38 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+var count = document.querySelector("#counter");
+var nightmare = document.querySelector("#night");
+
+var countdown = 6;
 
 function init() {
     initCards();
+    setupMode();
+    //nightmareMode();
     reset();
 }
+/*
+function nightmareMode(){
+  nightmare.addEventListener("click", function{
+    var interval = setInterval(function() {
+        if(countdown > 0)countdown--;
+        count.textContent = countdown;
+        // Display 'counter' wherever you want to display it.
+        if (countdown === 0) {
+            count.textContent = "";
+            messageDisplay.textContent = "TIMEOUT!"
+            resetDisplay.textContent = "Play Again"
+            changeColors("#FFF");
+            body.style.backgroundColor = pickedColor;
+            gameOver = true;
+            clearInterval(interval);
+        }
+    }, 1000);
+  });
+}*/
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -42,9 +69,41 @@ function initCards() {
         });
     }
 }
-
+function setupMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Easy") {
+				numCards = 3;
+			}
+			else if(this.textContent == "Hard"){
+				numCards = 6;
+			}else{
+        numCards = 6;
+        var interval = setInterval(function() {
+            if(countdown > 0)countdown--;
+            count.textContent = countdown;
+            if (countdown === 0) {
+                count.textContent = "";
+                messageDisplay.textContent = "TIMEOUT!"
+                resetDisplay.textContent = "Play Again"
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
+                gameOver = true;
+                clearInterval(interval);
+            }
+        }, 1000);
+      }
+			reset();
+		});
+	}
+}
 function reset() {
     gameOver = false;
+    countdown = 6;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
