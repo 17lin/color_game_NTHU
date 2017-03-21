@@ -23,7 +23,7 @@ var count = 5 ;
 var t = 6 ;
 function init() {
   /*SelectModes()*/
-
+var show = showTime() ;
 
   if(curMode==0)
     numCards = 3;
@@ -61,12 +61,14 @@ hard.onclick = function (hard) {
 
 nightmare.onclick = function (nightmare) {
   if(curMode!==2){
+    gameOver=false;
     numCards = 6 ;
     initCards() ;
     reset() ;
     curMode=2 ;
      t = 6 ;
     showTime() ;
+
     resetDisplay.style.display = "none"
 /*    resetDisplay.textContent = '' ;*/
   }
@@ -74,22 +76,23 @@ nightmare.onclick = function (nightmare) {
 
     function showTime()
     {
-
+      if(gameOver == false ){
       if(t>0  && curMode==2){
         t -= 1;
       messageDisplay.textContent = 'what is the color?  ' + t;
       }
       if(t<1 && curMode==2){
         messageDisplay.textContent = 'Time is Up!'  ;
-      clearTimeout(go) ;
+
       changeColors("#FFF");
       body.style.backgroundColor = pickedColor;
       gameOver=true ;
-
+      clearTimeout(show) ;
+            curMode = -99 ;
       }
     go = setTimeout("showTime()",1000) ;
-  }
-
+    }
+}
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -115,7 +118,20 @@ function initCards() {
 }
 
 function reset() {
+    if(gameOver == true && curMode!==0){
+      numCards = 3 ;
+      initCards() ;
+      curMode=0 ;
+      gameOver=false;
+      messageDisplay.textContent = "what is the color?" ;
+      resetDisplay.textContent = "New Color"
+    }
+
     gameOver = false;
+
+
+
+    var t = 6 ;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -137,8 +153,10 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+
 }
   resetButton.addEventListener("click", function() {
+
     reset();
   })
 
