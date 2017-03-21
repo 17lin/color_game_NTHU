@@ -125,3 +125,21 @@ button.mode {
 	margin:0rem;
 	padding:0rem 1rem;
 }
+
+button.mode:hover {
+color: steelblue;
+background-color: white;
+}
+
+
+.blink{
+	animation-name: blink-animation;
+	animation-duration: 1s;
+	animation-iteration-count: 100;
+}
+
+@keyframes blink-animation {
+    0%   {background-color: gray;}
+    10%  {background-color: black;}
+
+}

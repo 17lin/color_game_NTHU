@@ -18,7 +18,8 @@ var mode = document.querySelector(".mode");
 var easy = document.querySelector("#easy");
 var hard = document.querySelector("#hard");
 var nightmare = document.querySelector("#nightmare");
-var countdown = document.getElementById("#countdown");
+var countdown = document.querySelector("#countdown");
+var id;
 
 function init() {
     initModes();
@@ -33,16 +34,25 @@ function initModes() {
         hard.classList.remove('selected');
         nightmare.classList.remove('selected');
         numCards = 3;
-          resetButton.style.display = "block";
+        resetButton.style.display = "block";
+        countdown.style.display = "none";
+        clearInterval(id);
+        body.classList.remove('blink');
+
         initCards();
         reset();
     });
+
     hard.addEventListener("click", function() {
         hard.classList.add('selected');
         easy.classList.remove('selected');
         nightmare.classList.remove('selected');
         numCards = 6;
         resetButton.style.display = "block";
+        countdown.style.display = "none";
+        clearInterval(id);
+        body.classList.remove('blink');
+
         initCards();
         reset();
     });
@@ -52,19 +62,37 @@ function initModes() {
         easy.classList.remove('selected');
         hard.classList.remove('selected');
         numCards = 6;
-          resetButton.style.display = "none";
+        resetButton.style.display = "none";
+        countdown.style.display = "inline";
+        clearInterval(id);
+        body.classList.remove('blink');
+
         var now = new Date().getSeconds();
         var start = now + 5;
-        var id = setInterval(tick(start), 1000);
+          countdown.innerHTML = 5;
+        body.classList.add('blink');
+
+        id = setInterval(function() {
+
+            var d = new Date().getSeconds();
+            var e = Math.floor (start - d);
+            if (e >=60) {e=e-60;}
+            countdown.innerHTML = e;
+
+            if (e <= 0) {
+                messageDisplay.textContent = "TIMEOUT!";
+                countdown.style.display = "none";
+                body.classList.remove('blink');
+                clearInterval(id);
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
+            }
+        }, 1000);
 
         initCards();
         reset();
-    });
-}
 
-function tick(start) {
-  var  distance = start - new Date().getSeconds();;
-    countdown.innerHTML = distance;
+    });
 }
 
 function initCards() {
@@ -80,6 +108,10 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
+                clearInterval(id);
+                body.classList.remove('blink');
+                countdown.style.display = "none";
+
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
