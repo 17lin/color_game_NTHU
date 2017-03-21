@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,17 +13,24 @@
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
-<body>
+<body onload="initial();">
 	<div id="stripe">
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
+			<button class="modebutton"><span id = "easyButton">EASY</span></button>
+			<button class="modebutton"><span id = "hardButton">HARD</button>
+			<button onclick="setTimeout(myFunction, 3000);" class="modebutton"><span id = "nightmareButton">NIGHTMARE</button>
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
-
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?
+</span><span id="countdown"></span></h1>
+<h2></h2>
 	<div id="card-container" class="container">
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
