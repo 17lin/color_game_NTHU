@@ -31,10 +31,13 @@ body {
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
+
 }
 
 #about {
 	margin-left: auto;
+	padding: 0 1rem;
+
 	color: #bbb;
 }
 
@@ -88,6 +91,7 @@ h1 {
     background: steelblue;
 }
 
+
 button {
 	display: block;
 	margin: 3rem auto;
@@ -103,6 +107,14 @@ button {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
 	cursor: pointer;
+}
+.mode {
+	display: inline;
+
+	padding: 0 1rem;
+	font-weight: bold;
+	margin-top: auto;
+
 }
 
 button:hover {

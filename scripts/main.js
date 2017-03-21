@@ -2,12 +2,15 @@ window.onload = function() {
     init();
 };
 
+var mode = 1;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
+var modes = document.querySelectorAll(".mode");
+var nightmareButton = document.getElementById("nightmare");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
@@ -44,6 +47,7 @@ function initCards() {
 }
 
 function reset() {
+
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -65,9 +69,70 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
-resetButton.addEventListener("click", function() {
+function easy() {
+      mode = 1;
+      numCards = 3;
+      reset();
+
+}
+
+function hard(){
+    mode = 2;
+    numCards = 6;
     reset();
+
+}
+
+function nightmare(){
+  mode = 3;
+  numCards = 6;
+  reset();
+  countdown(6);
+}
+
+resetButton.addEventListener("click", function() {
+    if(mode==3){
+      clearInterval(count);
+      nightmare();
+    }
+    else{
+      reset();
+    }
 })
+modes[0].addEventListener("click", function() {
+    easy();
+    this.style.color = white;
+    this.style.background = steelblue;
+})
+modes[1].addEventListener("click", function() {
+    hard();
+
+})
+modes[2].addEventListener("click", function() {
+    nightmare();
+
+})
+
+function countdown(time){
+  if(mode==3){
+  count = setInterval(function(){
+    time =time-1;
+    messageDisplay.textContent = "What's the Color? " +time;
+    if (gameOver == true || mode!=3){
+        clearInterval(count);
+    }
+    else if(time == 0){
+      messageDisplay.textContent = "Timeout!";
+      changeColors("#FFF");
+      body.style.backgroundColor = pickedColor;
+      gameOver = true;
+      clearInterval(count);
+    }
+  }, 1000);}
+  else
+    clearInterval(count);
+
+}
 
 function changeColors(color) {
     //loop through all cards
