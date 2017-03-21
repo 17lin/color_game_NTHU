@@ -116,7 +116,9 @@ button {
 	margin-top: auto;
 
 }
-
+.mode:hover {
+	 color: steelblue !important; 
+}
 button:hover {
     color: white;
     background-color: steelblue;
