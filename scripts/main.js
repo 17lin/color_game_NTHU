@@ -139,7 +139,7 @@ function countDown(i) {
 
         i-- || clearInterval(int);   //if i is 0, then stop the interval
         setTimeout(function() {
-          if(i>0 && mode==nightmare)
+          if(i>0 && mode==nightmare && gameOver == false)
             body.style.backgroundColor = "grey";
         }, 900);
       }
