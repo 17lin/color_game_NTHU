@@ -89,11 +89,7 @@ h1 {
 }
 
 button {
-<<<<<<< HEAD
-	display: inline;
-=======
 	display: block;
->>>>>>> 26089fffed4cfcea6699afc48419d911ab76736b
 	margin: 3rem auto;
 	padding: 1rem;
 	outline: none;
@@ -128,4 +124,19 @@ button:hover {
 	margin-left: auto;
 margin-right: auto;
 	max-width: 350px;
+}
+
+#easyMode{
+	color: blue;
+}
+
+#seconds{
+	margin-left: 6px;
+}
+
+.modes{
+	display: inline;
+	font-weight: bold;
+	padding: 0 1rem;
+	margin: 0;
 }

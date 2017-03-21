@@ -17,9 +17,12 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var changeModeButton = document.querySelector("#changeMode");
-var changeModeButtonSpan = document.querySelector("#changeMode > span");
+
+var easyModeButton = document.querySelector("#easyMode");
+var hardModeButton = document.querySelector("#hardMode");
+var nightmareModeButton = document.querySelector("#nightmareMode");
 var secondsDisplay = document.querySelector("#seconds");
+var messageDisplay = document.querySelector("#message");
 
 function init() {
     initCards();
@@ -40,8 +43,7 @@ function initCards() {
             if (clickedColor === pickedColor) {
 
                 clearInterval(intervalTimer);
-                resetButton.style.display = "inline";
-
+                resetButton.style.visibility = "visible";
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -58,20 +60,19 @@ function initCards() {
 function reset() {
 
     clearInterval(intervalTimer);
-    resetButton.style.display = "inline";
+    resetButton.style.visibility = "visible";
+    messageDisplay.textContent = "What's the color?";
+    secondsDisplay.textContent = "";
     if (gameMode == 0) {
         numCards = 3;
-        changeModeButtonSpan.textContent = "Easy Mode";
         secondsDisplay.textContent = "";
     } else if (gameMode == 1) {
         numCards = 6;
-        changeModeButtonSpan.textContent = "Hard Mode";
         secondsDisplay.textContent = "";
     } else {
         numCards = 6;
-        changeModeButtonSpan.textContent = "Nightmare Mode";
         time = 5;
-        //resetButton.style.display = none;
+        resetButton.style.visibility = "hidden";
         intervalTimer = setInterval(countdown, 1000);
     }
 
@@ -87,11 +88,7 @@ function reset() {
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
-
-            cards[i].style.display = "inline"
-
             cards[i].style.display = "block"
-
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
@@ -102,30 +99,33 @@ function reset() {
 
 
 function blink2(){
-
+  document.body.style.backgroundColor = "#232323";
 }
 
-function blink(){
-  setTimeout(blink2, 100);
-}
+// function blink(){
+//   document.body.style.backgroundColor = "white";
+//   setTimeout(blink2, 100);
+// }
 
 function countdown() {
-  //resetButton.style.visibility = "hidden";
-  resetButton.style.display = "none";
+    //resetButton.style.visibility = "hidden";
+    document.body.style.backgroundColor = "white";
     secondsDisplay.textContent = time;
     time = time - 1;
     if (time < 0) {
         clearInterval(intervalTimer);
-        resetButton.style.display = "inline";
-        secondsDisplay.textContent = "Time out";
+        resetButton.style.visibility = "visible";
+        messageDisplay.textContent = "Time out";
+        secondsDisplay.textContent = "";
         changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
         gameOver = true;
     }
+    setTimeout(blink2, 80);
 }
 
-function changeMode() {
-    gameMode = (gameMode + 1) % 3;
+function changeMode(num) {
+    gameMode = num;
     reset();
     initCards();
 }
@@ -133,8 +133,23 @@ function changeMode() {
 resetButton.addEventListener("click", function() {
     reset();
 })
-changeModeButton.addEventListener("click", function() {
-    changeMode();
+easyModeButton.addEventListener("click", function() {
+  easyModeButton.style.color = "blue";
+  hardModeButton.style.color = "black";
+  nightmareModeButton.style.color = "black";
+    changeMode(0);
+})
+hardModeButton.addEventListener("click", function() {
+  easyModeButton.style.color = "black";
+  hardModeButton.style.color = "blue";
+  nightmareModeButton.style.color = "black";
+    changeMode(1);
+})
+nightmareModeButton.addEventListener("click", function() {
+  easyModeButton.style.color = "black";
+  hardModeButton.style.color = "black";
+  nightmareModeButton.style.color = "blue";
+    changeMode(2);
 })
 
 
