@@ -14,7 +14,9 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var timer = document.querySelector("#timer");//timer
+var t=5;
+var interval;
 function init() {
     initCards();
     reset();
@@ -26,6 +28,7 @@ function select0(){
       numCards = 3;
       changefontcolor();
       init();
+
     }
 }
 
@@ -48,28 +51,20 @@ function select2(){
 }
 function changefontcolor(){
     if(select === 0){
-      var OriginalFont=document.getElementById("easy").innerHTML;
-      document.getElementById("easy").innerHTML='<font color="blue">'+OriginalFont+'</font>';
-      var OriginalFont=document.getElementById("hard").innerHTML;
-      document.getElementById("hard").innerHTML='<font color="black">'+OriginalFont+'</font>';
-      var OriginalFont=document.getElementById("nightmare").innerHTML;
-      document.getElementById("nightmare").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      document.getElementById("easy").style.color="blue";
+      document.getElementById("hard").style.color = "black";
+      document.getElementById("nightmare").style.color = "black";
     }
   else if(select === 1){
-      var OriginalFont=document.getElementById("easy").innerHTML;
-      document.getElementById("easy").innerHTML='<font color="black">'+OriginalFont+'</font>';
-      var OriginalFont=document.getElementById("hard").innerHTML;
-      document.getElementById("hard").innerHTML='<font color="blue">'+OriginalFont+'</font>';
-      var OriginalFont2=document.getElementById("nightmare").innerHTML;
-      document.getElementById("nightmare").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      document.getElementById("easy").style.color = "black";
+      document.getElementById("hard").style.color = "blue";
+      document.getElementById("nightmare").style.color = "black";
   }
-  else if(select === 2){
-      var OriginalFont=document.getElementById("easy").innerHTML;
-      document.getElementById("easy").innerHTML='<font color="black">'+OriginalFont+'</font>';
-      var OriginalFont=document.getElementById("hard").innerHTML;
-      document.getElementById("hard").innerHTML='<font color="black">'+OriginalFont+'</font>';
-      var OriginalFont=document.getElementById("nightmare").innerHTML;
-      document.getElementById("nightmare").innerHTML='<font color="blue">'+OriginalFont+'</font>';
+  else if(select === 2){//nightmare
+    t = 5;
+    document.getElementById("easy").style.color = "black";
+    document.getElementById("hard").style.color = "black";
+    document.getElementById("nightmare").style.color = "blue";
   }
 }
 
@@ -86,15 +81,53 @@ function initCards() {
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                if(select === 2){
+                  timer.textContent ="";
+                  resetButton.style.visibility="visible";
+                }
+                clearInterval(interval);
+                t=5;
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
+                /*if(select !== 2){
+                  timer.textContent ="";
+                }*/
             }
         });
     }
+}
+
+function timeout(){
+  if(t!==1 ){
+    t = t-1;
+    timer.textContent = t.toString();
+    resetButton.style.visibility="hidden";
+    body.style.backgroundColor = "#FFF";
+    setTimeout(myFunction, 120);
+  }
+  else if(t === 1){
+    gameOverNightmare();//close the game
+  }
+}
+
+function myFunction(){
+  body.style.backgroundColor = "#232323";
+}
+
+function gameOverNightmare(){
+  timer.textContent ="";
+  messageDisplay.textContent = "Timeout";
+  resetDisplay.textContent = "Play Again"
+  changeColors("#FFF");
+  body.style.backgroundColor = pickedColor;
+  resetButton.style.visibility="visible";
+    clearInterval(interval);
+  gameOver = true;
+  t=5;
 }
 
 function reset() {
@@ -106,6 +139,16 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+   if(select === 2){
+    interval = setInterval(timeout,1000);
+    resetButton.style.visibility="hidden";
+    timer.textContent = "5";
+    }
+    else {
+      clearInterval(interval);
+      timer.textContent = "";
+      resetButton.style.visibility="visible";
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
