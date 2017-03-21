@@ -13,7 +13,6 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var Timer = ;
 
 function init() {
     initCards();
@@ -130,5 +129,4 @@ function Nightmare_G(){
     document.getElementById('Easy').setAttribute("class", "unclicked");
     numCards = 6;
     reset();
-    setTimeout("Failed()",10000);
 }
