@@ -101,6 +101,7 @@ function reset() {
     count = 5;
     if (mode == 2) {
       messageDisplay.textContent += " " + count;
+      resetButton.style.display = "none";
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -125,6 +126,7 @@ function countDown() {
     messageDisplay.textContent = "What's the Color? " + count;
   } else {
     messageDisplay.textContent = "TIMEOUT!";
+    resetButton.style.display = "block";
     resetDisplay.textContent = "Play Again"
     changeColors("#FFF");
     body.style.backgroundColor = pickedColor;
