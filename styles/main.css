@@ -49,14 +49,7 @@ body {
 	color: steelblue;
 	background-color: white;
 }
-#easy:active{
-	color: white;
-	background-color: steelblue;
-}
-#easy:focus{
-	color: white;
-	background-color: steelblue;
-}
+
 #hard{
 	display: inline;
 	margin: 0px auto;
@@ -78,14 +71,6 @@ body {
 {
 	color: steelblue;
 	background-color: white;
-}
-#hard:active{
-	color: white;
-	background-color: steelblue;
-}
-#hard:focus{
-	color: white;
-	background-color: steelblue;
 }
 
 #nightmare{
@@ -110,14 +95,7 @@ body {
 	color: steelblue;
 	background-color: white;
 }
-#nightmare:active{
-	color: white;
-	background-color: steelblue;
-}
-#nightmare:focus{
-	color: white;
-	background-color: steelblue;
-}
+
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
