@@ -89,6 +89,16 @@ resetButton.addEventListener("click", function() {
     reset();
     this.style.display = "none";
 })
+easyButton.addEventListener("mouseenter", function(){
+  if(gameMode != 0){
+    this.style.backgroundColor = "#ffffff";
+    this.style.color = "steelblue";
+  }
+});
+easyButton.addEventListener("mouseout", function(){
+  if(gameMode != 0)
+    this.style.color = "#484848";
+});
 easyButton.addEventListener("click", function(){
   numCards = 3;
   if(gameMode != 0){
@@ -105,6 +115,16 @@ easyButton.addEventListener("click", function(){
   nightButton.style.backgroundColor = "#ffffff";
   nightButton.style.color = "#484848";
 })
+hardButton.addEventListener("mouseenter", function(){
+  if(gameMode != 1){
+    this.style.backgroundColor = "#ffffff";
+    this.style.color = "steelblue";
+  }
+});
+hardButton.addEventListener("mouseout", function(){
+  if(gameMode != 1)
+    this.style.color = "#484848";
+});
 hardButton.addEventListener("click", function(){
   numCards = 6;
   if(gameMode != 1){
@@ -122,6 +142,16 @@ hardButton.addEventListener("click", function(){
   nightButton.style.backgroundColor = "#ffffff";
   nightButton.style.color = "#484848";
 })
+nightButton.addEventListener("mouseenter", function(){
+  if(gameMode != 2){
+    this.style.backgroundColor = "#ffffff";
+    this.style.color = "steelblue";
+  }
+});
+nightButton.addEventListener("mouseout", function(){
+  if(gameMode != 2)
+    this.style.color = "#484848";
+});
 nightButton.addEventListener("click", function(){
   numCards = 6;
   if(gameMode != 2){
