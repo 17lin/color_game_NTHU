@@ -73,6 +73,8 @@ function reset() {
         numCards = 6;
         time = 5;
         resetButton.style.visibility = "hidden";
+        secondsDisplay.textContent = time;
+        time = time - 1;
         intervalTimer = setInterval(countdown, 1000);
     }
 
@@ -100,6 +102,7 @@ function reset() {
 
 function blink2(){
   document.body.style.backgroundColor = "#232323";
+  if(time < 0) body.style.backgroundColor = pickedColor;
 }
 
 // function blink(){
@@ -112,6 +115,7 @@ function countdown() {
     document.body.style.backgroundColor = "white";
     secondsDisplay.textContent = time;
     time = time - 1;
+    setTimeout(blink2, 80);
     if (time < 0) {
         clearInterval(intervalTimer);
         resetButton.style.visibility = "visible";
@@ -121,7 +125,6 @@ function countdown() {
         body.style.backgroundColor = pickedColor;
         gameOver = true;
     }
-    setTimeout(blink2, 80);
 }
 
 function changeMode(num) {
