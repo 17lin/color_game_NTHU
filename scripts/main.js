@@ -3,21 +3,114 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var nummoreCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
+var morecards = document.querySelectorAll(".more_card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easybutton = document.querySelector("#easy");
+var hardbutton = document.querySelector("#hard");
+var nmbutton = document.querySelector("#nm");
+var mode;
+var seconds;
+var strsec;
+var countdown = document.querySelector("#countdown");
+var interval;
 
 function init() {
+    selecteasy();
+    mode = "easy";
     initCards();
     reset();
 }
+
+function selecteasy() {
+    mode = "easy";
+    easybutton.style.backgroundColor = "#0072E3";
+    easybutton.style.color = "#FFFFFF"
+    hardbutton.style.backgroundColor = "#FFFFFF";
+    hardbutton.style.color = "#484848"
+    nmbutton.style.backgroundColor = "#FFFFFF";
+    nmbutton.style.color = "#484848"
+}
+
+function selecthard() {
+    mode = "hard";
+    easybutton.style.backgroundColor = "#FFFFFF";
+    easybutton.style.color = "#484848"
+    hardbutton.style.backgroundColor = "#0072E3";
+    hardbutton.style.color = "#FFFFFF"
+    nmbutton.style.backgroundColor = "#FFFFFF";
+    nmbutton.style.color = "#484848"
+}
+
+function selectnm() {
+    mode = "nm";
+    easybutton.style.backgroundColor = "#FFFFFF";
+    easybutton.style.color = "#484848"
+    hardbutton.style.backgroundColor = "#FFFFFF";
+    hardbutton.style.color = "#484848"
+    nmbutton.style.backgroundColor = "#0072E3";
+    nmbutton.style.color = "#FFFFFF"
+}
+
+easybutton.addEventListener("click", function() {
+    selecteasy();
+    reset();
+})
+
+hardbutton.addEventListener("click", function() {
+    selecthard();
+    reset();
+})
+
+nmbutton.addEventListener("click", function() {
+    selectnm();
+    reset();
+})
+
+easybutton.addEventListener("mouseover", function() {
+    if(mode !== "easy") {
+        easybutton.style.color = "#0072E3";
+    }
+})
+
+easybutton.addEventListener("mouseout", function() {
+    if(mode !== "easy") {
+        easybutton.style.color = "#484848";
+    }
+})
+
+hardbutton.addEventListener("mouseover", function() {
+    if(mode !== "hard") {
+        hardbutton.style.color = "#0072E3";
+    }
+})
+
+hardbutton.addEventListener("mouseout", function() {
+    if(mode !== "hard") {
+        hardbutton.style.color = "#484848";
+    }
+})
+
+nmbutton.addEventListener("mouseover", function() {
+    if(mode !== "nm") {
+        nmbutton.style.color = "#0072E3";
+    }
+})
+
+nmbutton.addEventListener("mouseout", function() {
+    if(mode !== "nm") {
+        nmbutton.style.color = "#484848";
+    }
+})
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -41,11 +134,31 @@ function initCards() {
             }
         });
     }
+    for (var i = 0; i < morecards.length; i++) {
+        //add click listeners to cards
+        morecards[i].addEventListener("click", function() {
+            if (gameOver)
+                return;
+            var clickedColor = this.style.backgroundColor;
+            if (clickedColor === pickedColor) {
+                messageDisplay.textContent = "Correct!";
+                resetDisplay.textContent = "Play Again"
+                changeColors("#FFF");
+                body.style.backgroundColor = clickedColor;
+                gameOver = true;
+            } else {
+                this.style.opacity = 0;
+                messageDisplay.textContent = "Try Again"
+            }
+        });
+    }
 }
 
 function reset() {
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    //colors = generateRandomColors(numCards);
+    if(mode === "easy") colors = generateRandomColors(numCards);
+    else colors = generateRandomColors(numCards+nummoreCards);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
@@ -62,6 +175,57 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+    // for different level
+    if(mode === "easy") {
+        for (let j = 0; j < morecards.length; j++) {
+            morecards[j].style.display = "none";
+        }
+    }
+    else {
+        for (let j = 0; j < morecards.length; j++) {
+            morecards[j].style.opacity = 1;
+            if (colors[j+3]) {
+                morecards[j].style.display = "block"
+                morecards[j].style.backgroundColor = colors[j+3];
+            } else {
+                morecards[j].style.display = "none";
+            }
+        }
+    }
+    // for nightmare
+    if(mode == "nm") {
+        clearInterval(interval);
+        seconds = 5;
+        strsec = ' '+seconds;
+        countdown.textContent = strsec;
+        resetButton.style.display = "none";
+        interval = setInterval(function () {
+            if (seconds >= 1) {
+                seconds--;
+                strsec = ' '+seconds;
+                countdown.textContent = strsec;
+                //body.blink();
+            }
+            else {
+                countdown.textContent = '';
+                messageDisplay.textContent = "TIMEOUT!";
+                resetButton.style.display = "block";
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
+                gameOver = true;
+            }
+        }, 1000);
+        /*var gg = setInterval(function () {
+            if (seconds < 1) {
+                countdown.textContent = '';
+                messageDisplay.textContent = "TIMEOUT!";
+                resetButton.style.display = "block";
+                changeColors("#FFF");
+                body.style.backgroundColor = clickedColor;
+                gameOver = true;
+            }
+        }, 10);*/
+    }
     body.style.backgroundColor = "#232323";
 }
 
@@ -75,6 +239,11 @@ function changeColors(color) {
         //change each color to match given color
         cards[i].style.opacity = 1;
         cards[i].style.backgroundColor = color;
+    }
+    for (var i = 0; i < morecards.length; i++) {
+        //change each color to match given color
+        morecards[i].style.opacity = 1;
+        morecards[i].style.backgroundColor = color;
     }
 }
 
