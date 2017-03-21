@@ -38,6 +38,20 @@ body {
 	color: #bbb;
 }
 
+#mode_easy{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#mode_easy:hover{
+    color: steelblue;
+}
+#mode_hard{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#mode_hard:hover{
+    color: steelblue;
+}
 .container {
     margin-left: auto;
 	margin-right: auto;
