@@ -13,11 +13,45 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var cntdSecs=5;
+var easyButton = document.querySelector("#easymode");
+var hardButton = document.querySelector("#hardmode");
+var nightmaremodeButton = document.querySelector("#nightmaremode");
+
 
 function init() {
+    numCards = 3;
     initCards();
     reset();
+    initial();
 }
+
+function init2() {
+    numCards = 6;
+    initCards();
+    reset();
+    initial();
+}
+
+function init3() {
+    numCards = 6;
+    initCards();
+    reset();
+    initial();
+}
+
+easyButton.addEventListener("click", function() {
+  init();
+})
+
+hardButton.addEventListener("click", function() {
+  init2();
+})
+
+nightmaremodeButton.addEventListener("click", function() {
+  init3();
+})
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -67,6 +101,7 @@ function reset() {
 
 resetButton.addEventListener("click", function() {
     reset();
+    initial();
 })
 
 function changeColors(color) {
@@ -103,4 +138,28 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+modeButton.addEventListener("click", function() {
+    var el = document.querySelector('button');
+})
+
+var countdownid,x;
+function initial(){
+  clearInterval(countdownid);
+  cntdSecs=5;
+  x=document.getElementById("timer");
+  x.innerHTML=" "+cntdSecs;
+  cntdSecs--;
+  countdownid=window.setInterval(countdownfunc,1000);
+}
+function countdownfunc(){
+  x.innerHTML=" "+cntdSecs;
+  if (cntdSecs==0){
+    x.innerHTML="<br>TIMEOUT!";
+    body.style.backgroundColor = pickedColor;
+    changeColors("#FFF");
+    clearInterval(countdownid);
+  }
+  cntdSecs--;
 }
