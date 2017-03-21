@@ -22,6 +22,8 @@ var counter = 5;
 var dc = document.querySelector("#counter");
 var count = 0;
 /*down-counter*/
+var id;
+var bl, bl2;
 
 
 function init() {
@@ -29,6 +31,8 @@ function init() {
     setupMode();
     reset();
 }
+
+
 
 /*setup mode */
 
@@ -57,11 +61,17 @@ function setupMode() {
 modeButtons[0].addEventListener("click", function() {
     dc.textContent = null;
     count = 6;
+    clearInterval(id);
+    clearInterval(bl);
+    clearInterval(bl2);
 });
 
 modeButtons[1].addEventListener("click", function() {
     dc.textContent = null;
     count = 6;
+    clearInterval(id);
+    clearInterval(bl);
+    clearInterval(bl2);
 });
 
 
@@ -75,19 +85,40 @@ modeButtons[2].addEventListener("click", function() {
     else
     {
         resetButton.style.opacity = 1;
-        resetDisplay.textContent = "Play Again"
+        resetDisplay.textContent = "Try again"
         changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
         gameOver = true;
-        messageDisplay.textContent = "Try Again "
+        messageDisplay.textContent = "Time out "
+        dc.textContent="";
     }
   }
-  var id = setInterval(tick, 1000);
+  id = setInterval(tick, 1000);
 
 
 });
 
+
+
 /*setup conter*/
+
+/*bling*/
+modeButtons[2].addEventListener("click", function() {
+
+
+  function bling () {
+    body.style.backgroundColor = "white";
+  }
+
+  function bling2() {
+    body.style.backgroundColor = "#232323";
+  }
+
+  bl = setInterval(bling, 1000);
+  bl2 = setInterval(bling2,1020);
+
+});
+/*bling*/
 
 
 function initCards() {
@@ -106,7 +137,7 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("cards[i]");
                 body.style.backgroundColor = clickedColor;
-                resetButton.style.opacity = 0;
+                resetButton.style.opacity = 1;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -137,7 +168,7 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
-    clearInterval(id);
+    count = 0;
 }
 
 resetButton.addEventListener("click", function() {
