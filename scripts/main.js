@@ -35,8 +35,12 @@ function init() {
     if(mode_flag == false){
         easyButton.style.color = "white";
         easyButton.style.backgroundColor = "steelblue";
+        hardButton.style.backgroundColor = "white";
+        hardButton.style.color = "black";
 
     }else{
+         easyButton.style.backgroundColor = "white";
+        easyButton.style.color = "black";
         hardButton.style.backgroundColor = "steelblue";
         hardButton.style.color = "white";
     }

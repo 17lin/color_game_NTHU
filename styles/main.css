@@ -114,7 +114,9 @@ button {
     margin:0px;
     padding: 0px 10px;
 }
-
+button:hover #hard{
+    color:blue;
+}
 button:hover {
     color: white;
     background-color: steelblue;
