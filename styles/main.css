@@ -109,3 +109,34 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+
+#changeMode{
+
+}
+
+#changeMode:hover {
+    color: rgb(221, 138, 41);
+    background-color: rgb(147, 48, 163);
+}
+
+#footer{
+	margin-left: auto;
+margin-right: auto;
+	max-width: 350px;
+}
+
+#easyMode{
+	color: blue;
+}
+
+#seconds{
+	margin-left: 6px;
+}
+
+.modes{
+	display: inline;
+	font-weight: bold;
+	padding: 0 1rem;
+	margin: 0;
+}
