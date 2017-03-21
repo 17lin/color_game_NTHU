@@ -17,13 +17,43 @@ var resetDisplay = document.querySelector("#reset span");
 var easyButton = document.querySelector("#easy");
 var hardButton = document.querySelector("#hard");
 var nightmareButton = document.querySelector("#nightmare");
+var arr = [];
+var arr1 = [];
 
 function init() {
     initCards();
     reset();
 }
-
+/*function blink1()
+{
+  body.style.backgroundColor＝"white";
+}
+function blink2()
+{
+  body.style.backgroundColor＝"black";
+}*/
+/*function blinkOn(){
+  body.style.bgcolor = "000000"
+  nTimes++
+  JSCTimeOutID = window.setTimeout("blinkOff()",500);
+}
+function blinkOff(){
+body.style.bgcolor = "FFFFFF"
+if (nTimes < 5)
+JSCTimeOutID = window.setTimeout("blinkOn()",500);
+else theWin.history.go(0)
+}
+function blinkit(aWin)
+{
+  nTimes = 0
+  theWin = aWin
+  JSCTimeOutID = window.setTimeout("blinkOn()",500);
+}*/
 function initCards() {
+    if(mode!==3)
+    {
+      resetButton.style.display="block";
+    }
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -38,6 +68,14 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                if(mode===3)
+                {
+                  resetButton.style.display="block";
+                  for(var i=0;i<arr.length;i++)
+                  {
+                    clearInterval(arr[i]);
+                  }
+                }
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -50,6 +88,11 @@ function initCards() {
 function reset() {
     if(mode===3)
     {
+      resetButton.style.display="none";
+      for(var i=1;i<arr.length;i++)
+      {
+        clearInterval(arr[i]);
+      }
       gameOver = false;
       colors = generateRandomColors(numCards);
       //pick a new random color from array
@@ -70,24 +113,71 @@ function reset() {
       }
       body.style.backgroundColor = "#232323";
       var countdownnumber=5;
-      setTimeout(countdownfunc,5000);
-      setTimeout(myTimeout1, 0);
+      arr.push(setTimeout(countdownfunc,5000));
+      arr1.push(setTimeout(myblink1, 0));
+      function myblink1(){
+        body.style.backgroundColor="#232323";
+      }
+      arr1.push(setTimeout(myblink2, 500));
+      function myblink2(){
+        body.style.backgroundColor="#DDDDDD";
+      }
+      arr1.push(setTimeout(myblink3, 1000));
+      function myblink3(){
+        body.style.backgroundColor="#232323";
+      }
+      arr1.push(setTimeout(myblink4, 1500));
+      function myblink4(){
+        body.style.backgroundColor="#DDDDDD";
+      }
+      arr1.push(setTimeout(myblink5, 2000));
+      function myblink5(){
+        body.style.backgroundColor="#232323";
+      }
+      arr1.push(setTimeout(myblink6, 2500));
+      function myblink6(){
+        body.style.backgroundColor="#DDDDDD";
+      }
+      arr1.push(setTimeout(myblink7, 3000));
+      function myblink7(){
+        body.style.backgroundColor="#232323";
+      }
+      arr1.push(setTimeout(myblink8, 3500));
+      function myblink8(){
+        body.style.backgroundColor="#DDDDDD";
+      }
+      arr1.push(setTimeout(myblink9, 4000));
+      function myblink9(){
+        body.style.backgroundColor="#232323";
+      }
+      arr1.push(setTimeout(myblink10, 4500));
+      function myblink10(){
+        body.style.backgroundColor="#DDDDDD";
+      }
+      /*arr1.push(setTimeout(myblink11, 5000));
+      function myblink11(){
+        body.style.backgroundColor="#232323";
+      }*/
+      arr.push(setTimeout(myTimeout1, 0));
       function myTimeout1() {
       messageDisplay.textContent = "What's the Color? 5";
+      //setTimeout(blink1, 500);
+      //setTimeout(blinkOn, 500);
+      //blinkit(self);
       }
-      setTimeout(myTimeout2, 1000);
+      arr.push(setTimeout(myTimeout2, 1000));
       function myTimeout2() {
       messageDisplay.textContent = "What's the Color? 4";
       }
-      setTimeout(myTimeout3, 2000);
+      arr.push(setTimeout(myTimeout3, 2000));
       function myTimeout3() {
       messageDisplay.textContent = "What's the Color? 3";
       }
-      setTimeout(myTimeout4, 3000);
+      arr.push(setTimeout(myTimeout4, 3000));
       function myTimeout4() {
       messageDisplay.textContent = "What's the Color? 2";
       }
-      setTimeout(myTimeout5, 4000);
+      arr.push(setTimeout(myTimeout5, 4000));
       function myTimeout5() {
       messageDisplay.textContent = "What's the Color? 1";
       }
@@ -105,7 +195,9 @@ function reset() {
       }*/
       function countdownfunc(){
         /*clearInterval(int_id)*/
+        resetButton.style.display="block";
         gameOver=true;
+        changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
         messageDisplay.textContent = "TIME OUT!";
         resetDisplay.textContent = "Play Again"
@@ -115,6 +207,11 @@ function reset() {
       }
     }
     else{
+      resetButton.style.display="block";
+      for(var i=1;i<arr.length;i++)
+      {
+        clearInterval(arr[i]);
+      }
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -138,19 +235,39 @@ function reset() {
 }
 
 hardButton.addEventListener("click", function() {
+  nightmareButton.style.backgroundColor="white";
+  hardButton.style.backgroundColor="blue";
+  easyButton.style.backgroundColor="white";
     mode=2;
     numCards=6;
     reset();
 })
 easyButton.addEventListener("click", function() {
+  nightmareButton.style.backgroundColor="white";
+  hardButton.style.backgroundColor="white";
+  easyButton.style.backgroundColor="blue";
     mode=1;
     numCards=3;
     reset();
 })
 nightmareButton.addEventListener("click", function() {
+    nightmareButton.style.backgroundColor="blue";
+    hardButton.style.backgroundColor="white";
+    easyButton.style.backgroundColor="white";
     mode=3;
+    //setInterval(blinkOn,500);
+    //setInterval(blink,500);
+    resetButton.style.display="none";
+    if(mode===3)
+    {
+      for(var i=1;i<arr.length;i++)
+      {
+        clearInterval(arr[i]);
+      }
+    }
     numCards=6;
     reset();
+
     /*var countdownid;
     function initial(){ countdownfunc(); }
     function countdownfunc(){
@@ -168,24 +285,24 @@ nightmareButton.addEventListener("click", function() {
       }
     }*/
     var countdownnumber=5;
-    setTimeout(countdownfunc,5000);
-    setTimeout(myTimeout1, 0);
+    arr.push(setTimeout(countdownfunc,5000));
+    arr.push(setTimeout(myTimeout1, 0));
     function myTimeout1() {
     messageDisplay.textContent = "What's the Color? 5";
     }
-    setTimeout(myTimeout2, 1000);
+    arr.push(setTimeout(myTimeout2, 1000));
     function myTimeout2() {
     messageDisplay.textContent = "What's the Color? 4";
     }
-    setTimeout(myTimeout3, 2000);
+    arr.push(setTimeout(myTimeout3, 2000));
     function myTimeout3() {
     messageDisplay.textContent = "What's the Color? 3";
     }
-    setTimeout(myTimeout4, 3000);
+    arr.push(setTimeout(myTimeout4, 3000));
     function myTimeout4() {
     messageDisplay.textContent = "What's the Color? 2";
     }
-    setTimeout(myTimeout5, 4000);
+    arr.push(setTimeout(myTimeout5, 4000));
     function myTimeout5() {
     messageDisplay.textContent = "What's the Color? 1";
     }
@@ -203,6 +320,7 @@ nightmareButton.addEventListener("click", function() {
     }*/
     function countdownfunc(){
       /*clearInterval(int_id)*/
+      resetButton.style.display="block";
       gameOver=true;
       body.style.backgroundColor = pickedColor;
       messageDisplay.textContent = "TIME OUT!";
