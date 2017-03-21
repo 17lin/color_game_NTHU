@@ -13,8 +13,15 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy = document.querySelector("#easy");
+var hard = document.querySelector("#hard");
+var nightmare = document.querySelector("#nightmare");
+var timerText = document.querySelector("#timer");
+var timerID;
 
 function init() {
+    showCard3();
+    initButtons();
     initCards();
     reset();
 }
@@ -35,6 +42,10 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                if(nightmare.classList.contains("active")){
+                  resetButton.style.visibility = "visible";
+                  timerStop();
+                }
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -42,6 +53,95 @@ function initCards() {
         });
     }
 }
+
+function initButtons(){
+  easy.addEventListener("click", function(){
+    resetEasy();
+  });
+  hard.addEventListener("click", function(){
+    resetHard();
+  });
+  nightmare.addEventListener("click", function(){
+    resetNightmare();
+  });
+}
+function resetEasy(){
+  timerStop();
+  easy.classList.add("active");
+  hard.classList.remove("active");
+  nightmare.classList.remove("active");
+  numCards = 3;
+  resetButton.style.visibility = "visible";
+  reset();
+}
+function resetHard(){
+  timerStop();
+  easy.classList.remove("active");
+  hard.classList.add("active");
+  nightmare.classList.remove("active");
+  numCards = 6;
+  resetButton.style.visibility = "visible";
+  reset();
+}
+function resetNightmare(){
+  timerStop();
+  resetButton.style.visibility = "hidden";
+  easy.classList.remove("active");
+  hard.classList.remove("active");
+  nightmare.classList.add("active");
+  numCards = 6;
+  reset();
+  initTimer(5);
+  timerStart();
+}
+
+function showCard6(){
+  cards[3].style.display = "block";
+  cards[4].style.display = "block";
+  cards[5].style.display = "block";
+}
+function showCard3(){
+  cards[3].style.display = "none";
+  cards[4].style.display = "none";
+  cards[5].style.display = "none";
+}
+
+function initTimer(num){
+  timerStop();
+  timerText.textContent = num;
+}
+function timerStart(){
+  this.timerID = setInterval(function(){
+
+    var time = parseInt(timerText.textContent, 10);
+    time--;
+    if(time!=0){
+      timerText.textContent = time;
+      body.style.backgroundColor = "white";
+      setTimeout(function(){
+        body.style.backgroundColor = "#232323";
+      }, 100);
+    }
+    else{
+      timerStop();
+      timeOut();
+    }
+  }, 1000);
+}
+function timerStop(){
+  clearInterval(timerID);
+  timerText.textContent = "";
+}
+function timeOut(){
+  messageDisplay.textContent = "Timeout!";
+  resetDisplay.textContent = "Play Again"
+  resetButton.style.visibility = "visible";
+  changeColors("#FFF");
+  body.style.backgroundColor = pickedColor;
+  gameOver = true;
+}
+
+
 
 function reset() {
     gameOver = false;
@@ -66,6 +166,9 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
+  if(nightmare.classList.contains("active")){
+    resetNightmare();
+  }
     reset();
 })
 
