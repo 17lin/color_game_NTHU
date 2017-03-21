@@ -105,7 +105,9 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
-    color: white;
-    background-color: steelblue;
+
+
+button.modeButton:hover {
+	color: steelblue;
+	background-color: white;
 }

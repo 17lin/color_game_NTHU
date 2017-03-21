@@ -13,6 +13,21 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyModeButton = document.querySelector("#easy");
+var easyModeDisplay = document.querySelector("#easy span");
+var hardModeButton = document.querySelector("#hard");
+var hardModeDisplay = document.querySelector("#hard span");
+var countdownnumber=5;
+var countdownid;
+var timeoutContext = document.getElementById("countdown");
+var nightmare = false;
+var nightmareButton = document.querySelector("#nightmare");
+easyModeButton.style.backgroundColor = "steelblue";
+easyModeButton.style.color = "white";
+hardModeButton.style.backgroundColor = "white";
+hardModeButton.style.color = "#484848";
+nightmareButton.style.backgroundColor = "white";
+nightmareButton.style.color = "#484848";
 
 function init() {
     initCards();
@@ -44,6 +59,7 @@ function initCards() {
 }
 
 function reset() {
+
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -67,6 +83,30 @@ function reset() {
 
 resetButton.addEventListener("click", function() {
     reset();
+})
+
+easyModeButton.addEventListener("click", function() {
+  easyModeButton.style.backgroundColor = "steelblue";
+  easyModeButton.style.color = "white";
+  hardModeButton.style.backgroundColor = "white";
+  hardModeButton.style.color = "#484848";
+  nightmareButton.style.backgroundColor = "white";
+  nightmareButton.style.color = "#484848";
+
+  numCards = 3;
+  init();
+})
+
+hardModeButton.addEventListener("click", function() {
+  hardModeButton.style.backgroundColor = "steelblue";
+  hardModeButton.style.color = "white";
+  easyModeButton.style.backgroundColor = "white";
+  easyModeButton.style.color = "#484848";
+  nightmareButton.style.backgroundColor = "white";
+  nightmareButton.style.color = "#484848";
+
+  numCards = 6;
+  init();
 })
 
 function changeColors(color) {
@@ -103,4 +143,40 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+nightmareButton.addEventListener("click", function() {
+  nightmareButton.style.backgroundColor = "steelblue";
+  nightmareButton.style.color = "white";
+  easyModeButton.style.backgroundColor = "white";
+  easyModeButton.style.color = "#484848";
+  hardModeButton.style.backgroundColor = "white";
+  hardModeButton.style.color = "#484848";
+  nightmare = true;
+  countdownfunc();
+  countdownnumber=5;
+  timeoutContext = document.getElementById("countdown");
+  timeoutContext.innerHTML = countdownnumber;
+  countdownnumber--;
+  countdownid=window.setInterval(countdownfunc,1000);
+})
+
+function countdownfunc(){
+  timeoutContext.style.display = "block";
+  timeoutContext.innerHTML = countdownnumber;
+  if (countdownnumber == 0){
+    clearInterval(countdownid);
+    messageDisplay.textContent = "TimeOut!";
+    timeoutContext.style.display = "none";
+    resetDisplay.textContent = "Play Again";
+    resetButton.style.display = "block";
+    changeColors("#FFF"); //white
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+  }
+  else {
+    resetButton.style.display = "none";
+  }
+  countdownnumber--;
+  nightmare = false;
 }
