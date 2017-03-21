@@ -74,15 +74,15 @@ function reset() {
       nightmaretime.textContent="";
       gameOver = true;
       return;
-    }
-    else if(gameOver == true || gamemode!=3)
-    {
+       }
+      else if(gameOver == true || gamemode!=3)
+      {
       clearInterval(x);
       resetButton.style.visibility = 'visible';
       nightmaretime.textContent="";
       return;
-    }
-  }, 1000);
+      }
+    }, 1000);
     }
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -109,15 +109,30 @@ resetButton.addEventListener("click", function() {
   reset();
 })
 easy.addEventListener("click", function(){
+   if(gamemode == 2)
+   hard.style.backgroundColor = "white";
+   else if(gamemode ==3)
+   nightmare.style.backgroundColor = "white";
    gamemode = 1;
+   easy.style.backgroundColor="blue";
    reset();
 })
 hard.addEventListener("click", function(){
+  if(gamemode == 1)
+  easy.style.backgroundColor = "white";
+  else if(gamemode ==3)
+  nightmare.style.backgroundColor = "white";
   gamemode = 2;
+  hard.style.backgroundColor="blue";
    reset();
 })
 nightmare.addEventListener("click", function(){
+  if(gamemode == 2)
+  hard.style.backgroundColor = "white";
+  else if(gamemode ==1)
+  easy.style.backgroundColor = "white";
    gamemode = 3;
+   nightmare.style.backgroundColor="blue";
    reset();
 })
 
