@@ -2,6 +2,9 @@ window.onload = function() {
     init();
 };
 
+var timer, tmpTimer, remain, timeBoard;
+var mode = 1;
+var btns = [];
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -16,7 +19,56 @@ var resetDisplay = document.querySelector("#reset span");
 
 function init() {
     initCards();
+    initBtns();
+    timeBoard=document.querySelector("#time");
     reset();
+}
+
+function initBtns() {
+  var btn=document.querySelector("#easy");
+  btn.addEventListener("click", function(event) {
+    btns[0].classList.remove("selected");
+    btns[1].classList.remove("selected");
+    btns[2].classList.remove("selected");
+    if (mode===3) {
+      clearInterval(timer);
+    }
+    mode=1;
+    event.target.classList.add("selected");
+    numCards=3;
+    reset();
+  });
+  btns.push(btn);
+
+  btn=document.querySelector("#hard");
+  btn.addEventListener("click", function(event) {
+    btns[0].classList.remove("selected");
+    btns[1].classList.remove("selected");
+    btns[2].classList.remove("selected");
+    if (mode===3) {
+      clearInterval(timer);
+    }
+    mode=2;
+    event.target.classList.add("selected");
+    numCards=6;
+    reset();
+  });
+  btns.push(btn);
+
+  var btn=document.querySelector("#nightmare");
+  btn.addEventListener("click", function(event) {
+    btns[0].classList.remove("selected");
+    btns[1].classList.remove("selected");
+    btns[2].classList.remove("selected");
+    if (mode===3) {
+      clearInterval(timer);
+    }
+    mode=3;
+    event.target.classList.add("selected");
+    numCards=6;
+    reset();
+  });
+  btns.push(btn);
 }
 
 function initCards() {
@@ -30,6 +82,9 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+                if (mode===3) {
+                  clearInterval(timer);
+                }
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -63,6 +118,38 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+
+    var res=document.querySelector("#reset");
+    if (mode==3) {
+      timer=setInterval(countdown,1000);
+      res.style.visibility="hidden";
+      timeBoard.style.visibility="visible";
+      remain=5;
+      timeBoard.textContent="5";
+    } else {
+      res.style.visibility="visible";
+      timeBoard.style.visibility="hidden";
+    }
+}
+
+function countdown() {
+  remain--;
+  timeBoard.textContent=remain.toString();
+  if (remain===0) {
+    gameOver = true;
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    timeBoard.style.visibility="hidden";
+    clearInterval(timer);
+  } else {
+    body.style.backgroundColor = "#FFF";
+    tmpTimer=setInterval(blink,75);
+  }
+}
+
+function blink() {
+  body.style.backgroundColor = "#232323";
+  clearInterval(tmpTimer);
 }
 
 resetButton.addEventListener("click", function() {
