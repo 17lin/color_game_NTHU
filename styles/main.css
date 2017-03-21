@@ -15,28 +15,7 @@ body {
     -webkit-transition: background 0.6s;
     -moz-transition: background 0.6s;
 }
-button #easy{
-	display: inline;
-	padding: 0 1rem;
-	float: left;
-	width: 50px;
-}
-button #hard{
-	display: inline;
-	padding: 0 1rem;
-	float: left;
-	width: 50px;
-}
-button #nightmare{
-	display: inline;
-	padding: 0 1rem;
-	float: left;
-	width: 50px;
-}
-button:hover {
-    color: white;
-    background-color: steelblue;
-}
+
 #stripe {
 	background: white;
 	padding: 1rem;
@@ -45,7 +24,7 @@ button:hover {
 
 #navbar {
 	display: -webkit-flex;
-  display: flex;
+    display: flex;
 	flex-direction: row;
 }
 
@@ -53,6 +32,7 @@ button:hover {
 	font-weight: bold;
 	padding: 0 1rem;
 }
+
 
 #about {
 	margin-left: auto;
@@ -87,7 +67,7 @@ h1 {
     font-weight: normal;
     color: white;
     text-transform: uppercase;
-		margin: 0;
+	margin: 0;
     padding: 20px 0;
 }
 
@@ -108,7 +88,6 @@ h1 {
     color: white;
     background: steelblue;
 }
-
 #reset {
 	display: block;
 	margin: 3rem auto;
@@ -129,4 +108,28 @@ h1 {
 #reset:hover {
     color: white;
     background-color: steelblue;
+}
+
+button:hover {
+    color: white;
+    background-color: steelblue;
+}
+
+button #easy{
+	display: inline;
+	padding: 0 1rem;
+	float: left;
+	width: 50px;
+}
+button #hard{
+	display: inline;
+	padding: 0 1rem;
+	float: left;
+	width: 50px;
+}
+button #nightmare{
+	display: inline;
+	padding: 0 1rem;
+	float: left;
+	width: 50px;
 }

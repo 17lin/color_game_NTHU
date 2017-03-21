@@ -1,50 +1,27 @@
 window.onload = function() {
     init();
 };
-
-var numCards = 3;
+var counter ;
+var nightmare = false;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
-var colorDisplay = document.getElementById("color-picked");
-var messageDisplay = document.querySelector("#message");
+var tt = document.querySelector("#tt");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
-var hardButton = document.querySelector("#hard");
-var easyButton = document.querySelector("#easy");
-var nightButton = document.querySelector("#nightmare");
-hardButton.addEventListener("click", function() {
-    numCards = 6;
-    reset();
-})
-
-easyButton.addEventListener("click", function() {
-    numCards = 3;
-    reset();
-})
-
-nightButton.addEventListener("click", function() {
-    numCards = 6;
-    reset();
-    var counter = 5;
-    messageDisplay.textContent = "It is Nightmare"+counter;
-    var interval = setInterval(function() {
-    counter++;
-    // Display 'counter' wherever you want to display it.
-    if (counter == 0) {
-        // Display a login box
-        clearInterval(interval);
-    }
-    }, 1000);
-})
-
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+var footer = document.querySelector("#footer");
+var colorDisplay = document.getElementById("color-picked");
+var messageDisplay = document.querySelector("#message");
 
 function init() {
     initCards();
+    setupMode();
     reset();
 }
 
@@ -61,6 +38,7 @@ function initCards() {
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                tt.textContent = "";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -71,13 +49,59 @@ function initCards() {
         });
     }
 }
+function setupMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Easy") {
+        clearInterval(cc);
+        resetButton.style.display = "block";
+        nightmare = false;
+				numCards = 3;
+        tt.textContent = "";
+			}
+			else if (this.textContent === "Hard") {
+        clearInterval(cc);
+        resetButton.style.display = "block";
+        nightmare = false;
+				numCards = 6;
+        tt.textContent = "";
+			}
+      else{
+        nightmare = true;
+        counter = 6;
+        numCards = 6;
+        resetButton.style.display = "none";
+        var cc = setInterval(function() {
+            if(!gameOver)tt.textContent = counter-1;
+            counter--;
 
+            // Display 'counter' wherever you want to display it.
+            if (counter <= 0) {
+                // Display a login box
+                if(!gameOver){
+                messageDisplay.textContent = "";
+                tt.textContent = "Timeout";
+              }
+                body.style.backgroundColor = pickedColor;
+                gameOver = true;
+                changeColors("#FFF");
+                clearInterval(cc);
+            }
+        }, 1000);
+
+      }
+			reset();
+		});
+	}
+}
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
-    //pick a new random color from array
     pickedColor = pickColor();
-    //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
@@ -101,7 +125,6 @@ resetButton.addEventListener("click", function() {
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
-        //change each color to match given color
         cards[i].style.opacity = 1;
         cards[i].style.backgroundColor = color;
     }
@@ -113,17 +136,12 @@ function pickColor() {
 }
 
 function generateRandomColors(num) {
-    //make an array
     var arr = []
-    //repeat num times
     for (var i = 0; i < num; i++) {
-        //get random color and push into arr
         arr.push(randomColor())
     }
-    //return that array
     return arr;
 }
-
 function randomColor() {
     //pick a "red" from 0 - 255
     var r = Math.floor(Math.random() * 256);
