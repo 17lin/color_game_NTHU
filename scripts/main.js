@@ -1,9 +1,8 @@
 window.onload = function() {
     init();
-    timer();
 };
-
-var numCards=6;
+var t;
+var count = 5;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -16,12 +15,20 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 var hardMode = document.querySelector("#hard");
 var easyMode = document.querySelector("#easy");
+var nightMode = document.querySelector("#night");
 var restart = document.querySelector("#restart");
+var counter;
+var Mode;
+
 function init() {
     initCards();
     reset();
 }
+
 function initCards() {
+    count = 5;
+    clearInterval(counter);
+    counter = setInterval(timer, 1000);
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -32,6 +39,8 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+                document.getElementById("timer").innerHTML = "";
+                resetButton.style.display = "block";
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
@@ -46,12 +55,18 @@ function initCards() {
 }
 
 function reset() {
-    count = 5;
+    if(Mode==="Night" && gameOver===true){
+      count = 5;
+      clearInterval(counter);
+      counter = setInterval(timer, 1000);
+    }
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    colors = generateRandomColors(cards.length);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
+    document.getElementById("timer").innerHTML = "";
+    resetButton.style.display = "block";
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
@@ -70,6 +85,27 @@ function reset() {
 
 resetButton.addEventListener("click", function() {
     reset();
+})
+
+hardMode.addEventListener("click", function() {
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div>'
+    cards = document.querySelectorAll(".card");
+    Mode = "Hard";
+    init();
+
+})
+
+easyMode.addEventListener("click", function() {
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div>';
+    cards = document.querySelectorAll(".card");
+    init();
+    Mode = "Easy";
+})
+nightMode.addEventListener("click", function() {
+    document.querySelector("#card-container").innerHTML = '<div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div><div class="card"></div>'
+    cards = document.querySelectorAll(".card");
+    Mode = "Night";
+    init();
 })
 
 function changeColors(color) {
@@ -107,36 +143,41 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
-var count=5;
 
-var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+function timer() {
+    if (Mode === "Night" && gameOver === false) {
+      document.getElementById("timer").innerHTML = count;
+      resetButton.style.display = "none";
+      if(gameOver)return;
+        if (count == 0) {
+          gameOver = true;
+            document.getElementById("timer").innerHTML = "";
+            messageDisplay.textContent = "TIMEOUT!";
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.opacity = 1;
+                if (colors[i]) {
+                    cards[i].style.display = "block"
+                    cards[i].style.backgroundColor = "white";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+            body.style.backgroundColor = pickedColor;
+            resetDisplay.textContent = "Play Again";
+            resetButton.style.display = "block";
+            window.clearInterval(counter);
+            return;
+        }
+        count = count - 1;
+        blink(1);
+    }
+}
 
-function timer()
-{
-
-  if(count>=1){
-    document.getElementById("timer").innerHTML=count;
-    resetButton.style.display="none";
-  }
-  else
-  {
-     clearInterval(counter);
-     window.clearInterval("timer");
-     document.getElementById("timer").innerHTML="";
-     messageDisplay.textContent="TIMEOUT!";
-     for (var i = 0; i < cards.length; i++) {
-         cards[i].style.opacity = 1;
-         if (colors[i]) {
-             cards[i].style.display = "block"
-             cards[i].style.backgroundColor = "white";
-         } else {
-             cards[i].style.display = "none";
-         }
-     }
-     body.style.backgroundColor = pickedColor;
-     resetDisplay.textContent = "Play Again";
-     return;
-  }
-count=count-1;
-  //Do code for showing the number of seconds here
+function blink(num) {
+    body.style.backgroundColor = "white";
+    if(num)
+      t=setTimeout("blink(0)", 100);
+    else {
+      body.style.backgroundColor = "#232323";
+    }
 }
