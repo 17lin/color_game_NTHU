@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,13 +13,71 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyBtn = document.querySelector("#easy");
+var hardBtn = document.querySelector("#hard");
+var nightmareBtn = document.querySelector("#nightmare");
+var state = 1;
+
 
 function init() {
-    initCards();
-    reset();
+  if(state === 1){initCardsEasy();}
+  else if(state === 2){initCardsHard();}
+  else if(state === 3){initCardsNightmare();}
+  reset();
 }
 
-function initCards() {
+
+
+hardBtn.addEventListener('click', function(){
+  this.style.background = "blue";
+  this.style.color = "white";
+  easyBtn.style.background = "white";
+  easyBtn.style.color = "black";
+  nightmareBtn.style.background = "white";
+  nightmareBtn.style.color = "black";
+});
+
+
+easyBtn.addEventListener('click', function(){
+  this.style.background = "blue";
+  this.style.color = "white";
+  hardBtn.style.background = "white";
+  hardBtn.style.color = "black";
+  nightmareBtn.style.background = "white";
+  nightmareBtn.style.color = "black";
+});
+
+
+nightmareBtn.addEventListener('click', function(){
+  this.style.background = "blue";
+  this.style.color = "white";
+  easyBtn.style.background = "white";
+  easyBtn.style.color = "black";
+  hardBtn.style.background = "white";
+  hardBtn.style.color = "black";
+});
+
+
+
+function initCardsEasy() {
+
+
+  var count = document.querySelector('#count');
+  count.style.fontSize = "0px";
+
+  hardBtn.addEventListener('click', function(){
+    state = 2;
+    init();
+  });
+
+  nightmareBtn.addEventListener('click', function(){
+    state = 3;
+    init();
+  });
+
+  var count = document.querySelector('#count');
+
+    numCards = 3;
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -42,6 +100,107 @@ function initCards() {
         });
     }
 }
+
+function initCardsHard() {
+
+
+
+  var count = document.querySelector('#count');
+  count.style.fontSize = "0px";
+  easyBtn.addEventListener('click', function(){
+    state = 1;
+    init();
+  });
+
+  nightmareBtn.addEventListener('click', function(){
+    state = 3;
+    init();
+  });
+
+    numCards = 6;
+    for (var i = 0; i < cards.length; i++) {
+        //add click listeners to cards
+        cards[i].addEventListener("click", function() {
+            if (gameOver)
+                return;
+            //grab color of clicked card
+            var clickedColor = this.style.backgroundColor;
+            // alert(this.style.backgroundColor);
+            //compare color to pickedColor
+            if (clickedColor === pickedColor) {
+                messageDisplay.textContent = "Correct!";
+                resetDisplay.textContent = "Play Again"
+                changeColors("#FFF");
+                body.style.backgroundColor = clickedColor;
+                gameOver = true;
+            } else {
+                this.style.opacity = 0;
+                messageDisplay.textContent = "Try Again"
+            }
+        });
+    }
+}
+
+function initCardsNightmare() {
+
+  var footer = document.querySelector("button");
+  footer.className = "hide";
+  easyBtn.addEventListener('click', function(){
+    state = 1;
+    init();
+  });
+
+  hardBtn.addEventListener('click', function(){
+    state = 2;
+    init();
+  });
+
+    var count = document.querySelector('#count');
+    count.style.fontSize = "30px";
+    clearInterval(myvar);
+    count.textContent = 5;
+    var myvar = setInterval(myfunc, 1000);
+
+    function myfunc(){
+      var countNum = count.textContent;
+      countNum--;
+      count.textContent = countNum;
+      if(countNum === 0){
+        clearInterval(myvar);
+        clearInterval(countNum);
+        messageDisplay.textContent = "TimeOut!";
+        changeColors("#FFF");
+        body.style.backgroundColor = pickedColor;
+        return;
+      }
+    }
+
+    numCards = 6;
+    for (var i = 0; i < cards.length; i++) {
+        //add click listeners to cards
+        cards[i].addEventListener("click", function() {
+            if (gameOver)
+                return;
+            //grab color of clicked card
+            var clickedColor = this.style.backgroundColor;
+            // alert(this.style.backgroundColor);
+            //compare color to pickedColor
+            if (clickedColor === pickedColor) {
+                messageDisplay.textContent = "Correct!";
+                clearInterval(myvar);
+                resetDisplay.textContent = "Play Again"
+                changeColors("#FFF");
+                body.style.backgroundColor = clickedColor;
+                gameOver = true;
+            } else {
+                this.style.opacity = 0;
+                messageDisplay.textContent = "Try Again"
+            }
+        });
+    }
+}
+
+
 
 function reset() {
     gameOver = false;
