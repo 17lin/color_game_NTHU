@@ -49,7 +49,7 @@ function initCards() {
                     resetButton.style.display = "block";
                     messageDisplay.textContent = "Correct!";
                     resetDisplay.textContent = "Play Again"
-
+                    body.classList.remove("blink");
                     clearTimeout(t);
 
                     changeColors("#FFF");
@@ -79,6 +79,7 @@ function initCards() {
                   messageDisplay.textContent = "Correct!";
                   resetDisplay.textContent = "Play Again";
                   changeColors("#FFF");
+                  body.classList.remove("blink");
                   body.style.backgroundColor = clickedColor;
                   gameOver = true;
               } else {
@@ -130,6 +131,7 @@ function setupMode() {
 
 function timedCount() {
     countDown.textContent = c.toString();
+    body.classList.add("blink");
     if(c>0)c = c - 1;
     else {
       timeOut = 1;
@@ -139,6 +141,7 @@ function timedCount() {
       body.style.backgroundColor = pickedColor;
       messageDisplay.textContent = "Time out!";
       changeColors("#FFF");
+      body.classList.remove("blink");
       return;
     }
     t = setTimeout(function(){ timedCount() }, 1000);
