@@ -65,13 +65,14 @@ function reset() {
     if(mode == nightmare)
       countDown(5);
     else {
-      document.getElementById("counter").innerHTML = ' ';
+      document.getElementById("counter").innerHTML = '';
+      resetButton.style.display = "block";
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
-            cards[i].style.display = "block"
+            cards[i].style.display = "block";
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
@@ -82,21 +83,33 @@ function reset() {
 
 easyButton.addEventListener("click", function() {
   mode = easy;
-   numCards = 3;
-   reset();
+  numCards = 3;
+  easyButton.style.color = "white";
+  easyButton.style.backgroundColor = "steelblue";
+  hardButton.style = "";
+  nightmareButton.style = "";
+  reset();
  })
 
  hardButton.addEventListener("click", function() {
-   mode = hard;
-    numCards = 6;
-    reset();
+  mode = hard;
+  numCards = 6;
+  easyButton.style = "";
+  hardButton.style.color = "white";
+  hardButton.style.backgroundColor = "steelblue";
+  nightmareButton.style = "";
+  reset();
   })
 
 nightmareButton.addEventListener("click", function() {
   mode = nightmare;
-   numCards = 6;
-   reset();
-   countDown(5);
+  numCards = 6;
+  easyButton.style = "";
+  hardButton.style = "";
+  nightmareButton.style.color = "white";
+  nightmareButton.style.backgroundColor = "steelblue";
+  reset();
+  countDown(5);
  })
 
 resetButton.addEventListener("click", function() {
@@ -105,6 +118,7 @@ resetButton.addEventListener("click", function() {
 
 function countDown(i) {
     var int = setInterval(function () {
+
       if(mode == nightmare && gameOver == false)
       {
         document.getElementById("counter").innerHTML = i;
@@ -119,15 +133,22 @@ function countDown(i) {
           document.getElementById("counter").innerHTML = '';
           resetButton.style.display = "block";
         }
+        else {
+          body.style.backgroundColor = "#232323";
+        }
 
         i-- || clearInterval(int);   //if i is 0, then stop the interval
-
+        setTimeout(function() {
+          if(i>0 && mode==nightmare)
+            body.style.backgroundColor = "grey";
+        }, 900);
       }
       else {
         clearInterval(int);
       }
-
     }, 1000);
+
+
 }
 
 function changeColors(color) {
