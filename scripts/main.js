@@ -106,10 +106,16 @@ function timeout(){
     t = t-1;
     timer.textContent = t.toString();
     resetButton.style.visibility="hidden";
+    body.style.backgroundColor = "#FFF";
+    setTimeout(myFunction, 120);
   }
   else if(t === 1){
     gameOverNightmare();//close the game
   }
+}
+
+function myFunction(){
+  body.style.backgroundColor = "#232323";
 }
 
 function gameOverNightmare(){
