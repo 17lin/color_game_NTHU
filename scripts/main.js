@@ -135,6 +135,8 @@ function hard(){
 }
 
 function nightmare(){
+    numCards = 6;
+    init();
     resetButton.style.display = "none";
     //show timer
     var timer = document.getElementById("timer");
