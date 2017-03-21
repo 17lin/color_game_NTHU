@@ -13,9 +13,14 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var easyButton = document.querySelector("#easymode")
-var hardButton = document.querySelector("#hardmode")
-var nightmareButton = document.querySelector("#nightmaremode")
+var easyButton = document.querySelector("#easymode");
+var hardButton = document.querySelector("#hardmode");
+var nightmareButton=document.querySelector("#nightmaremode");
+var countdownDisplay = document.querySelector("#countdown");
+
+var countdownnumber=5;
+var countdownid,x;
+
 
 function init() {
     initCards();
@@ -27,15 +32,34 @@ function easy(){
   reset();
   initCards();
 }
+
 function hard(){
   window.numCards=6;
   reset();
   initCards();
 }
+
 function nightmare(){
   window.numCards=6;
   reset();
+  initial();
   initCards();
+}
+function initial(){
+  countdownnumber=5;
+  x=document.getElementById("countdown");
+  x.innerHTML=countdownnumber;
+  countdownnumber--;
+  countdownid=window.setInterval(countdownfunc,1000);
+}
+function countdownfunc(){
+  x.innerHTML=countdownnumber;
+  if (countdownnumber==0){
+    messageDisplay.textContent = "Time Out";
+    countdownDisplay.textContent = " ";
+    clearInterval(countdownid);
+  }
+  countdownnumber--;
 }
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -63,6 +87,7 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    var countdownnumber=5;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
