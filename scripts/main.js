@@ -43,7 +43,7 @@ function initCards() {
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
                 if(nightmare.classList.contains("active")){
-                  resetButton.style.display = "block";
+                  resetButton.style.visibility = "visible";
                   timerStop();
                 }
             } else {
@@ -71,7 +71,7 @@ function resetEasy(){
   hard.classList.remove("active");
   nightmare.classList.remove("active");
   numCards = 3;
-  resetButton.style.display = "block";
+  resetButton.style.visibility = "visible";
   reset();
 }
 function resetHard(){
@@ -80,17 +80,17 @@ function resetHard(){
   hard.classList.add("active");
   nightmare.classList.remove("active");
   numCards = 6;
-  resetButton.style.display = "block";
+  resetButton.style.visibility = "visible";
   reset();
 }
 function resetNightmare(){
   timerStop();
+  resetButton.style.visibility = "hidden";
   easy.classList.remove("active");
   hard.classList.remove("active");
   nightmare.classList.add("active");
   numCards = 6;
   reset();
-  resetButton.style.display = "none";
   initTimer(5);
   timerStart();
 }
@@ -112,9 +112,16 @@ function initTimer(num){
 }
 function timerStart(){
   this.timerID = setInterval(function(){
+
     var time = parseInt(timerText.textContent, 10);
     time--;
-    if(time!=0)timerText.textContent = time;
+    if(time!=0){
+      timerText.textContent = time;
+      body.style.backgroundColor = "white";
+      setTimeout(function(){
+        body.style.backgroundColor = "#232323";
+      }, 100);
+    }
     else{
       timerStop();
       timeOut();
@@ -128,7 +135,7 @@ function timerStop(){
 function timeOut(){
   messageDisplay.textContent = "Timeout!";
   resetDisplay.textContent = "Play Again"
-  resetButton.style.display = "block";
+  resetButton.style.visibility = "visible";
   changeColors("#FFF");
   body.style.backgroundColor = pickedColor;
   gameOver = true;
