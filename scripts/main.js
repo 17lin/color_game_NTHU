@@ -1,8 +1,9 @@
 window.onload = function() {
     init();
+    timer();
 };
 
-var numCards = 3;
+var numCards=6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,12 +14,13 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var hardMode = document.querySelector("#hard");
+var easyMode = document.querySelector("#easy");
+var restart = document.querySelector("#restart");
 function init() {
     initCards();
     reset();
 }
-
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -44,6 +46,7 @@ function initCards() {
 }
 
 function reset() {
+    count = 5;
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -103,4 +106,36 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+var count=5;
+
+var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+function timer()
+{
+
+  if(count>=1){
+    document.getElementById("timer").innerHTML=count;
+  }
+  else
+  {
+     clearInterval(counter);
+     window.clearInterval("timer");
+     document.getElementById("timer").innerHTML="";
+     messageDisplay.textContent="TIMEOUT!";
+     for (var i = 0; i < cards.length; i++) {
+         cards[i].style.opacity = 1;
+         if (colors[i]) {
+             cards[i].style.display = "block"
+             cards[i].style.backgroundColor = "white";
+         } else {
+             cards[i].style.display = "none";
+         }
+     }
+     body.style.backgroundColor = pickedColor;
+     resetDisplay.textContent = "Play Again";
+     return;
+  }
+count=count-1;
+  //Do code for showing the number of seconds here
 }
