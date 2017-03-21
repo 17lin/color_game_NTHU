@@ -32,7 +32,7 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
-#easy ,#hard{
+#easy ,#hard, #night{
 	padding: 0 1rem;
 	margin: inherit;
 	border-radius: 15px;

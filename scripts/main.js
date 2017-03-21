@@ -17,6 +17,7 @@ var resetDisplay = document.querySelector("#reset span");
 var mode;
 var easy = document.querySelector("#easy");
 var hard = document.querySelector("#hard");
+var night = document.querySelector("#night");
 
 function init() {
     initbtn();
@@ -28,11 +29,13 @@ function initbtn(){
       mode = "easy";
       easy.style.backgroundColor = "steelblue";
       hard.style.backgroundColor = "white";
+      night.style.backgroundColor = "white";
     });
     hard.addEventListener("click",function(){
       mode = "hard";
       hard.style.backgroundColor = "steelblue";
       easy.style.backgroundColor = "white";
+      night.style.backgroundColor = "white";
     });
     easy.addEventListener("mouseenter",function(){
       easy.style.color = "black";
@@ -45,7 +48,19 @@ function initbtn(){
     });
     hard.addEventListener("mouseleave",function(){
       hard.style.color = "#CCC";
-    })
+    });
+    night.addEventListener("click",function(){
+      mode = "easy";
+      night.style.backgroundColor = "steelblue";
+      hard.style.backgroundColor = "white";
+      easy.style.backgroundColor = "white";
+    });
+    night.addEventListener("mouseenter",function(){
+      night.style.color = "black";
+    });
+    night.addEventListener("mouseleave",function(){
+      night.style.color = "#CCC";
+    });
 }
 function initCards() {
 
