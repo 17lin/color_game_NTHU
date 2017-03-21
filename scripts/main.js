@@ -14,6 +14,8 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var Nightmare;
+
 function init() {
     initCards();
     reset();
@@ -30,6 +32,22 @@ function initCards() {
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
+            if(Nightmare = 1)
+            {
+              resetButton.style.opacity = 0;
+              if (clickedColor === pickedColor) {
+                  messageDisplay.textContent = "Correct!";
+                  resetDisplay.textContent = "Play Again"
+                  changeColors("#FFF");
+                  body.style.backgroundColor = clickedColor;
+                  resetButton.style.opacity =1;
+                  gameOver = true;
+                } else {
+                  this.style.opacity = 0;
+                  messageDisplay.textContent = "Try Again"
+                }
+            }
+            else{
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
@@ -40,6 +58,7 @@ function initCards() {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
+          }
         });
     }
 }
@@ -111,6 +130,7 @@ function Easy_G(){
     document.getElementById('Hard').setAttribute("class", "unclicked");
     document.getElementById('Nightmare').setAttribute("class", "unclicked");
     numCards = 3;
+    Nightmare = 0;
     reset();
 }
 
@@ -119,6 +139,7 @@ function Hard_G(){
     document.getElementById('Easy').setAttribute("class", "unclicked");
     document.getElementById('Nightmare').setAttribute("class", "unclicked");
     numCards = 6;
+    Nightmare = 0;
     reset();
 
 }
@@ -128,5 +149,10 @@ function Nightmare_G(){
     document.getElementById('Hard').setAttribute("class", "unclicked");
     document.getElementById('Easy').setAttribute("class", "unclicked");
     numCards = 6;
+    Nightmare = 1;
     reset();
+}
+
+function Failed(){
+  messageDisplay.textContent = "Timeout!!"
 }
