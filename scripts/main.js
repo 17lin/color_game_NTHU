@@ -2,11 +2,12 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
+var cards_num = document.querySelector(".card");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
@@ -15,8 +16,35 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 function init() {
-    initCards();
-    reset();
+    initLevel();
+    if(count=0){
+      console.log('0');
+      numCards = 3;
+      initCards();
+      reset();
+    }else if (count=1){
+      console.log('1');
+    //  body.classList.add('card');
+    //  body.classList.add('card');
+      cards_num.classList.add('card');
+      numCards = 6;
+      initCards();
+      reset();
+    }
+
+
+}
+
+function initLevel(){
+      count=0;
+      document.onclick=function(){
+      var obj = event.srcElement;
+      if(obj.id == "hard"){
+        count=1;
+      }else{
+        count=0;
+      }
+      }
 }
 
 function initCards() {

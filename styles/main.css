@@ -109,3 +109,7 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+button #ease.Level {
+	margin:none;
+}
