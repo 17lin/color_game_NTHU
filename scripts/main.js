@@ -16,10 +16,12 @@ var resetDisplay = document.querySelector("#reset span");
 var easyDisplay = document.getElementById("easymode");
 var hardDisplay = document.getElementById("hardmode");
 var nightDisplay = document.getElementById("nightmode");
-
+var statusid = 'easy';
+var count5,count4,count3,count2,count1,count;
 function change_div(id) {
     if (id == 'easy') {
-
+          clearTimeout(count);
+        statusid = 'easy';
         document.getElementById("hard").style.display = 'none';
         easyDisplay.style.backgroundColor = "#4482e5";
         easyDisplay.style.color = "white";
@@ -33,8 +35,10 @@ function change_div(id) {
         nightDisplay.style.fontWeight = "normal";
         reset(3);
         numCards = 3;
-    } else if (id == 'hard') {
 
+    } else if (id == 'hard') {
+        clearTimeout(count);
+        statusid = 'hard';
         document.getElementById("hard").style.display = 'block';
         hardDisplay.style.backgroundColor = "#4482e5";
         hardDisplay.style.color = "white";
@@ -47,10 +51,12 @@ function change_div(id) {
         nightDisplay.style.fontWeight = "normal";
         reset(6);
         numCards = 6;
+
     }
     else if (id == 'night') {
         //easyDisplay.style.display = 'none' ;
         //hardDisplay.style.display = 'block' ;
+        statusid = 'night';
         document.getElementById("hard").style.display = 'block';
         nightDisplay.style.backgroundColor = "#4482e5";
         nightDisplay.style.color = "white";
@@ -64,6 +70,18 @@ function change_div(id) {
         hardDisplay.style.fontWeight = "normal";
         reset(6);
         numCards = 6;
+        var count5 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 5";
+        var count4 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 4";
+        var count3 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 3";
+        var count2 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 2";
+        var count1 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 1";
+        var count = setTimeout(function(){
+           messageDisplay.textContent = "time out";
+           changeColors("#FFF");
+           body.style.backgroundColor = pickedColor;
+           gameOver = true;
+      }, 6000);}, 5000);}, 4000);}, 3000);}, 2000);}, 1000);
+
     }
 }
 
