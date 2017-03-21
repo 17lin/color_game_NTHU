@@ -3,6 +3,7 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var gameMod = 0;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,8 +14,40 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector('#easy');
+var hardButton = document.querySelector('#hard');
+
+function changeEasy(){
+    if(gameMod != 0){
+    	easyButton.style.backgroundColor = "#FFFFFF";
+    	hardButton.style.backgroundColor = "#FFFFFF";
+    	this.style.backgroundColor = "#AAAAAA"; 
+
+    	numCards = 3;
+		gameMod = 0;
+
+    	reset();
+    }
+}
+
+function changeHard(){
+    if(gameMod != 1){
+	    easyButton.style.backgroundColor = "#FFFFFF";
+	    hardButton.style.backgroundColor = "#FFFFFF";
+	    this.style.backgroundColor = "#AAAAAA";
+
+	    numCards = 6;
+	    gameMod = 1;
+
+	    reset();
+	}
+}
 
 function init() {
+	easyButton.style.backgroundColor = "#AAAAAA";
+    easyButton.addEventListener("click", changeEasy);
+    hardButton.addEventListener("click", changeHard);
+
     initCards();
     reset();
 }
@@ -104,3 +137,4 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+

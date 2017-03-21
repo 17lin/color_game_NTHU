@@ -33,6 +33,22 @@ body {
 	padding: 0 1rem;
 }
 
+#easy{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#easy:hover{
+    color: steelblue;
+}
+
+#hard{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#hard:hover{
+    color: steelblue;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
