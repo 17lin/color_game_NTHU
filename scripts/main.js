@@ -5,6 +5,7 @@ window.onload = function() {
 var numCards = 3;
 var gameOver = false;
 var colors = [];
+var timer = new Number(0);
 var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
@@ -17,10 +18,68 @@ var easyDisplay = document.getElementById("easymode");
 var hardDisplay = document.getElementById("hardmode");
 var nightDisplay = document.getElementById("nightmode");
 var statusid = 'easy';
-var count5,count4,count3,count2,count1,count;
+var count;
+
+function count5() {
+    timer = 4;
+    var delayMillis = 100;
+
+    setTimeout(function() {
+        body.style.backgroundColor='#232323';
+    }, delayMillis);
+    body.style.backgroundColor = "#FFFFFF";
+    messageDisplay.textContent = "What's the Color? 4";
+    count = setTimeout(count4, 1000);
+}
+
+function count4() {
+    timer = 3;
+    var delayMillis = 100;
+
+    setTimeout(function() {
+        body.style.backgroundColor='#232323';
+    }, delayMillis);
+    body.style.backgroundColor = "#FFFFFF";
+    messageDisplay.textContent = "What's the Color? 3";
+    count = setTimeout(count3, 1000);
+}
+
+function count3() {
+    timer = 2;
+    var delayMillis = 100;
+
+    setTimeout(function() {
+        body.style.backgroundColor='#232323';
+    }, delayMillis);
+    body.style.backgroundColor = "#FFFFFF";
+    messageDisplay.textContent = "What's the Color? 2";
+    count = setTimeout(count2, 1000);
+}
+
+function count2() {
+    timer = 1;
+    var delayMillis = 100;
+
+    setTimeout(function() {
+        body.style.backgroundColor='#232323';
+    }, delayMillis);
+    body.style.backgroundColor = "#FFFFFF";
+    messageDisplay.textContent = "What's the Color? 1";
+    count = setTimeout(count1, 1000);
+}
+
+function count1() {
+  
+    messageDisplay.textContent = "time out wahaha";
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+    resetButton.style.display = 'inherit';
+    resetDisplay.style.display = 'inline';
+}
+
 function change_div(id) {
     if (id == 'easy') {
-          clearTimeout(count);
         statusid = 'easy';
         document.getElementById("hard").style.display = 'none';
         easyDisplay.style.backgroundColor = "#4482e5";
@@ -37,7 +96,6 @@ function change_div(id) {
         numCards = 3;
 
     } else if (id == 'hard') {
-        clearTimeout(count);
         statusid = 'hard';
         document.getElementById("hard").style.display = 'block';
         hardDisplay.style.backgroundColor = "#4482e5";
@@ -52,8 +110,7 @@ function change_div(id) {
         reset(6);
         numCards = 6;
 
-    }
-    else if (id == 'night') {
+    } else if (id == 'night') {
         //easyDisplay.style.display = 'none' ;
         //hardDisplay.style.display = 'block' ;
         statusid = 'night';
@@ -70,18 +127,6 @@ function change_div(id) {
         hardDisplay.style.fontWeight = "normal";
         reset(6);
         numCards = 6;
-        var count5 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 5";
-        var count4 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 4";
-        var count3 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 3";
-        var count2 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 2";
-        var count1 = setTimeout(function(){ messageDisplay.textContent = "What's the Color? 1";
-        var count = setTimeout(function(){
-           messageDisplay.textContent = "time out";
-           changeColors("#FFF");
-           body.style.backgroundColor = pickedColor;
-           gameOver = true;
-      }, 6000);}, 5000);}, 4000);}, 3000);}, 2000);}, 1000);
-
     }
 }
 
@@ -116,14 +161,28 @@ function initCards() {
 }
 
 function reset(numCards) {
+    clearTimeout(count);
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
-    messageDisplay.textContent = "What's the Color?";
+    //resetDisplay.textContent = "New Color"
+    if (statusid === 'night') {
+        timer = 5;
+        count = setTimeout(count5, 1000);
+
+
+        messageDisplay.textContent = "What's the Color? 5";
+        resetButton.style.display = 'none';
+        resetDisplay.style.display = 'none';
+    } else {
+        resetButton.style.display = 'inherit';
+        resetDisplay.style.display = 'inline';
+        resetDisplay.textContent = "New Color"
+        messageDisplay.textContent = "What's the Color?";
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
