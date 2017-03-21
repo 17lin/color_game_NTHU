@@ -2,6 +2,7 @@ window.onload = function() {
     init();
 };
 
+var select = 0;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -17,6 +18,59 @@ var resetDisplay = document.querySelector("#reset span");
 function init() {
     initCards();
     reset();
+}
+
+function select0(){
+    if(select !== 0){
+      select = 0;
+      numCards = 3;
+      changefontcolor();
+      init();
+    }
+}
+
+function select1(){
+    if(select !== 1){
+      select = 1;
+      numCards = 6;
+      changefontcolor();
+      init();
+    }
+}
+
+function select2(){
+    if(select !== 2){
+      select = 2;
+      numCards = 6;
+      changefontcolor();
+      init();
+    }
+}
+function changefontcolor(){
+    if(select === 0){
+      var OriginalFont=document.getElementById("easy").innerHTML;
+      document.getElementById("easy").innerHTML='<font color="blue">'+OriginalFont+'</font>';
+      var OriginalFont=document.getElementById("hard").innerHTML;
+      document.getElementById("hard").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      var OriginalFont=document.getElementById("nightmare").innerHTML;
+      document.getElementById("nightmare").innerHTML='<font color="black">'+OriginalFont+'</font>';
+    }
+  else if(select === 1){
+      var OriginalFont=document.getElementById("easy").innerHTML;
+      document.getElementById("easy").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      var OriginalFont=document.getElementById("hard").innerHTML;
+      document.getElementById("hard").innerHTML='<font color="blue">'+OriginalFont+'</font>';
+      var OriginalFont2=document.getElementById("nightmare").innerHTML;
+      document.getElementById("nightmare").innerHTML='<font color="black">'+OriginalFont+'</font>';
+  }
+  else if(select === 2){
+      var OriginalFont=document.getElementById("easy").innerHTML;
+      document.getElementById("easy").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      var OriginalFont=document.getElementById("hard").innerHTML;
+      document.getElementById("hard").innerHTML='<font color="black">'+OriginalFont+'</font>';
+      var OriginalFont=document.getElementById("nightmare").innerHTML;
+      document.getElementById("nightmare").innerHTML='<font color="blue">'+OriginalFont+'</font>';
+  }
 }
 
 function initCards() {
