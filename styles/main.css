@@ -28,11 +28,24 @@ body {
 	flex-direction: row;
 }
 
-#brand {
-	font-weight: bold;
-	padding: 0 1rem;
+#colorGame {
+
+    padding: 0 1rem;
+    font-family: impact;
 }
 
+#brand {
+    font-weight: bold;
+    padding: 0 1rem;
+}
+#brand2 {
+    font-weight: bold;
+    padding: 0 1rem;
+}
+#brand3 {
+    font-weight: bold;
+    padding: 0 1rem;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -108,4 +121,9 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+click {
+    border-radius: 1rem;
+    background: blue;
 }
