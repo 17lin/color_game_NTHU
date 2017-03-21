@@ -7,16 +7,38 @@ var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
-var cards = document.querySelectorAll(".card");
+var cards = document.querySelectorAll(".eam");
+var hid = document.querySelectorAll(".har");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var bteasy = document.querySelector("#easy");
+var bthard = document.querySelector("#hard");
+var mode = "easy";
+var test = document.getElementById("about");
 
 function init() {
     initCards();
     reset();
+
+    bteasy.addEventListener('click', function(e){
+      mode = "easy";
+      numCards = 3;
+      cards = document.querySelectorAll(".eam");
+      for (var index = 0; index < 3; index++){
+        hid[index].opacity = 0;
+      }
+      init();
+    });
+
+    bthard.addEventListener('click', function(e){
+      mode = "hard";
+      numCards = 6;
+      cards = document.querySelectorAll(".card");
+      init();
+    });
 }
 
 function initCards() {
@@ -79,7 +101,7 @@ function changeColors(color) {
 }
 
 function pickColor() {
-    var random = Math.floor(Math.random() * colors.length);
+    var random = Math.floor(Math.random() * cards.length);
     return colors[random];
 }
 
