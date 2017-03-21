@@ -4,6 +4,7 @@ window.onload = function() {
 
 var numCards = 3;
 var gameOver = false;
+var counter = 5;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
@@ -122,6 +123,7 @@ function setDifficulty() {
     nightmare.addEventListener("mouseout", mouseout);
     toHard();
     toEasy();
+    toNightmare();
 }
 
 function click() {
@@ -153,4 +155,26 @@ function toEasy() {
         initCards();
         reset();
     });
+}
+
+function toNightmare() {
+    nightmare.addEventListener("click", function() {
+        numCards = 6;
+        initCards();
+        reset();
+        counter = 5;
+        messageDisplay.textContent = "What's the Color? " + "5";
+        var timer = setInterval(tick, 1000);
+    });
+}
+
+function tick() {
+    counter--;
+    if(counter < 0) {
+        clearInterval(timer);
+        messageDisplay.textContent = "TIMEOUT!";
+    }
+    else {
+        messageDisplay.textContent = "What's the Color? " + counter.toString();
+    }
 }
