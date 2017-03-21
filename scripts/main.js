@@ -3,8 +3,8 @@ window.onload = function() {
 };
 
 var Mode = 0;
-var t;
-var Count = 6;
+var t, tb;
+var Count;
 var numCards = 3;
 var gameOver = false;
 var colors = [];
@@ -16,8 +16,8 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var easyMode = document.querySelector("#Easy");
-var hardMode = document.querySelector("#Hard");
+var easyMode = document.querySelector("#easy");
+var hardMode = document.querySelector("#hard");
 var nightmareMode = document.querySelector("#nightmare");
 var counterControl = document.querySelector("#counter");
 
@@ -25,7 +25,7 @@ function init(mode) {
     Mode = mode;
     initCards();
     reset(mode);
-    countdownfuc();
+    countdownfuc(1);
 }
 
 function initCards() {
@@ -39,7 +39,9 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+                counterControl.textContent = "";
                 messageDisplay.textContent = "Correct!";
+                resetButton.style.display = "block";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
@@ -59,12 +61,11 @@ function reset(mode) {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
+    resetButton.style.display = "block";
     if(mode == 0)
       resetDisplay.textContent = "New Color"
-      // counterControl.textContent = "";
     else{
-      Count = 5;
-      resetDisplay.textContent = "";
+      resetButton.style.display = "none";
     }
 
     messageDisplay.textContent = "What's the Color?";
@@ -82,8 +83,11 @@ function reset(mode) {
 }
 
 resetButton.addEventListener("click", function() {
-    if(Mode == 0 && Count == -1)
-      reset(0);
+    if(Mode == 0 || (Mode == 1 && gameOver)){
+      reset(Mode);
+      if(Mode)
+        countdownfuc(1);
+    }
 })
 
 easyMode.addEventListener("click", function(){
@@ -104,23 +108,39 @@ nightmareMode.addEventListener("click", function(){
     init(1);
 })
 
-function countdownfuc(){
+function countdownfuc(reset){
+  if(reset){
+      Count = 5;
+      clearTimeout(t);
+  }
+
   if(Mode == 1)
-  counterControl.textContent = Count;
+    counterControl.textContent = " "+Count;
   else
-  counterControl.textContent = "";
+    counterControl.textContent = "";
+
   Count = Count - 1;
-  if(Mode == 1 && Count != -1 && !gameOver)
-    t=setTimeout("countdownfuc()",1000);
+
+  if(Mode == 1 && Count != -1 && !gameOver){
+      t=setTimeout("countdownfuc(0)",1000);
+  }
+
+  if(Mode)
+    blink(1);
+
   if(Count == -1){
+    clearTimeout(tb);
     messageDisplay.textContent = "Time Out!";
     counterControl.textContent = "";
     changeColors("#FFF");
     body.style.backgroundColor = pickedColor;
     gameOver = true;
   }
-  if(gameOver)
-  counterControl.textContent = "";
+  if(gameOver){
+      counterControl.textContent = "";
+      resetButton.style.display = "block";
+      resetDisplay.textContent = "Play again!"
+  }
 }
 
 function changeColors(color) {
@@ -157,4 +177,13 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function blink(num) {
+  body.style.backgroundColor = "white";
+  if(num)
+    tb=setTimeout("blink(0)", 50);
+  else {
+    body.style.backgroundColor = "#232323";
+  }
 }
