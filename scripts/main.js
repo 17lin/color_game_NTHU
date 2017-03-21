@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,21 +14,66 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+
+var easy = document.querySelector("#easy");
+var hard = document.querySelector("#hard");
+var nightmare = document.querySelector("#nightmare");
+var mode = "easy";
+
 function init() {
+
+    initButton();
     initCards();
     reset();
 }
 
+function countDown() {
+alert("hello");
+}
+
+function initButton() {
+    easy.addEventListener("click", function() {
+      mode = "easy";
+      initCards();
+      reset();
+    });
+    hard.addEventListener("click", function() {
+      mode = "hard";
+      initCards();
+      reset();
+    });
+    nightmare.addEventListener("click", function() {
+      mode = "nightmare";
+      initCards();
+      reset();
+      setTimeout(countDown(), 2000);
+    });
+}
+
+
 function initCards() {
-    for (var i = 0; i < cards.length; i++) {
-        //add click listeners to cards
+    if (mode == "easy") {
+        numCards = 3;
+    }
+    else if (mode == "hard") {
+        numCards = 6;
+        for (var i = 3; i < 6; i++) {
+          cards[i].style.display = "block";
+        }
+    }
+    else if (mode == "nightmare") {
+        numCards = 6;
+        for (var i = 3; i < 6; i++) {
+          cards[i].style.display = "block";
+        }
+    } else numCards = 3;
+
+
+    for (var i = 0; i < numCards; i++) {
         cards[i].addEventListener("click", function() {
             if (gameOver)
                 return;
-            //grab color of clicked card
             var clickedColor = this.style.backgroundColor;
-            // alert(this.style.backgroundColor);
-            //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
