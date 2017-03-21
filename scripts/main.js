@@ -3,6 +3,7 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var state = 1;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,11 +14,20 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easy-mode");
+var hardButton = document.querySelector("#hard-mode");
+var nightmareButton = document.querySelector("#nightmare");
+var timerDisplay = document.querySelector("#timer");
+var time = 5;
+
 
 function init() {
     initCards();
     reset();
+    easyButton.style.backgroundColor = "steelblue";
+    easyButton.style.color = "white";
 }
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -45,6 +55,10 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    if (state == 3){
+      resetButton.style.visibility = 'hidden';
+    }
+    time = 5;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
@@ -65,6 +79,83 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+hardButton.addEventListener("click", function() {
+  if(state!=2){
+    state = 2;
+    numCards = 6;
+    hardButton.style.backgroundColor = "steelblue";
+    hardButton.style.color = "white";
+    easyButton.style.backgroundColor = "white";
+    easyButton.style.color = "black";
+    nightmareButton.style.backgroundColor = "white";
+    nightmareButton.style.color = "black";
+    timerDisplay.textContent = "";
+    initCards();
+    reset();
+  }
+})
+easyButton.addEventListener("click", function() {
+    if(state != 1){
+      state = 1;
+      numCards = 3;
+      easyButton.style.backgroundColor = "steelblue";
+      easyButton.style.color = "white";
+      hardButton.style.backgroundColor = "white";
+      hardButton.style.color = "black";
+      nightmareButton.style.backgroundColor = "white";
+      nightmareButton.style.color = "black";
+      timerDisplay.textContent = "";
+      initCards();
+      reset();
+    }
+})
+nightmareButton.addEventListener("click", function() {
+    if(state != 3){
+      state = 3;
+      numCards = 6;
+      time = 5;
+      nightmareButton.style.backgroundColor = "steelblue";
+      nightmareButton.style.color = "white";
+      easyButton.style.backgroundColor = "white";
+      easyButton.style.color = "black";
+      hardButton.style.backgroundColor = "white";
+      hardButton.style.color = "black";
+      initCards();
+      reset();
+      resetButton.style.visibility = 'hidden';
+      var timeoutVar = setTimeout(myTimeout, 5000);
+      var timerVar = setInterval(myTimer, 1000);
+      timerDisplay.textContent = time;
+    }
+})
+function timerStart(){
+//  var timeoutVar = setTimeout(myTimeout, 5000);
+  var timerVar = setInterval(myTimer, 1000);
+}
+function myTimeout(){
+//  clearInterval(timeVar);
+  messageDisplay.textContent = "Timeout!"
+  timerDisplay.textContent = "";
+  resetDisplay.textContent = "Play Again"
+  changeColors("#FFF");
+  body.style.backgroundColor = pickedColor;
+  gameOver = true;
+  resetButton.style.visibility = 'visible';
+  time = 5;
+}
+function myTimer(){
+  if(state == 3 && gameOver == false){
+    timerDisplay.textContent = time;
+    time--;
+    if(time > 0){
+      timerDisplay.textContent = time;
+    }
+    else{
+
+//      cleatInterval(timerVar);
+    }
+  }
+}
 resetButton.addEventListener("click", function() {
     reset();
 })
