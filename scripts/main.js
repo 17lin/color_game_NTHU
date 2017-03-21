@@ -90,6 +90,7 @@ hardButton.addEventListener("click", function() {
     nightmareButton.style.backgroundColor = "white";
     nightmareButton.style.color = "black";
     timerDisplay.textContent = "";
+    resetButton.style.visibility = 'visible';
     initCards();
     reset();
   }
@@ -105,6 +106,7 @@ easyButton.addEventListener("click", function() {
       nightmareButton.style.backgroundColor = "white";
       nightmareButton.style.color = "black";
       timerDisplay.textContent = "";
+      resetButton.style.visibility = 'visible';
       initCards();
       reset();
     }
