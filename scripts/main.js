@@ -30,6 +30,8 @@ function init() {
     reset();
 }
 
+
+
 /*setup mode */
 
 function setupMode() {
@@ -75,11 +77,12 @@ modeButtons[2].addEventListener("click", function() {
     else
     {
         resetButton.style.opacity = 1;
-        resetDisplay.textContent = "Play Again"
+        resetDisplay.textContent = "Try again"
         changeColors("#FFF");
         body.style.backgroundColor = pickedColor;
         gameOver = true;
-        messageDisplay.textContent = "Try Again "
+        messageDisplay.textContent = "Time out "
+        dc.textContent="";
     }
   }
   var id = setInterval(tick, 1000);
@@ -87,7 +90,26 @@ modeButtons[2].addEventListener("click", function() {
 
 });
 
+
+
 /*setup conter*/
+
+/*bling*/
+modeButtons[2].addEventListener("click", function() {
+
+  function bling () {
+    body.style.backgroundColor = "white";
+  }
+
+  function bling2() {
+    body.style.backgroundColor = "#232323";
+  }
+
+  var bl = setInterval(bling, 1000);
+  var bl2 = setInterval(bling2,1020);
+
+});
+/*bling*/
 
 
 function initCards() {
@@ -106,7 +128,7 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("cards[i]");
                 body.style.backgroundColor = clickedColor;
-                resetButton.style.opacity = 0;
+                resetButton.style.opacity = 1;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -138,6 +160,8 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
     clearInterval(id);
+    clearInterval(bl);
+    clearInterval(bl2);
 }
 
 resetButton.addEventListener("click", function() {
