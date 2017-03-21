@@ -55,6 +55,32 @@ function selectMode(){
         })
     }
 }*/
+
+function selectMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Easy") {
+				numCards = 3;
+			}
+			else if(this.textContent==="Hard"){
+				numCards = 6;
+			}else{
+                resetButton.style.display="none";
+                n = 5;
+                countdown.textContent = " 5";
+                mode = 3;
+                numCards = 6;
+                resetButton.style.display="none";
+                setInterval(timing, 1000);
+            }
+			reset();
+		});
+	}
+}/*
 var mode = 1;
 function selectMode(){
     for(var i = 0;i < modeButtons.length;i ++){
@@ -64,7 +90,7 @@ function selectMode(){
             }
             this.classList.add("selected");
             if(this.textContent==="Easy"){ numCards = 3; mode = 1;}
-            else if(this.textContent==="Hard"){numCards = 6; mode = 2;}
+            if(this.textContent==="Hard"){numCards = 6; mode = 2;}
             else{
                 resetButton.style.display="none";
                 n = 5;
@@ -78,7 +104,7 @@ function selectMode(){
         })
     }
 }
-
+*/
 function timing(){
                     countdown.textContent = " " + --n;
                     if(n <= 0 || gameOver){
