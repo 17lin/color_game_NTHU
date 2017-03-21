@@ -16,6 +16,21 @@ body {
     -moz-transition: background 0.6s;
 }
 
+.blink {
+	-webkit-animation: example 1s infinite;
+	animation: example 1s infinite;
+}
+
+@-webkit-keyframes example {
+    0%   {opacity: 0.9;}
+    5%   {opacity: 1.0;}
+}
+
+@keyframes example {
+		0%   {opacity: 0.9;}
+		5%   {opacity: 1.0;}
+}
+
 #stripe {
 	background: white;
 	padding: 1rem;
@@ -31,6 +46,21 @@ body {
 #brand {
 	font-weight: bold;
 	padding: 0 1rem;
+}
+
+.mode {
+	padding: 0 0.5rem;
+}
+
+.mode:hover:not(.selected) {
+	color: steelblue;
+	cursor: pointer;
+}
+
+.mode.selected {
+	color: white;
+	background-color: steelblue;
+	cursor: pointer;
 }
 
 #about {
