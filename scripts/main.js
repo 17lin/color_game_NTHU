@@ -170,9 +170,13 @@ function toNightmare() {
 
 function tick() {
     counter--;
-    if(counter < 0) {
+    if(counter <= 0) {
         clearInterval(timer);
         messageDisplay.textContent = "TIMEOUT!";
+        resetDisplay.textContent = "Play Again"
+        changeColors("#FFF");
+        body.style.backgroundColor = pickedColor;
+        gameOver = true;
     }
     else {
         messageDisplay.textContent = "What's the Color? " + counter.toString();
