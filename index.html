@@ -10,18 +10,66 @@
 
 	<title>Color Game</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
+
+	<style> 
+
+	 #b0 { 
+  background-color: white;
+  background-size: cover;
+  -o-background-size: cover;
+}
+    #b1 {  background-color: black;
+  background-size: cover;
+  -o-background-size: cover; }
+   #b2 { 
+  background-color: white;
+  background-size: cover;
+  -o-background-size: cover;
+}
+    #b3 {  background-color: black;
+  background-size: cover;
+  -o-background-size: cover; }
+
+    </style>
 </head>
 
 <body>
-	<div id="stripe">
-		<div id="navbar" class="container">
-			<span id="brand" href="#">Color Game</span>
-			<span href="#" id="about">DataLab</span>
-		</div>
+
+	<script>
+	document.body.id = "b0";
+</script>
+    <script>
+
+        function run(interval, frames) {
+    var int = 1;
+    var frames = 3;
+    var interval = 1000;
+
+    function func() {
+        document.body.id = "b"+int;
+        int++;
+        if(int === frames) { int = 1; }
+    }
+
+    var swap = window.setInterval(func, interval);
+}
+
+run(1000, 10);
+    </script>
+	<div style="display:inline;">
+		<h1>Color Games</h1>
+		<button onclick="document.getElementById('id1').innerHTML">Easy</button>
+		<button onclick="document.getElementById('id2').innerHTML">Hard</button>
+		<button onclick="document.getElementById('id3').innerHTML">Nightmare</button>
 	</div>
 
 	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
 
+	<div id="card-container" class="container">
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
+	</div>
 	<div id="card-container" class="container">
 		<div class="card"></div>
 		<div class="card"></div>
