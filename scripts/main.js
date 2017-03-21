@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6; //origional is 3
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -18,6 +18,7 @@ function init() {
     initCards();
     reset();
 }
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -43,7 +44,44 @@ function initCards() {
     }
 }
 
+
+function startTimer(duration, display) {
+    var timer = duration, seconds;
+    var id = setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
+        seconds = seconds < 10 ? seconds : seconds;
+        display.textContent = seconds;
+        resetButton.style.display = "none";
+        //blinkbg();
+        //body.style.backgroundColor='#000000';
+        var delayMillis = 100;
+
+        setTimeout(function() {
+            body.style.backgroundColor='#232323';
+        }, delayMillis);
+        body.style.backgroundColor = "#FFFFFF";
+
+
+        if (--timer < 0) {
+            //stop the timer
+            clearInterval(id);
+            display.textContent = "";
+            messageDisplay.textContent = "TIMEOUT";
+            body.style.backgroundColor = pickedColor;
+            changeColors("#FFF");
+            resetDisplay.textContent = "Play Again";
+            resetButton.style.display = "inherit";
+
+        }
+    }, 1000);
+}
+
 function reset() {
+    //init timer
+    var fiveSecond = 5,
+        display = document.querySelector('#time');
+    startTimer(fiveSecond, display);
+
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
