@@ -120,6 +120,8 @@ function setDifficulty() {
     nightmare.addEventListener("mouseover", mouseover);
     nightmare.addEventListener("click", click);
     nightmare.addEventListener("mouseout", mouseout);
+    toHard();
+    toEasy();
 }
 
 function click() {
@@ -135,4 +137,20 @@ function mouseover() {
 function mouseout() {
     this.style.color = 'gray';
     this.style.backgroundColor = 'transparent';
+}
+
+function toHard() {
+    hard.addEventListener("click", function() {
+        numCards = 6;
+        initCards();
+        reset();
+    });
+}
+
+function toEasy() {
+    easy.addEventListener("click", function() {
+        numCards = 3;
+        initCards();
+        reset();
+    });
 }
