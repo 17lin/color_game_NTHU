@@ -14,7 +14,7 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
-var Nightmare;
+var Nightmare = 0;
 
 function init() {
     initCards();
@@ -32,22 +32,6 @@ function initCards() {
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
-            if(Nightmare = 1)
-            {
-              resetButton.style.opacity = 0;
-              if (clickedColor === pickedColor) {
-                  messageDisplay.textContent = "Correct!";
-                  resetDisplay.textContent = "Play Again"
-                  changeColors("#FFF");
-                  body.style.backgroundColor = clickedColor;
-                  resetButton.style.opacity =1;
-                  gameOver = true;
-                } else {
-                  this.style.opacity = 0;
-                  messageDisplay.textContent = "Try Again"
-                }
-            }
-            else{
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
@@ -58,7 +42,6 @@ function initCards() {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
-          }
         });
     }
 }
@@ -151,6 +134,7 @@ function Nightmare_G(){
     numCards = 6;
     Nightmare = 1;
     reset();
+    resetButton.style.opacity = 0;
 }
 
 function Failed(){
