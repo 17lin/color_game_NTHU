@@ -14,9 +14,37 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+
 function init() {
     initCards();
     reset();
+
+}
+
+function easyMode() {
+  var x = document.getElementById("hard");
+  var y = document.getElementById("easy");
+  numCards = 3;
+  x.style.color = "#484848";
+  x.style.background = "white";
+  y.style.color = "white";
+  y.style.background = "steelblue";
+  initCards();
+  reset();
+
+}
+
+function hardMode() {
+  var x = document.getElementById("hard");
+  var y = document.getElementById("easy");
+  numCards = 6;
+  y.style.color = "#484848";
+  y.style.background = "white";
+  x.style.color = "white";
+  x.style.background = "steelblue";
+  initCards();
+  reset();
+
 }
 
 function initCards() {
