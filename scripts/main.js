@@ -3,6 +3,7 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var gameMode = 0;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -18,6 +19,15 @@ function init() {
     initCards();
     reset();
 }
+
+// function initGameMode(){
+//     b1.addEventListener("click", function() {
+//         numCards=3;}
+//     b2.addEventListener("click", function() {
+//         numCards=6;}
+//     b3.addEventListener("click", function() {
+//         numCards=6;}
+// }
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
