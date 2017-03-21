@@ -33,6 +33,7 @@ body {
 	padding: 0 1rem;
 }
 
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -103,9 +104,15 @@ button {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
 	cursor: pointer;
+
 }
 
 button:hover {
     color: white;
     background-color: steelblue;
+}
+.dif {
+		padding-top: 4px;
+		padding-bottom: 4px;
+		margin-top: 0;
 }
