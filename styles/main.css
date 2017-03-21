@@ -109,3 +109,54 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+
+#easy{
+	color:white;
+	padding:5px;
+	margin-right:10px;
+	background: blue;
+}
+#easy:hover{
+	transform: scale(1.2);
+	transition: 0.3s;
+	color:yellow;
+}
+
+
+#hard{
+	color:black;
+	padding:5px;
+	margin-right:10px;
+	background: white;
+}
+#hard:hover{
+	transform: scale(1.2);
+	transition: 0.3s;
+	color:yellow;
+}
+
+#nightmare{
+	color:black;
+	padding:5px;
+	margin-right:10px;
+	background: white;
+}
+#nightmare:hover{
+		transform: scale(1.2);
+		transition: 0.3s;
+		color:yellow;
+}
+ #count{
+	 margin-left:2%;
+	 margin-top:0px;
+	 z-index: 2;
+	 display: inline-block;
+	 font-size: 30px;
+ }
+ .hide{
+	 height:0px;
+	 width:0px;
+	 background: transparent;
+	 color:transparent;
+ }
