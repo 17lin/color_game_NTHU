@@ -88,9 +88,9 @@ h1 {
     background: steelblue;
 }
 
-button {
+button.foot {
 	display: block;
-	margin: 3rem auto;
+		margin: 3rem auto;
 	padding: 1rem;
 	outline: none;
 	border: none;
@@ -105,7 +105,24 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+button.foot:hover {
     color: white;
     background-color: steelblue;
+}
+button.mode{
+display: block;
+border: none;
+	border-radius: 999rem;
+	background-color: white;
+	font-size: 1rem;
+	transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+cursor: pointer;
+}
+button.mode:hover{
+	color: blue;
+}
+button:focus{
+	font-family: 'Baloo Bhaina', cursive;
 }
