@@ -106,6 +106,6 @@ button {
 }
 
 button:hover {
-    color: white;
-    background-color: steelblue;
+    color: yellow;
+    background-color: white;
 }
