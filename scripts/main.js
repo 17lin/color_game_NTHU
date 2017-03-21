@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,11 +13,19 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+//var hardButton = document.querySelector(".mode selected");
+//var nightmareButton = document.querySelector("mode selected2");
+
+
 
 function init() {
     initCards();
+    setupMode();
     reset();
 }
+
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -43,6 +51,33 @@ function initCards() {
     }
 }
 
+
+
+resetButton.addEventListener("click", function() {
+    reset();
+})
+function setupMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Easy") {
+				numCards = 3;
+			}
+			/*else if(this.textcontent === "Hard"){
+				numCards = 6;
+			}*/
+            else{
+                numCards = 6;
+
+            }
+			reset();
+		});
+	}
+}
+
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -64,10 +99,6 @@ function reset() {
     }
     body.style.backgroundColor = "#232323";
 }
-
-resetButton.addEventListener("click", function() {
-    reset();
-})
 
 function changeColors(color) {
     //loop through all cards
