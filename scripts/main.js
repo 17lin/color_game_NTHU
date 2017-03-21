@@ -54,7 +54,7 @@ easy.onclick = function(event){
      numCards = 3;
       resetButton.style.opacity = 1;
      init();
-   this.style.background = 'blue';
+    this.style.background = 'blue';
     this.style.borderRadius= "999rem";
 }
 
@@ -63,6 +63,10 @@ easy.onmouseover = function(){
 }
 
 hard.onmouseover = function(){
+    this.style.color = 'red';
+}
+
+night.onmouseover = function(){
     this.style.color = 'red';
 }
 
