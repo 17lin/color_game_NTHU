@@ -15,6 +15,9 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 var modeButtons = document.querySelectorAll(".mode-button");
+var mode = 0;
+var count = 5;
+var counterId = 0;
 
 function init() {
     initModeButtons();
@@ -25,12 +28,24 @@ function init() {
 function initModeButtons() {
   modeButtons[0].addEventListener("click", function() {
     numCards = 3;
+    mode = 0;
+    if (counterId != 0) {
+      clearInterval(counterId);
+    }
   })
   modeButtons[1].addEventListener("click", function() {
     numCards = 6;
+    mode = 1;
+    if (counterId != 0) {
+      clearInterval(counterId);
+    }
   })
   modeButtons[2].addEventListener("click", function() {
     numCards = 6;
+    mode = 2;
+    if (counterId == 0) {
+      counterId = setInterval(countDown, 1000);
+    }
   })
   for (var i=0; i<modeButtons.length; i++) {
     modeButtons[i].addEventListener("click", function() {
@@ -81,6 +96,10 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+    count = 5;
+    if (mode == 2) {
+      messageDisplay.textContent += " " + count;
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -97,6 +116,13 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+function countDown() {
+  if (count > 0) {
+    count--;
+  }
+  messageDisplay.textContent = "What's the Color? " + count;
+}
 
 function changeColors(color) {
     //loop through all cards
