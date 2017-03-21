@@ -5,7 +5,8 @@ window.onload = function() {
 var numCards = 3;
 var mode; 
 var time;
-var id; // id for setInterval
+var id, idBlink; // id for setInterval
+var blink = false;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -79,8 +80,9 @@ function reset() {
 		id = setInterval(function() {
 			if(time>0) {
 				timer.textContent = time;
+				body.style.backgroundColor = "white";
+				blink = true;
 				time--;
-			
 			} else {
 				stopTimer();
 				messageDisplay.textContent = "timeout!";
@@ -89,6 +91,14 @@ function reset() {
 				gameOver = true;
 			}
 		}, 1000);
+		idBlink = setInterval(function() {
+			if(blink) {
+				body.style.backgroundColor = "white";
+				blink = false;
+			} else {
+				body.style.backgroundColor = "black";
+			}
+		}, 100)
 	}
 }
 
@@ -96,7 +106,9 @@ function stopTimer( ) {
 	timer.textContent = "";
 	resetButton.style.display = "block";
 	clearInterval(id);
+	clearInterval(idBlink);
 } 
+
 resetButton.addEventListener("click", function() {
     reset();
 })
