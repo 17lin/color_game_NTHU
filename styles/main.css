@@ -131,7 +131,14 @@ button:hover {
     background-color: steelblue;
 }
 #countdown{
-    font-size: 200%;
     text-align: center;
     color: red;
+}
+.active{
+    color: white;
+    background-color: red;
+}
+.deactive{
+    color: black;
+    background-color: lightblue;
 }

@@ -22,6 +22,14 @@ var resetDisplay = document.querySelector("#reset span");
 var countdownnumber=5;
 var countdownid,x;
 function init() {
+    var temp = document.getElementById('ez');
+    temp.className=' active';
+    var classes = temp.className.split(' ');
+    console.log(classes);
+    var temp = document.getElementById('hard');
+    temp.className=' deactive';
+    var temp = document.getElementById('nightmare');
+    temp.className=' deactive';
     numCards = 3;
     reset();
     initCards();
@@ -29,6 +37,7 @@ function init() {
     ezDisplay.textContent="Selected";
     hardDisplay.textContent="hard";
     nightmareDisplay.textContent="nightmare";
+    resetButton.style.visibility="visible";
 }
 function init2() {
     numCards = 6;
@@ -39,13 +48,14 @@ function init2() {
     ezDisplay.textContent="easy";
     hardDisplay.textContent="Selected";
     nightmareDisplay.textContent="nightmare";
+    resetButton.style.visibility="visible";
 }
 function init3() {
     numCards = 6;
     resetButton.style.visibility="hidden";
     reset();
     initCards();
-    initial();
+    
     x.style.display="inline";
     ezDisplay.textContent="easy";
     hardDisplay.textContent="hard";
@@ -56,12 +66,29 @@ resetButton.addEventListener("click", function() {
 })
 ezButton.addEventListener("click", function() {
     init();
+    
 })
 hardButton.addEventListener("click", function() {
     init2();
+    var temp = document.getElementById('hard');
+    temp.className=' active';
+    var classes = temp.className.split(' ');
+    console.log(classes);
+    var temp = document.getElementById('ez');
+    temp.className=' deactive';
+    var temp = document.getElementById('nightmare');
+    temp.className=' deactive';
 })
 nightmareButton.addEventListener("click", function() {
     init3();
+    var temp = document.getElementById('nightmare');
+    temp.className=' active';
+    var classes = temp.className.split(' ');
+    console.log(classes);
+    var temp = document.getElementById('ez');
+    temp.className=' deactive';
+    var temp = document.getElementById('hard');
+    temp.className=' deactive';
 })
 
 function initCards() {
@@ -92,6 +119,7 @@ function initCards() {
 function reset() {
     clearInterval(countdownid);
     countdownnumber=5;
+    initial();
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -163,7 +191,7 @@ function initial(){
 function countdownfunc(){
   x.innerHTML=countdownnumber;
   while (countdownnumber==0){
-    x.innerHTML="Time's up";
+    x.innerHTML="Time out";
     body.style.backgroundColor = pickedColor;
     changeColors("#FFF");
     clearInterval(countdownid);
