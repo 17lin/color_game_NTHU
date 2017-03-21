@@ -68,24 +68,27 @@ function initCards() {
                 clearInterval(countnum);
                 count=5;
                 messageDisplay.textContent = "Correct!";
+                resetButton.style.display= "block";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                if(btnnight.style.background == 'red'&&count<6)messageDisplay.textContent = "Try Again " + count ;
+                else {
+                  messageDisplay.textContent = "Try Again "
+                  resetButton.style.display= "block";
+                }
             }
         });
     }
 }
-var blink;
 function reset() {
   count=6;
   if(btnnight.style.background == 'red'){
     countnum=setInterval(countdown,1000);
   }
-  blink=setInterval(blin,1000);
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -94,6 +97,7 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+    resetButton.style.display= "block";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -146,16 +150,15 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
-function blin(){
-  var origincolor=body.style.backgroundColor;
-  body.style.backgroundColor = 'white';
-  body.style.backgroundColor = origincolor;
-}
+
+var blin;
 function countdown(){
   if(count>1){
     count=count-1;
     if(btnnight.style.background == 'red')messageDisplay.textContent= "What's the color? "+count;
     else h2.textContent= "";
+    resetButton.style.display= "none";
+    blink();
   }else{
     messageDisplay.textContent= "TIMEOUT!";
     count=5;
@@ -164,5 +167,14 @@ function countdown(){
     body.style.backgroundColor = pickedColor;
     gameOver = true;
     clearInterval(countnum);
+    resetButton.style.display= "block";
   }
+}
+function  blink() {
+    body.style.backgroundColor="white";
+    blin=setInterval(rebg,100);
+}
+function rebg(){
+  body.style.backgroundColor="black";
+  clearInterval(blin);
 }
