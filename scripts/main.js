@@ -14,6 +14,13 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var f1=0, f2=1, f3=1;
+
+var countdownid;
+var t = document.getElementById("countdown");
+var countdownnumber=5;
+
+var flag = 0;
 
 function init() {
     initCards();
@@ -21,30 +28,138 @@ function init() {
 
 }
 
+function a1(x) {
+  if(f1){
+    x.style.color = "red";
+  }
+}
+
+function b1(x) {
+  if(f1){
+    x.style.color = "#484848";
+  }
+}
+
+function a2(x) {
+  if(f2){
+    x.style.color = "red";
+  }
+}
+
+function b2(x) {
+  if(f2){
+    x.style.color = "#484848";
+  }
+}
+
+function a3(x) {
+  if(f3){
+    x.style.color = "red";
+  }
+}
+
+function b3(x) {
+  if(f3){
+    x.style.color = "#484848";
+  }
+}
+
 function easyMode() {
-  var x = document.getElementById("hard");
-  var y = document.getElementById("easy");
+  var x = document.getElementById("easy");
+  var y = document.getElementById("hard");
+  var z = document.getElementById("nightmare");
   numCards = 3;
-  x.style.color = "#484848";
-  x.style.background = "white";
-  y.style.color = "white";
-  y.style.background = "steelblue";
+  f1=0;
+  f2=1;
+  f3=1;
+  x.style.color = "white";
+  x.style.background = "steelblue";
+  y.style.color = "#484848";
+  y.style.background = "white";
+  z.style.color = "#484848";
+  z.style.background = "white";
+  t.style.display="none";
+  resetButton.style.display="";
+
+  flag = 0;
+  clearInterval(countdownid);
+
   initCards();
   reset();
 
 }
 
 function hardMode() {
-  var x = document.getElementById("hard");
-  var y = document.getElementById("easy");
+  var x = document.getElementById("easy");
+  var y = document.getElementById("hard");
+  var z = document.getElementById("nightmare");
   numCards = 6;
-  y.style.color = "#484848";
-  y.style.background = "white";
-  x.style.color = "white";
-  x.style.background = "steelblue";
+  f1=1;
+  f2=0;
+  f3=1;
+  x.style.color = "#484848";
+  x.style.background = "white";
+  y.style.color = "white";
+  y.style.background = "steelblue";
+  z.style.color = "#484848";
+  z.style.background = "white";
+  t.style.display="none";
+  resetButton.style.display="";
+
+  flag = 0;
+  clearInterval(countdownid);
+
   initCards();
   reset();
 
+}
+
+function nightMode() {
+  flag = 1;
+  var x = document.getElementById("easy");
+  var y = document.getElementById("hard");
+  var z = document.getElementById("nightmare");
+  numCards = 6;
+  f1=1;
+  f2=1;
+  f3=0;
+  x.style.color = "#484848";
+  x.style.background = "white";
+  y.style.color = "#484848";
+  y.style.background = "white";
+  z.style.color = "white";
+  z.style.background = "steelblue";
+
+  clearInterval(countdownid);
+  t.style.display="";
+  resetButton.style.display="none";
+  countdownnumber = 5;
+  t.innerHTML=countdownnumber;
+  countdownnumber--;
+  countdownid=window.setInterval(countdownfunc, 1000);
+
+  initCards();
+  reset();
+}
+
+function countdownfunc(){
+  t.innerHTML=countdownnumber;
+  if (countdownnumber==0){
+    clearInterval(countdownid);
+    timeOut();
+  }
+  countdownnumber--;
+}
+
+function timeOut() {
+  t.innerHTML="TIME OUT!"
+
+  messageDisplay.textContent = "";
+  resetButton.style.display="";
+  resetDisplay.textContent = "Play Again"
+  changeColors("#FFF");
+  body.style.backgroundColor = pickedColor;
+  gameOver = true;
 }
 
 function initCards() {
@@ -59,7 +174,9 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
+                resetDisplay.textContent = "Play Again";
+                resetButton.style.display="";
+                clearInterval(countdownid);
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -78,7 +195,7 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "New Color";
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -94,7 +211,12 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
+  if(flag){
+    nightMode();
+  }
+  else{
     reset();
+  }
 })
 
 function changeColors(color) {

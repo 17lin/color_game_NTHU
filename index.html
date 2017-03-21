@@ -17,15 +17,15 @@
 		<div id="navbar" class="container">
 			<span id="brand" href="#">Color Game</span>
 			<span>
-				<button id="easy" class="mode" onclick="easyMode()" type="button">Easy</button>
-				<button id="hard" class="mode" onclick="hardMode()" type="button">Hard</button>
-				<button id="nightmare" class="mode">Nightmare</button>
+				<button id="easy" class="mode" onclick="easyMode()" type="button" onmouseover="a1(this)" onmouseout="b1(this)">Easy</button>
+				<button id="hard" class="mode" onclick="hardMode()" type="button" onmouseover="a2(this)" onmouseout="b2(this)">Hard</button>
+				<button id="nightmare" class="mode" onclick="nightMode()" type="button" onmouseover="a3(this)" onmouseout="b3(this)">Nightmare</button>
 			</span>
 			<span href="#" id="about">DataLab</span>
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id="countdown"> </span> </h1>
 
 	<div id="card-container" class="container">
 		<div class="card"></div>
