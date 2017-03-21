@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,9 +14,43 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var modeeasy = document.querySelector("#mode-easy");
+var modehard = document.querySelector("#mode-hard");
+var modenight = document.querySelector("#mode-night");
+var count;
+
 function init() {
+    numCards = 3;
     initCards();
     reset();
+    modeeasy.addEventListener("click", function(){
+        numCards = 3;
+        modeeasy.style.backgroundColor = 'pink';
+        modehard.style.backgroundColor = 'transparent';
+        modenight.style.backgroundColor = 'transparent';
+        initCards();
+        reset();
+    });
+    modehard.addEventListener("click", function(){
+        numCards = 6;
+        modehard.style.backgroundColor = 'pink';
+        modeeasy.style.backgroundColor = 'transparent';
+        modenight.style.backgroundColor = 'transparent';
+        initCards();
+        reset();
+    });
+    modenight.addEventListener("click", function(){
+        nightmode();
+        modenight.style.backgroundColor = 'pink';
+        modeeasy.style.backgroundColor = 'transparent';
+        modehard.style.backgroundColor = 'transparent';
+    });
+}
+
+function nightmode(){
+    numCards = 6;
+    initCardsNight();
+    resetNight();
 }
 
 function initCards() {
@@ -35,6 +69,31 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+            } else {
+                this.style.opacity = 0;
+                messageDisplay.textContent = "Try Again"
+            }
+        });
+    }
+}
+
+function initCardsNight() {
+    for (var i = 0; i < cards.length; i++) {
+        //add click listeners to cards
+        cards[i].addEventListener("click", function() {
+            if (gameOver)
+                return;
+            //grab color of clicked card
+            var clickedColor = this.style.backgroundColor;
+            // alert(this.style.backgroundColor);
+            //compare color to pickedColor
+            if (clickedColor === pickedColor) {
+                messageDisplay.textContent = "Correct!";
+                resetDisplay.textContent = "Play Again"
+                changeColors("#FFF");
+                body.style.backgroundColor = clickedColor;
+                gameOver = true;
+                clearTimeout(master);
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -63,6 +122,48 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+}
+
+function resetNight() {
+    gameOver = false;
+    colors = generateRandomColors(numCards);
+    //pick a new random color from array
+    pickedColor = pickColor();
+    //change colorDisplay to match picked Color
+    colorDisplay.textContent = pickedColor;
+    resetDisplay.textContent = "New Color";
+    //messageDisplay.textContent = "What's the Color?"+ count;
+    count = 5;
+    startTimer();
+
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].style.opacity = 1;
+        if (colors[i]) {
+            cards[i].style.display = "block"
+            cards[i].style.backgroundColor = colors[i];
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+    body.style.backgroundColor = "#232323";
+}
+
+function startTimer(){
+    messageDisplay.textContent = "What's the Color?  "+ count;
+    master = setTimeout("startTimer()",1000);
+    count--;
+    if (count===-1){
+        clearTimeout(master);
+        timeOut();
+    }
+}
+
+function timeOut() {
+    messageDisplay.textContent = "Time Out!";
+    resetDisplay.textContent = "Play Again"
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
 }
 
 resetButton.addEventListener("click", function() {
