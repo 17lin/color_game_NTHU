@@ -33,6 +33,16 @@ body {
 	padding: 0 1rem;
 }
 
+.mode{
+	/*font-weight: bold;*/
+}
+.mode:hover{
+/*color:rgb(113, 162, 255)*/
+}
+
+
+
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -88,6 +98,7 @@ h1 {
     background: steelblue;
 }
 
+
 button {
 	display: block;
 	margin: 3rem auto;
@@ -108,4 +119,9 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+button.mode {
+	margin:0rem;
+	padding:0rem 1rem;
 }

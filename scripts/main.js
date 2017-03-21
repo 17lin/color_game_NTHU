@@ -14,9 +14,53 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var mode = document.querySelector(".mode");
+var easy = document.querySelector("#easy");
+var hard = document.querySelector("#hard");
+var nightmare = document.querySelector("#nightmare");
+var count = document.getElementById("countdown");
+
 function init() {
+    initModes();
     initCards();
     reset();
+}
+
+function initModes() {
+    //add click listeners to modes
+    easy.addEventListener("click", function() {
+        easy.classList.add('selected');
+        hard.classList.remove('selected');
+        nightmare.classList.remove('selected');
+        numCards = 3;
+        initCards();
+        reset();
+    });
+    hard.addEventListener("click", function() {
+        hard.classList.add('selected');
+        easy.classList.remove('selected');
+        nightmare.classList.remove('selected');
+        numCards = 6;
+        initCards();
+        reset();
+    });
+
+    nightmare.addEventListener("click", function() {
+        nightmare.classList.add('selected');
+        easy.classList.remove('selected');
+        hard.classList.remove('selected');
+        numCards = 6;
+        var now = new Date().getSeconds();
+        var start = now + 5;
+        var id = setInterval(tick(start), 1000);
+        initCards();
+        reset();
+    });
+}
+
+function tick(start) {
+  var  distance = start - new Date().getSeconds();;
+    countdown.innerHTML = distance;
 }
 
 function initCards() {
@@ -25,6 +69,7 @@ function initCards() {
         cards[i].addEventListener("click", function() {
             if (gameOver)
                 return;
+
             //grab color of clicked card
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
