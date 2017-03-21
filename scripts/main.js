@@ -69,7 +69,7 @@ function count2() {
 }
 
 function count1() {
-  
+
     messageDisplay.textContent = "time out wahaha";
     changeColors("#FFF");
     body.style.backgroundColor = pickedColor;
@@ -152,6 +152,7 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                clearTimeout(count);
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
