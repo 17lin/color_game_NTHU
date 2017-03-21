@@ -88,7 +88,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+button:not(.set-mode) {
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -108,4 +108,13 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+button .set-mode {
+	display: inline;
+}
+
+button .set-mode:hover {
+	color: steelblue;
+	background-color: white;
 }
