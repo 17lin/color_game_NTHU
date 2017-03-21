@@ -1,5 +1,5 @@
 window.onload = function() {
-  //  a.style.visibility=hidden;
+
     init();
 };
 var s=5;
@@ -11,14 +11,14 @@ var pickedColor;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
-// var a=document.getElementById("reset");
+ var a=document.getElementById("reset");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
 function init() {
-    // resetButton.style.display=none;
+    //  resetButton.style.display=none;
 
     initCards();
     reset();
@@ -53,10 +53,12 @@ function second(){
     messageDisplay.textContent = "What's the Color?"+s;
     if(s==0){
          s=5;
+
          messageDisplay.textContent = "Time Out";
          changeColors("#FFF");
          body.style.backgroundColor = pickedColor;
          gameOver = true;
+           a.style.display="block";
         //  resetButton.style.display=block;
          clearInterval(countdownid);
 
@@ -64,6 +66,7 @@ function second(){
 }
 
 function reset() {
+    a.style.display="none";
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
