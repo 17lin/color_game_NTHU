@@ -1,7 +1,16 @@
 window.onload = function() {
     init();
 };
-
+//my code
+var user = {
+          time: 5,
+          greet2: function() {
+        this.time= }
+        };
+          greet: function() {
+console.log(this.time); }
+        };
+        setInterval(user.greet, 1000);
 var numCards = 3;
 var gameOver = false;
 var colors = [];
