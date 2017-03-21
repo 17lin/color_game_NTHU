@@ -13,9 +13,16 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var modeButtons = document.querySelectorAll(".mode");
+var easyButton = document.querySelector(".mode");
+var countdownnum = 5;
+var countdownid;
 
 function init() {
+    changebackground();
+    setupMode();
     initCards();
+    // countdown();
     reset();
 }
 
@@ -50,7 +57,7 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "New Color";
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -77,6 +84,20 @@ function changeColors(color) {
         cards[i].style.backgroundColor = color;
     }
 }
+function changebackground() {
+    x = 1;
+    setInterval(change, 1000);
+}
+function change() {
+    if (x === 1) {
+        x = 2;
+        color = "#232323";
+    } else {
+        color = "black";
+        x = 1;
+    }
+    body.style.backgroundColor = color;
+}
 
 function pickColor() {
     var random = Math.floor(Math.random() * colors.length);
@@ -95,6 +116,28 @@ function generateRandomColors(num) {
     return arr;
 }
 
+function setupMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Hard") {
+				numCards = 6;
+			}
+			else if(this.textContent == "Nightmare"){
+				numCards = 9;
+        // countdown();
+			}
+      else{
+        numCards = 3;
+      }
+			reset();
+		});
+	}
+}
+
 function randomColor() {
     //pick a "red" from 0 - 255
     var r = Math.floor(Math.random() * 256);
@@ -104,3 +147,19 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+// function countdown() {
+//           var x=document.getElementById("countdown");
+//           x.innerHTML=countdownnumber;
+//           if (countdownnumber == 0){
+//             messageDisplay.textContent = Time Out;
+//             clearTimeout(countdownid);
+//           }else{
+//             countdownnumber--;
+//
+//             if(countdownid){
+//               clearTimeout(countdownid);
+//             }
+//             countdownid=setTimeout(countdownfunc,1000);
+//           }
+//         }
