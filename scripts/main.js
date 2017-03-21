@@ -63,6 +63,9 @@ function reset() {
       counter--;
       timer = setInterval(myTimer, 1000);
     }
+	else{
+		
+	}
 
     gameOver = false;
     colors = generateRandomColors(numCards);
@@ -87,7 +90,8 @@ function reset() {
 
 resetButton.addEventListener("click", function() {
     reset();
-    this.style.display = "none";
+	if(gameMode == 2)
+		this.style.display = "none";
 })
 easyButton.addEventListener("mouseenter", function(){
   if(gameMode != 0){
