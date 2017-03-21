@@ -32,7 +32,45 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
-
+#easy{
+	/*margin-left: 1rem;*/
+	color: black;
+	font-weight: bold;
+	border-radius: 999rem;
+	margin:0;
+	padding:0 1rem;
+	height:24px;
+}
+#hard{
+	/*margin-left: 1rem;*/
+	color: black;
+	border-radius: 999rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 1rem;
+	height:24px;
+}
+#nightmare{
+	/*margin-left: 1rem;*/
+	color: black;
+	border-radius: 999rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 1rem;
+	height:24px;
+}
+#hard:hover{
+	color: steelblue;
+	background-color: white;
+}
+#easy:hover{
+	color: steelblue;
+	background-color: white;
+}
+#nightmare:hover{
+	color: steelblue;
+	background-color: white;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
