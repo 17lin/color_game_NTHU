@@ -20,6 +20,8 @@ var nmButton = document.querySelector('#nightmare');
 var timerDisplay = document.querySelector('#timer');
 var time;
 var myTimer;
+var on;
+var off;
 
 function changeEasy(){
     if(gameMod !== 0){
@@ -80,6 +82,7 @@ function changeNM(){
 		time = 5;
 		timerDisplay.textContent = time;
 		myTimer = setInterval(my_func, 1000);
+        blinking();
 
 	    numCards = 6;
 	    gameMod = 2;
@@ -212,5 +215,19 @@ function timeout(){
 	messageDisplay.textContent = "TIMEOUT!";
 	clearInterval(myTimer);
 	gameOver = true;
+    clearInterval(on);
+    clearInterval(off);
 }
 
+function blinking(){
+    on = setInterval(turn_on, 1000);
+}
+
+function turn_on(){
+    body.style.backgroundColor = '#FFFFFF';
+    setTimeout(turn_off, 50);
+}
+
+function turn_off(){
+    body.style.backgroundColor = '#232323';
+}
