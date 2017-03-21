@@ -60,15 +60,12 @@ body {
 	height:24px;
 }
 #hard:hover{
-	color: steelblue;
 	background-color: white;
 }
 #easy:hover{
-	color: steelblue;
 	background-color: white;
 }
 #nightmare:hover{
-	color: steelblue;
 	background-color: white;
 }
 #about {
