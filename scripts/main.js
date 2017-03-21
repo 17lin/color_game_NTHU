@@ -7,12 +7,15 @@ var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
-var cards = document.querySelectorAll(".card");
+var cards = document.querySelectorAll(".card,.card2");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easy = document.querySelector("#easy");
+var hard = document.querySelector("#hard");
+var nightmare = document.querySelector("#nightmare");
 
 function init() {
     initCards();
@@ -70,22 +73,31 @@ resetButton.addEventListener("click", function() {
 })
 
 easy.addEventListener("click",function(){
-  document.getElementById("easy").className="easy"
-  document.getElementById("hard").className=
-  document.getElementById("nightmare").className=
+  document.getElementById("easy").className="easymode";
+  document.getElementById("hard").className="hardmode";
+  document.getElementById("nightmare").className="hardmode";
+  ocument.getElementById("hardcard").style.display="none";
   numCards=3;
   reset();
 })
 
 hard.addEventListener("click", function(){
-  document.getElementById("easy").className=
-  document.getElementById("hard").className=
-  document.getElementById("nightmare").className=
   document.getElementById("hardcard").style.display="block";
+  document.getElementById("hard").className="easymode";
+  document.getElementById("easy").className="hardmode";
+  document.getElementById("nightmare").className="hardmode";
   numCards = 6;
   reset();
 })
 
+nightmare.addEventListener("click", function() {
+  document.getElementById("hardcard").style.display="block";
+  document.getElementById("nightmare").className="easymode";
+  document.getElementById("easy").className="hardmode";
+  document.getElementById("hard").className="hardmode";
+  numCards =6;
+  reset();
+})
 
 
 function changeColors(color) {
