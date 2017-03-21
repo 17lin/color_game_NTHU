@@ -11,14 +11,12 @@ var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
+var timerDisplay = document.querySelector("#timer");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var timer;
-var sec;
-var secp;
-startday = new Date();
-clockStart = startday.getTime();
+var timerID;
+var timer = 5;
 
 function init() {
     initCards();
@@ -47,9 +45,6 @@ function difficult2(){
     if(difficult !== 2){
       difficult = 2;
       numCards = 6;
-      sec = setInterval(tick, 1000);
-      secp = sec;
-      timer = secp + 5 - sec;
       changefontcolor();
       init();
     }
@@ -73,9 +68,6 @@ function changefontcolor(){
   }
 }
 
-function tick() {
-console.log(new Date().getSeconds());
-}
 
 
 function initCards() {
@@ -90,11 +82,17 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
+                resetButton.style.display = "block";
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
-            } else {
+                if(difficult == 2){
+                  clearInterval(timerID);
+                  timerDisplay.style.display = "none";
+                }
+            } 
+            else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
@@ -104,19 +102,26 @@ function initCards() {
 
 function reset() {
     gameOver = false;
+    timer = 5;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
-    //if(difficult != 2)
-    messageDisplay.textContent = "What's the Color?";
-    /*if(difficult == 2){
-      getSecs()
-      messageDisplay.textContent = "What's the Color?"+mySecs1; //將倒數時間顯示在頁面空隔中
-      window.setTimeout('getSecs()',1000); //每1秒重新執行一次
-    }*/
+    if(difficult != 2){
+      messageDisplay.textContent = "What's the Color?";
+      resetButton.style.display = "block";
+      timerDisplay.style.display = "none";
+      clearInterval(timerID);
+    }
+    if(difficult == 2){
+        messageDisplay.textContent = "What's the Color?";
+        timerDisplay.style.display = "block";
+        resetButton.style.display = "none";
+        timerDisplay.textContent = timer.toString();
+        timerID = setInterval(changeTimer, 1000);
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -130,22 +135,27 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
-/*function initStopwatch()
-{
-var myTime = new Date();
-var timeNow = myTime.getTime();
-var timeDiff = timeNow - clockStart; //現在的時間和起始的時間相減得到已經過的時間
-this.diffSecs = timeDiff/1000; //除以1000就是秒
-return(this.diffSecs); //將差異秒數回傳給getSecs函數
+function changeTimer(){
+    if(timer !== 1){
+      timer--;
+      timerDisplay.textContent = timer.toString();
+
+      console.log(timer.toString());
+    }
+    else{
+      clearInterval(timerID);
+      timerDisplay.style.display = "none";
+      messageDisplay.textContent = "Time out!";
+      resetButton.style.display = "block";
+      resetDisplay.textContent = "Play Again";
+      changeColors("#FFF");
+      body.style.backgroundColor = pickedColor;
+      gameOver = true;
+      console.log(timer.toString());
+    }
+
 }
-function getSecs()
-{
-var mySecs = initStopwatch();
-var mySecs1 = ""+mySecs; //將數字變成文字
-mySecs1= 5 - eval(mySecs1.substring(0,mySecs1.indexOf("."))) + "秒"; //算出倒數的時間
-//messageDisplay.textContent = "What's the Color?"+mySecs1; //將倒數時間顯示在頁面空隔中
-//window.setTimeout('getSecs()',1000); //每1秒重新執行一次
-}*/
+
 
 resetButton.addEventListener("click", function() {
     reset();
