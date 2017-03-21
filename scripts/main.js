@@ -14,6 +14,27 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+function easymode(){
+  numCards=3;
+  init();
+}
+
+function hardmode(){
+  numCards = 6;
+  init();
+}
+
+function nightmaremode(){
+  numCards = 6;
+
+  init();
+  settime();
+  tick();
+  var id = setInterval(tick, 1000)
+  if(gameOver===true){
+
+  }
+}
 function init() {
     initCards();
     reset();
@@ -68,7 +89,15 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
-
+easyButton.addEventListener("click", function(){
+    easymode();
+})
+hardButton.addEventListener("click", function(){
+    hardmode();
+})
+nightmareButton.addEventListener("click", function(){
+    nightmaremode();
+})
 function changeColors(color) {
     //loop through all cards
     for (var i = 0; i < cards.length; i++) {
@@ -103,4 +132,28 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function tick() {
+  console.log(new Date().getSeconds());
+}
+
+var id = setInterval(tick, 1000);
+var countdownnumber=5;
+var countdownid,x;
+function settime(){
+  x=document.getElementById("countdown");
+  x.innerHTML=countdownnumber;
+  countdownnumber--;
+  countdownid=window.setInterval(countdownfunc,1000);
+}
+function countdownfunc(){
+  x.innerHTML=countdownnumber;
+  if (countdownnumber==0){
+    x.innerHTML='timeout';
+    changeColors("#FFF");
+    gameOver = true;
+    clearInterval(countdownid);
+  }
+  countdownnumber--;
 }
