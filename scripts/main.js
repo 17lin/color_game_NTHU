@@ -31,6 +31,7 @@ function initModeButtons() {
     mode = 0;
     if (counterId != 0) {
       clearInterval(counterId);
+      counterId = 0;
     }
   })
   modeButtons[1].addEventListener("click", function() {
@@ -38,6 +39,7 @@ function initModeButtons() {
     mode = 1;
     if (counterId != 0) {
       clearInterval(counterId);
+      counterId = 0;
     }
   })
   modeButtons[2].addEventListener("click", function() {
@@ -118,10 +120,16 @@ resetButton.addEventListener("click", function() {
 })
 
 function countDown() {
-  if (count > 0) {
+  if (count > 1) {
     count--;
+    messageDisplay.textContent = "What's the Color? " + count;
+  } else {
+    messageDisplay.textContent = "TIMEOUT!";
+    resetDisplay.textContent = "Play Again"
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
   }
-  messageDisplay.textContent = "What's the Color? " + count;
 }
 
 function changeColors(color) {
