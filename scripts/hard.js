@@ -14,16 +14,12 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
-var timeout=5000;
-var t=5;
 
 
 function init() {
     initCards();
     reset();
-    if(t!=0){
-      showTime();
-    }
+  
 
 }
 
@@ -111,28 +107,4 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
-}
-
-function showTime()
-{
-    t -= 1;
-    if(t<0){
-      t=0;
-    }
-
-    if(t==0)
-    {
-      document.getElementById('div1').innerHTML= " ";
-      messageDisplay.textContent = "Time out";
-      body.style.backgroundColor = pickedColor;
-      t=0;
-      document.getElementById('reset').style.display = "none";
-      changeColors("#FFF");
-      gameOver = true;
-    }
-    else{
-      document.getElementById('div1').innerHTML= t;
-      document.getElementById('reset').style.display = "none";
-      setTimeout("showTime()",1000);
-    }
 }
