@@ -39,12 +39,6 @@ body {
 	color: #CCC;
 	display: flex;
 }
-}
-#easy:hover , #hard:hover{
-	color:black;
-}
-
-
 #about {
 	margin-left: auto;
 	color: #bbb;

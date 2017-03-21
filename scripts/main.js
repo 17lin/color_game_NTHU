@@ -34,6 +34,18 @@ function initbtn(){
       hard.style.backgroundColor = "steelblue";
       easy.style.backgroundColor = "white";
     });
+    easy.addEventListener("mouseenter",function(){
+      easy.style.color = "black";
+    });
+    hard.addEventListener("mouseenter",function(){
+      hard.style.color = "black";
+    });
+    easy.addEventListener("mouseleave",function(){
+      easy.style.color = "#CCC";
+    });
+    hard.addEventListener("mouseleave",function(){
+      hard.style.color = "#CCC";
+    })
 }
 function initCards() {
 
