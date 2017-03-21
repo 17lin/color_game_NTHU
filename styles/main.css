@@ -109,3 +109,12 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+#Easy, #Hard, #Nightmare{
+	margin: 0;
+	padding: 0 1rem;
+}
+#Easy:hover, #Hard:hover, #Nightmare:hover{
+	color: steelblue;
+	background-color: #ffffff;
+}
