@@ -160,9 +160,9 @@ function initCardsNightmare() {
     clearInterval(myvar);
     count.textContent = 5;
     var myvar = setInterval(myfunc, 1000);
-
+    var countNum = 5;
     function myfunc(){
-      var countNum = count.textContent;
+
       countNum--;
       count.textContent = countNum;
       if(countNum === 0){
