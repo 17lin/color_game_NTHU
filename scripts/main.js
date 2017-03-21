@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,7 +13,9 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
+var Mode_button=document.querySelectorAll(".mode_select");
+var count=5;
+var mode=1;//simple:1 hard:2 nightmare:3
 function init() {
     initCards();
     reset();
@@ -41,22 +43,71 @@ function initCards() {
             }
         });
     }
+    for(var i=0; i<Mode_button.length; i++){
+       Mode_button[i].addEventListener("click", function(){
+          if(this===Mode_button[0]){
+            mode=1;
+            this.style.backgroundColor= "rgb(252,73,124)";
+            this.style.color="white";
+            Mode_button[1].style.backgroundColor="white";
+            Mode_button[2].style.backgroundColor="white";
+            Mode_button[1].style.color= "rgb(252,73,124)";
+            Mode_button[2].style.color= "rgb(252,73,124)";
+            reset();
+          }else if(this==Mode_button[1]){
+            mode=2;
+            this.style.backgroundColor= "rgb(252,73,124)";
+            this.style.color="white";
+            Mode_button[0].style.backgroundColor="white";
+            Mode_button[2].style.backgroundColor="white";
+            Mode_button[0].style.color= "rgb(252,73,124)";
+            Mode_button[2].style.color= "rgb(252,73,124)";
+            reset();
+          }else if(this==Mode_button[2]){
+            mode=3;
+            this.style.backgroundColor= "rgb(252,73,124)";
+            this.style.color="white";
+            Mode_button[0].style.backgroundColor="white";
+            Mode_button[1].style.backgroundColor="white";
+            Mode_button[0].style.color= "rgb(252,73,124)";
+            Mode_button[1].style.color= "rgb(252,73,124)";
+            reset();
+          }
+          modeDisplay();
+       });
+    }
 }
 
 function reset() {
     gameOver = false;
-    colors = generateRandomColors(numCards);
+    if(mode===1)
+      colors = generateRandomColors(3);
+    else
+      colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
+    for (var i = 0; i < Mode_button.length; i++) {
+      if(i==mode-1){
+        Mode_button[i].style.backgroundColor= "rgb(252,73,124)";
+        Mode_button[i].style.color="white";
+      }else{
+        Mode_button[i].style.color= "rgb(252,73,124)";
+        Mode_button[i].style.backgroundColor="white";
+      }
+
+    }
     //change colorDisplay to match picked Color
+
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+
+
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
-        cards[i].style.opacity = 1;
+
         if (colors[i]) {
-            cards[i].style.display = "block"
+            cards[i].style.display = "block";
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
