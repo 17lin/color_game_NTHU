@@ -16,6 +16,21 @@ body {
     -moz-transition: background 0.6s;
 }
 
+.blink {
+	-webkit-animation: example 1s infinite;
+	animation: example 1s infinite;
+}
+
+@-webkit-keyframes example {
+    0%   {opacity: 0.9;}
+    5%   {opacity: 1.0;}
+}
+
+@keyframes example {
+		0%   {opacity: 0.9;}
+		5%   {opacity: 1.0;}
+}
+
 #stripe {
 	background: white;
 	padding: 1rem;

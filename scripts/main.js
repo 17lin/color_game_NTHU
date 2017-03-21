@@ -70,6 +70,7 @@ function initCards() {
                 resetButton.style.display = '';
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                body.className = '';
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -85,6 +86,7 @@ function initNightmare() {
     clearInterval(interval);
     countdown.textContent = '5';
     countdown.style.display = '';
+    body.className = 'blink';
     interval = setInterval(function() {
         time -= 1;
         countdown.textContent = time;
@@ -96,6 +98,7 @@ function initNightmare() {
             resetButton.style.display = '';
             changeColors("#FFF");
             body.style.backgroundColor = pickedColor;
+            body.className = '';
             gameOver = true;
 
         }
