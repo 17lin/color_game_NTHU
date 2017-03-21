@@ -29,8 +29,30 @@ body {
 }
 
 #brand {
+	display: inline-block;
 	font-weight: bold;
 	padding: 0 1rem;
+}
+
+#easy {
+	display: inline-block;
+	font-weight: bold;
+	padding: 0 1rem;
+	margin: 0;
+}
+
+#hard {
+	display: inline-block;
+	font-weight: bold;
+	padding: 0 1rem;
+	margin: 0;
+}
+
+#nightmare {
+	display: inline-block;
+	font-weight: bold;
+	padding: 0 1rem;
+	margin: 0;
 }
 
 #about {
@@ -44,7 +66,17 @@ body {
     max-width: 520px;
 }
 
+.container2 {
+	
+}
+
 #card-container::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+#card-container2::after {
 	content: "";
 	display: block;
 	clear: both;
@@ -108,4 +140,8 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+.focus:focus {
+		color: steelblue;
 }

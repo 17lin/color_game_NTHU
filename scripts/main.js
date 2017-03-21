@@ -13,6 +13,9 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
 
 function init() {
     initCards();
@@ -65,6 +68,15 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+easyButton.addEventListener("click", function() {
+    reset();
+})
+hardButton.addEventListener("click", function() {
+    reset();
+})
+nightmareButton.addEventListener("click", function() {
+    reset();
+})
 resetButton.addEventListener("click", function() {
     reset();
 })
