@@ -116,6 +116,8 @@ function select_mode(){
         hard_mode_button.style.backgroundColor = "white";
         nightmare_mode_button.style.backgroundColor = "white";
         timer.style.visibility = 'hidden';
+        blink.style.animation = '';
+        time = 6;
     }
     else if(mode == 1){
         numCards = 6;
@@ -125,6 +127,8 @@ function select_mode(){
         nightmare_mode_button.style.backgroundColor = "white";        
         hard_mode_button.style.backgroundColor = "green";
         timer.style.visibility = 'hidden';
+        blink.style.animation = '';
+        time = 6;
     }
     else if(mode == 2){
         numCards = 6;
