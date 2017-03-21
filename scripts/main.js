@@ -24,8 +24,9 @@ var nightmaremode=0;
 function init() {
     initCards();
     easy();
-    hard();
 }
+
+    //        $("div1").show();
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
@@ -37,15 +38,16 @@ function initCards() {
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
+            easyDisplay.textContent = "Easy"
+            hardDisplay.textContent = "Hard"
+            nightmareDisplay.textContent = "Nightmare"
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
-                easyDisplay.textContent = "Easy"
-                hardDisplay.textContent = "Hard"
-                nightmareDisplay.textContent = "Nightmare"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                stopTimer();
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -86,6 +88,7 @@ function easy() {
     gameOver = false;
     numCards=3;
     nightmaremode=0;
+    //document.getElementById("countdown").style.display= 'none';
     colors = generateRandomColors(numCards);
 
     //numCardsnow=3
@@ -183,7 +186,13 @@ timeInSecs--;
 }
 else {
 clearInterval(ticker);
-messageDisplay.textContent = "Timeout";// stop counting at zero
+messageDisplay.textContent = "Timeout";
+resetDisplay.textContent = "Play Again"
+changeColors("#FFF");
+body.style.backgroundColor = black;
+gameOver=true;
+document.getElementById('div1').style.display = "hidden";
+// stop counting at zero
 // startTimer(60);  // remove forward slashes in front of startTimer to repeat if required
 }
 
