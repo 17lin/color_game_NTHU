@@ -2,7 +2,7 @@ window.onload = function () {
     init();
 };
 
-var numCards = 6;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -140,6 +140,8 @@ function barColor() {
         easyGame = true;
         hardGame = false;
         nightmareGame = false;
+        numCards = 3;
+        reset();
     }, false);
 
 
@@ -163,6 +165,7 @@ function barColor() {
         easyGame = false;
         hardGame = true;
         numCards = 6;
+        reset();
     }, false);
 
     barAction3.addEventListener('mouseover', function (e) {
