@@ -14,7 +14,7 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
-var modeButtons = document.querySelectorAll(".mode-button")
+var modeButtons = document.querySelectorAll(".mode-button");
 
 function init() {
     initModeButtons();
@@ -26,6 +26,7 @@ function initModeButtons() {
   for (var i=0; i<modeButtons.length; i++) {
     modeButtons[i].addEventListener("click", function() {
       // refresh all other mode buttons
+      reset();
       refreshModeButtons();
       this.classList.add("selected-mode-button");
     })

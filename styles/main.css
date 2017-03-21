@@ -100,6 +100,10 @@ h1 {
 	cursor: pointer;
 }
 
+.hard-mode-card {
+	display: none;
+}
+
 .selected {
     color: white;
     background: steelblue;
