@@ -105,7 +105,7 @@ button {
 	cursor: pointer;
 }
 .normal {
-	display: block;
+	display: inline-block;
 	margin: 0;
 	padding: 4px;
     background-color: white;
@@ -113,7 +113,7 @@ button {
 }
 
 .selected{
-    display: block;
+    display: inline-block;
 	margin: 0;
 	padding: 4px;
     color: white;
