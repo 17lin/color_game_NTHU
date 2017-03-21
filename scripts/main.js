@@ -28,17 +28,27 @@ function init() {
 }
 
 function modeselect() {
+    easy.mouce
     easy.addEventListener("click" , function() {
+        easy.style.backgroundColor = 'powderblue';
+        hard.style.backgroundColor = 'white';
+        mare.style.backgroundColor = 'white';
         mode = 0;
         reset();
     });
 
     hard.addEventListener("click" ,function() {
+      easy.style.backgroundColor = 'white';
+      hard.style.backgroundColor = 'powderblue';
+      mare.style.backgroundColor = 'white';
         mode = 1;
         reset();
     });
 
     mare.addEventListener("click" ,function() {
+      easy.style.backgroundColor = 'white';
+      hard.style.backgroundColor = 'white';
+      mare.style.backgroundColor = 'powderblue';
         mode = 2;
         reset();
     });
