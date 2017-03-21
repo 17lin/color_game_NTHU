@@ -124,6 +124,7 @@ function resetHard() {
 }
 
 function resetNightmare() {
+  clearInterval(id);
   id=setInterval(countDown,1000);
   mode=3;
   hardButton.style.backgroundColor='white';
