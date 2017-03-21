@@ -7,7 +7,9 @@ var easy = document.getElementById('easy');
 var hard = document.getElementById('hard');
 var mare = document.getElementById('nightmare');
 var mode = 0;
-var time;
+var counter = document.getElementById('counter');
+var time = 6;
+
 
 var gameOver = false;
 var colors = [];
@@ -28,9 +30,8 @@ function init() {
 }
 
 function modeselect() {
-    easy.mouce
     easy.addEventListener("click" , function() {
-        easy.style.backgroundColor = 'powderblue';
+        easy.style.backgroundColor = 'steelblue';
         hard.style.backgroundColor = 'white';
         mare.style.backgroundColor = 'white';
         mode = 0;
@@ -39,7 +40,7 @@ function modeselect() {
 
     hard.addEventListener("click" ,function() {
       easy.style.backgroundColor = 'white';
-      hard.style.backgroundColor = 'powderblue';
+      hard.style.backgroundColor = 'steelblue';
       mare.style.backgroundColor = 'white';
         mode = 1;
         reset();
@@ -48,7 +49,7 @@ function modeselect() {
     mare.addEventListener("click" ,function() {
       easy.style.backgroundColor = 'white';
       hard.style.backgroundColor = 'white';
-      mare.style.backgroundColor = 'powderblue';
+      mare.style.backgroundColor = 'steelblue';
         mode = 2;
         reset();
     });
@@ -80,18 +81,21 @@ function initCards() {
 
 
 function reset() {
+    var ans = false;
     gameOver = false;
+    time = 5;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
-    time = 5;
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     if (mode === 2)
-      messageDisplay.textContent = "What's the Color? "+time;
+        messageDisplay.textContent = "What's the Color? "
+        // counter.textContent = time;
+        //  resetButton.style.display = "none"
     else {
-      messageDisplay.textContent = "What's the Color? ";
+        messageDisplay.textContent = "What's the Color? ";
     }
     //change colors of cards
     if (mode === 0)
@@ -104,6 +108,13 @@ function reset() {
           } else {
               cards[i].style.display = "none";
           }
+          if (cards[i].style.backgroundColor === pickedColor){
+              ans = true;
+          }
+      }
+      if (ans === false){
+        var random = Math.floor(Math.random() * 3);
+        cards[random].style.backgroundColor = pickedColor;
       }
       cards[3].style.display = "none";
       cards[4].style.display = "none";
@@ -132,6 +143,9 @@ function reset() {
               cards[i].style.display = "none";
           }
       }
+      // var timer = setInterval(function(){
+      //
+      // },1000)
     }
     body.style.backgroundColor = "#232323";
 }
@@ -144,11 +158,21 @@ resetButton.addEventListener("click", function() {
 
 function changeColors(color) {
     //loop through all cards
-    for (var i = 0; i < cards.length; i++) {
-        //change each color to match given color
-        cards[i].style.opacity = 1;
-        cards[i].style.backgroundColor = color;
+    if (mode === 1) {
+      for (var i = 0; i < 3; i++) {
+          //change each color to match given color
+          cards[i].style.opacity = 1;
+          cards[i].style.backgroundColor = color;
+      }
     }
+    else {
+      for (var i = 0; i < cards.length; i++) {
+          //change each color to match given color
+          cards[i].style.opacity = 1;
+          cards[i].style.backgroundColor = color;
+      }
+    }
+
 }
 
 function pickColor() {
