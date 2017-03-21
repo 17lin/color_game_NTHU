@@ -10,6 +10,7 @@ var numCards = 3;
 var num = 5;
 var cdd = document.getElementById("cd");
 var count;
+var text = document.getElementById("text");
 
 var gameOver = false;
 var colors = [];
@@ -31,7 +32,7 @@ var resetDisplay = document.querySelector("#reset span");
         hard.style.backgroundColor = "white";
         night.style.backgroundColor = "white";
         hide.style.visibility = "hidden";
-        resetButton.disabled = false;
+        resetButton.style.visibility = "visible";
         reset();
     });
     hard.addEventListener("click", function(){
@@ -43,20 +44,21 @@ var resetDisplay = document.querySelector("#reset span");
         hard.style.backgroundColor = "red";
         night.style.backgroundColor = "white";
         hide.style.visibility = "visible";
-        resetButton.disabled = false;
+        resetButton.style.visibility = "visible";
         reset();
     });
     night.addEventListener("click", function(){
         mode = 3;
         numCards = 6;
+        resetButton.style.visibility = 'hidden';
         easy.style.backgroundColor = "white";
         hard.style.backgroundColor = "white";
         night.style.backgroundColor = "red";
         hide.style.visibility = "visible";
-        resetButton.disabled = true;
         initCards();
         reset();
         num = 5;
+        discount();
         count = setInterval(countdown, 1000);
     });
 
@@ -64,6 +66,8 @@ function countdown(){
     if(!gameOver){
         messageDisplay.innerHTML = "What's the color? " + num;
         num--;
+        body.style.backgroundColor = "white";
+        setTimeout(blink, 50);
     }
     if(num == -2){
         gameOver = true;
@@ -73,10 +77,15 @@ function countdown(){
             cards[i].style.backgroundColor = "white";
         }
         body.style.backgroundColor = pickedColor;
+        resetButton.style.visibility = "visible";
+        text.innerHTML = "Play Again";
     }
 }
 
-//var myVar = setInterval(function(){ setColor() }, 300);
+function blink(){
+    if(!gameOver) body.style.backgroundColor = "#232323";
+    else body.style.backgroundColor = pickedColor;
+}
 
 
 function discount(){
@@ -127,6 +136,12 @@ function reset() {
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
+    if(mode === 3) {
+        resetButton.style.visibility = 'hidden';
+        num = 5;
+        discount();
+        count = setInterval(countdown, 1000);
+    }
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
