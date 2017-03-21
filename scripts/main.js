@@ -28,7 +28,7 @@ function init() {   // initial condition
 
 function initCards() {
   if(nightmare){
-      timers= setInterval(call(),1000);
+      timers= setInterval(call(),1000);   
   }
 
     for (var i = 0; i < cards.length; i++) {
@@ -65,7 +65,7 @@ function reset() {
     if(nightmare)
       messageDisplay.textContent = "What's the Color?" + timers_word;
     else{
-      messageDisplay.textContent = "What's the Color?";  
+      messageDisplay.textContent = "What's the Color?";
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
