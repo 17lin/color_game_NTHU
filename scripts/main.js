@@ -19,8 +19,8 @@ var modeButtons = document.querySelectorAll(".mode");
 var easyButton = document.querySelector(".mode");
 var night = document.getElementById("nightmare");
 var sTime = new Date().getTime();
-var countDown = 5; // Number of seconds to count down from.        
-var timeshow =document.getElementById("countdowntimertxt");
+var countDown = 99; // Number of seconds to count down from.        
+var timeshow =document.getElementById("color-picked");
 //
 
 function init() {
@@ -63,18 +63,18 @@ function setupMode() {
             this.classList.add("selected");
             if (this.textContent === "Easy") {
                 numCards = 3;
-                //timeshow.style.display = "none";
-                countDown = 0; 
+                resetButton.style.display ="initial"
             }
             else if(this.textContent === "nightmare"){
+                UpdateCountDownTime();
                 numCards = 6;
                 resetButton.style.display ="none";
-                countDown = 5; 
+
             }
             else {
                 numCards = 6;
-                //timeshow.style.display = "none";
-                countDown = 0; 
+                resetButton.style.display ="initial"
+                //resetButton.style.display ="center"
             }
             reset();
         });
