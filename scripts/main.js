@@ -20,6 +20,8 @@ var nmButton = document.querySelector('#nightmare');
 var timerDisplay = document.querySelector('#timer');
 var time;
 var myTimer;
+var on;
+var off;
 
 function changeEasy(){
     if(gameMod !== 0){
@@ -32,6 +34,7 @@ function changeEasy(){
     	resetButton.style.display = 'block';
 
     	clearInterval(myTimer);
+        clearInterval(on);
 
     	numCards = 3;
 		gameMod = 0;
@@ -54,6 +57,7 @@ function changeHard(){
 	    gameMod = 1;
 
 	    clearInterval(myTimer);
+        clearInterval(on);
 
 	    reset();
 	}
@@ -80,6 +84,7 @@ function changeNM(){
 		time = 5;
 		timerDisplay.textContent = time;
 		myTimer = setInterval(my_func, 1000);
+        blinking();
 
 	    numCards = 6;
 	    gameMod = 2;
@@ -115,6 +120,7 @@ function initCards() {
 					resetButton.style.display = 'block';
 					resetDisplay.textContent = "Play Again";
                 	clearInterval(myTimer);
+                    clearInterval(on);
                 }
                 resetDisplay.textContent = "Play Again";
                 changeColors("#FFF");
@@ -158,7 +164,7 @@ resetButton.addEventListener("click", function() {
 		time = 5;
 		timerDisplay.textContent = time;
 		myTimer = setInterval(my_func, 1000);
-
+        blinking();
 
     	reset();
     }
@@ -212,5 +218,18 @@ function timeout(){
 	messageDisplay.textContent = "TIMEOUT!";
 	clearInterval(myTimer);
 	gameOver = true;
+    clearInterval(on);
 }
 
+function blinking(){
+    on = setInterval(turn_on, 1000);
+}
+
+function turn_on(){
+    body.style.backgroundColor = '#FFFFFF';
+    setTimeout(turn_off, 50);
+}
+
+function turn_off(){
+    body.style.backgroundColor = '#232323';
+}
