@@ -3,6 +3,7 @@ window.onload = function() {
 };
 
 var numCards = 3;
+var gameMod = 0;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,8 +14,86 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyButton = document.querySelector('#easy');
+var hardButton = document.querySelector('#hard');
+var nmButton = document.querySelector('#nightmare');
+var timerDisplay = document.querySelector('#timer');
+var time;
+var myTimer;
+
+function changeEasy(){
+    if(gameMod !== 0){
+    	easyButton.style.backgroundColor = "#FFFFFF";
+    	hardButton.style.backgroundColor = "#FFFFFF";
+    	nmButton.style.backgroundColor = "#FFFFFF";
+    	this.style.backgroundColor = "#AAAAAA"; 
+
+    	timerDisplay.style.display = "none";
+    	resetButton.style.display = 'block';
+
+    	clearInterval(myTimer);
+
+    	numCards = 3;
+		gameMod = 0;
+
+    	reset();
+    }
+}
+
+function changeHard(){
+    if(gameMod !== 1){
+	    easyButton.style.backgroundColor = "#FFFFFF";
+	    hardButton.style.backgroundColor = "#FFFFFF";
+	    nmButton.style.backgroundColor = "#FFFFFF";
+	    this.style.backgroundColor = "#AAAAAA";
+
+	    timerDisplay.style.display = "none";
+	    resetButton.style.display = 'block';
+
+	    numCards = 6;
+	    gameMod = 1;
+
+	    clearInterval(myTimer);
+
+	    reset();
+	}
+}
+
+function my_func(){
+	if(time !== 0) time = time - 1;
+	timerDisplay.textContent = time;
+	if(time === 0){
+		timeout();
+	}
+}
+
+function changeNM(){
+    if(gameMod !== 2){
+	    easyButton.style.backgroundColor = "#FFFFFF";
+	    hardButton.style.backgroundColor = "#FFFFFF";
+	    nmButton.style.backgroundColor = "#FFFFFF";
+	    this.style.backgroundColor = "#AAAAAA";
+			
+		timerDisplay.style.display = "inline";
+		resetButton.style.display = 'none';
+
+		time = 5;
+		timerDisplay.textContent = time;
+		myTimer = setInterval(my_func, 1000);
+
+	    numCards = 6;
+	    gameMod = 2;
+
+	    reset();
+	}
+}
 
 function init() {
+	easyButton.style.backgroundColor = "#AAAAAA";
+    easyButton.addEventListener("click", changeEasy);
+    hardButton.addEventListener("click", changeHard);
+    nmButton.addEventListener("click", changeNM);
+
     initCards();
     reset();
 }
@@ -31,13 +110,19 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
+                if(gameMod === 2){
+					timerDisplay.style.display = "none";
+					resetButton.style.display = 'block';
+					resetDisplay.textContent = "Play Again";
+                	clearInterval(myTimer);
+                }
+                resetDisplay.textContent = "Play Again";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                messageDisplay.textContent = "Try Again";
             }
         });
     }
@@ -50,13 +135,13 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
+    resetDisplay.textContent = "New Color";
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
-            cards[i].style.display = "block"
+            cards[i].style.display = "block";
             cards[i].style.backgroundColor = colors[i];
         } else {
             cards[i].style.display = "none";
@@ -66,7 +151,20 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+    if(gameMod === 2){
+		timerDisplay.style.display = "inline";
+		resetButton.style.display = 'none';
+
+		time = 5;
+		timerDisplay.textContent = time;
+		myTimer = setInterval(my_func, 1000);
+
+
+    	reset();
+    }
+    else{
+    	reset();
+    }
 })
 
 function changeColors(color) {
@@ -89,7 +187,7 @@ function generateRandomColors(num) {
     //repeat num times
     for (var i = 0; i < num; i++) {
         //get random color and push into arr
-        arr.push(randomColor())
+        arr.push(randomColor());
     }
     //return that array
     return arr;
@@ -104,3 +202,15 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+function timeout(){
+	timerDisplay.style.display = "none";
+	resetButton.style.display = 'block';
+	resetDisplay.textContent = "Play Again";
+	changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+	messageDisplay.textContent = "TIMEOUT!";
+	clearInterval(myTimer);
+	gameOver = true;
+}
+

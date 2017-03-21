@@ -33,6 +33,28 @@ body {
 	padding: 0 1rem;
 }
 
+#easy{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#easy:hover{
+    color: steelblue;
+}
+#hard{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#hard:hover{
+    color: steelblue;
+}
+#nightmare{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#nightmare:hover{
+   color: steelblue;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -86,6 +108,12 @@ h1 {
 .selected {
     color: white;
     background: steelblue;
+}
+
+#timer{
+    display: none;
+    padding: 0.5rem;
+    color: white;
 }
 
 button {
