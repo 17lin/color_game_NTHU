@@ -23,6 +23,14 @@ var seconds;
 var strsec;
 var countdown = document.querySelector("#countdown");
 var interval;
+var blink4start;
+var blink4end;
+var blink3start;
+var blink3end;
+var blink2start;
+var blink2end;
+var blink1start;
+var blink1end;
 
 function init() {
     selecteasy();
@@ -195,16 +203,29 @@ function reset() {
     // for nightmare
     if(mode == "nm") {
         clearInterval(interval);
+        clearInterval(blink4start);
+        clearInterval(blink3start);
+        clearInterval(blink2start);
+        clearInterval(blink1start);
+        clearInterval(blink4end);
+        clearInterval(blink3end);
+        clearInterval(blink2end);
+        clearInterval(blink1end);
         seconds = 5;
         strsec = ' '+seconds;
         countdown.textContent = strsec;
         resetButton.style.display = "none";
         interval = setInterval(function () {
-            if (seconds >= 1) {
+            if (seconds > 1 && !gameOver) {
                 seconds--;
                 strsec = ' '+seconds;
                 countdown.textContent = strsec;
-                //body.blink();
+            }
+            else if (seconds > 1 && gameOver) {
+                countdown.textContent = '';
+                resetButton.style.display = "block";
+                changeColors("#FFF");
+                body.style.backgroundColor = pickedColor;
             }
             else {
                 countdown.textContent = '';
@@ -215,6 +236,37 @@ function reset() {
                 gameOver = true;
             }
         }, 1000);
+        blink4start = setInterval(function() {
+            if (mode == "nm" && seconds > 4 && !gameOver) body.style.backgroundColor = "#FFFFFF";
+        },900);
+
+        blink4end = setInterval(function() {
+            if (mode == "nm" && seconds > 3 && !gameOver) body.style.backgroundColor = "#232323";
+        },1100);
+
+        blink3start = setInterval(function() {
+            if (mode == "nm" && seconds > 3 && !gameOver) body.style.backgroundColor = "#FFFFFF";
+        },1900);
+
+        blink3end = setInterval(function() {
+            if (mode == "nm" && seconds > 2 && !gameOver) body.style.backgroundColor = "#232323";
+        },2100);
+
+        blink2start = setInterval(function() {
+            if (mode == "nm" && seconds > 2 && !gameOver) body.style.backgroundColor = "#FFFFFF";
+        },2900);
+
+        blink2end = setInterval(function() {
+            if (mode == "nm" && seconds > 1 && !gameOver) body.style.backgroundColor = "#232323";
+        },3100);
+
+        blink1start = setInterval(function() {
+            if (mode == "nm" && !gameOver) body.style.backgroundColor = "#FFFFFF";
+        },3900);
+
+        blink1end = setInterval(function() {
+            if (mode == "nm" && !gameOver) body.style.backgroundColor = "#232323";
+        },4100);
         /*var gg = setInterval(function () {
             if (seconds < 1) {
                 countdown.textContent = '';
@@ -225,6 +277,10 @@ function reset() {
                 gameOver = true;
             }
         }, 10);*/
+    }
+    else {
+        countdown.textContent = '';
+        clearInterval(interval);
     }
     body.style.backgroundColor = "#232323";
 }
