@@ -120,6 +120,7 @@ function initCards() {
 					resetButton.style.display = 'block';
 					resetDisplay.textContent = "Play Again";
                 	clearInterval(myTimer);
+                    clearInterval(on);
                 }
                 resetDisplay.textContent = "Play Again";
                 changeColors("#FFF");
