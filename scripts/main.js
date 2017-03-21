@@ -116,6 +116,7 @@ function timer()
 
   if(count>=1){
     document.getElementById("timer").innerHTML=count;
+    resetButton.style.display="none";
   }
   else
   {
