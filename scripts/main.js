@@ -27,6 +27,7 @@ function init() {
 }
 
 function initCards() {
+
     if(is_easy==true){
       numCards=3;
       cards.length=3;
@@ -75,26 +76,16 @@ function reset() {
     }
     else{
       messageDisplay.textContent = "What's the Color? 5";
+      resetButton.style.display="none";
       timedText();
       function timedText() {
-        setTimeout(myTimeout1, 1000)
-        setTimeout(myTimeout2, 2000)
-        setTimeout(myTimeout3, 3000)
-        setTimeout(myTimeout4, 4000)
-        setTimeout(myTimeout5, 5000)
+        t1=setTimeout(myTimeout1, 1000)
+        t2=setTimeout(myTimeout2, 2000)
+        t3=setTimeout(myTimeout3, 3000)
+        t4=setTimeout(myTimeout4, 4000)
+        t5=setTimeout(myTimeout5, 5000)
       }
-      function myTimeout1() {messageDisplay.textContent = "What's the Color? 4";var result = background.blink();}
-      function myTimeout2() {messageDisplay.textContent = "What's the Color? 3";var result = background.blink();}
-      function myTimeout3() {messageDisplay.textContent = "What's the Color? 2";var result = background.blink();}
-      function myTimeout4() {messageDisplay.textContent = "What's the Color? 1";var result = background.blink();}
-      function myTimeout5() {
-        messageDisplay.textContent = "TimeOut!";
-        resetButton.style.opacity=1;
-        resetDisplay.textContent = "Play Again"
-        changeColors("#FFF");
-        body.style.backgroundColor = pickedColor;
-        gameOver = true;
-        }
+
     }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -107,6 +98,18 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+}
+function myTimeout1() {messageDisplay.textContent = "What's the Color? 4";blinkit();resetButton.style.display="none";}
+function myTimeout2() {messageDisplay.textContent = "What's the Color? 3";blinkit();}
+function myTimeout3() {messageDisplay.textContent = "What's the Color? 2";blinkit();}
+function myTimeout4() {messageDisplay.textContent = "What's the Color? 1";blinkit();}
+function myTimeout5() {
+  messageDisplay.textContent = "TimeOut!";
+  resetButton.style.display="block";
+  resetDisplay.textContent = "Play Again"
+  changeColors("#FFF");
+  body.style.backgroundColor = pickedColor;
+  gameOver = true;
 }
 
 resetButton.addEventListener("click", function() {
@@ -137,7 +140,6 @@ nightmareButton.addEventListener("click", function(){
     cards[3].style.opacity=1;
     cards[4].style.opacity=1;
     cards[5].style.opacity=1;
-    resetButton.style.opacity=0;
     init();
 })
 
@@ -176,4 +178,14 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function blinkit(){
+intrvl=0;
+for(nTimes=0;nTimes<1;nTimes++){
+intrvl += 200;
+setTimeout("body.style.backgroundColor='white';",intrvl);
+intrvl += 200;
+setTimeout("body.style.backgroundColor='black';",intrvl);
+   }
 }
