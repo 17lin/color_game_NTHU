@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 6;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -155,14 +155,17 @@ function setMode() {
 		modeButton[0].style.backgroundColor = "steelBlue";
 		modeButton[1].style.backgroundColor = "white";
 		modeButton[2].style.backgroundColor = "white";
+		numCards = 3;
 	} else if (selectedMode === "Hard") {
 		modeButton[0].style.backgroundColor = "white";
 		modeButton[1].style.backgroundColor = "steelBlue";
 		modeButton[2].style.backgroundColor = "white";
+		numCards = 6;
 	} else if (selectedMode === "Nightmare") {
 		modeButton[0].style.backgroundColor = "white";
 		modeButton[1].style.backgroundColor = "white";
 		modeButton[2].style.backgroundColor = "steelBlue";
+		numCards = 6;
 	}
 }
 
