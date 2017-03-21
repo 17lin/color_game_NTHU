@@ -18,19 +18,26 @@ var easyButton = document.querySelector("#easymode");
 var hardButton = document.querySelector("#hardmode");
 var nightmaremodeButton = document.querySelector("#nightmaremode");
 
-
 function init() {
     numCards = 3;
     initCards();
     reset();
-    initial();
+    stop_Timer();
+    //initial();
+    easyButton.className = 'selected';
+    hardButton.className -= 'selected';
+    nightmaremodeButton.className -= 'selected';
 }
 
 function init2() {
     numCards = 6;
     initCards();
     reset();
-    initial();
+    stop_Timer();
+    //initial();
+    easyButton.className -= 'selected';
+    hardButton.className = 'selected';
+    nightmaremodeButton.className -= 'selected';
 }
 
 function init3() {
@@ -38,6 +45,10 @@ function init3() {
     initCards();
     reset();
     initial();
+    resetButton.className = 'hidden';
+    easyButton.className -= 'selected';
+    hardButton.className -= 'selected';
+    nightmaremodeButton.className = 'selected';
 }
 
 easyButton.addEventListener("click", function() {
@@ -69,6 +80,7 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                stop_Timer();
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -97,11 +109,15 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+    messageDisplay.className -= 'hidden';
 }
 
 resetButton.addEventListener("click", function() {
     reset();
-    initial();
+    if(nightmaremode.className === 'selected'){
+      //initial();
+      init3();
+    }
 })
 
 function changeColors(color) {
@@ -153,13 +169,27 @@ function initial(){
   cntdSecs--;
   countdownid=window.setInterval(countdownfunc,1000);
 }
+function stop_Timer(){
+  clearInterval(countdownid);
+  x=document.getElementById("timer");
+  x.innerHTML="";
+  resetButton.className -= 'hidden';
+}
 function countdownfunc(){
   x.innerHTML=" "+cntdSecs;
   if (cntdSecs==0){
-    x.innerHTML="<br>TIMEOUT!";
+    x.innerHTML="TIMEOUT!";
     body.style.backgroundColor = pickedColor;
     changeColors("#FFF");
     clearInterval(countdownid);
+    resetButton.className -= 'hidden';
+    gameOver = true;
+    messageDisplay.className = 'hidden';
+    resetDisplay.textContent = "Play Again"
   }
   cntdSecs--;
 }
+
+Button.addEventListener("click", function() {
+  this.addClass('selected');
+})
