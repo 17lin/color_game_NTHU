@@ -52,6 +52,13 @@ body {
 #mode_hard:hover{
     color: steelblue;
 }
+#mode_nightmare{
+    font-weight: bold;
+    padding: 0 0.5rem;
+}
+#mode_nightmare:hover{
+    color: steelblue;
+}
 .container {
     margin-left: auto;
 	margin-right: auto;
@@ -122,4 +129,19 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+.blink {
+    animation-duration: 0.5s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
