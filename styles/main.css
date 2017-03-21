@@ -104,6 +104,16 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+#easy{
+    display: inline;
+    margin:0px;
+    padding: 0px 10px;
+}
+#hard{
+    display: inline;   
+    margin:0px;
+    padding: 0px 10px;
+}
 
 button:hover {
     color: white;
