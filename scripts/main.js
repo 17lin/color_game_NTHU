@@ -15,6 +15,7 @@ var hardButton = document.getElementById('hard');
 var timeDisplay = document.getElementById('timer');
 
 
+
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
@@ -25,15 +26,33 @@ var resetDisplay = document.querySelector("#reset span");
 var card_container = document.querySelector('#card-container');
 
 setInterval(timer,1000);
+//setInterval(Blink,1000);
 function init() {
     
     timecount = 5;
     time_flag = true;
     timeDisplay.textContent = " "+timecount;
+    if(mode_flag == false){
+        easyButton.style.color = "white";
+        easyButton.style.backgroundColor = "steelblue";
+
+    }else{
+        hardButton.style.backgroundColor = "steelblue";
+        hardButton.style.color = "white";
+    }
     initCards();
     reset();
 }
+function Blink(){
+    var d = new Date();
 
+    if(gameOver != true){
+        if(d.getSeconds()%2 == 1)
+        body.style.backgroundColor = "white";
+        else
+        body.style.backgroundColor = "#232323";
+    }
+}
 function timer(){
     var d = new Date();
     if(time_flag == false){
