@@ -32,7 +32,24 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
-
+#easy {
+	display: inline;
+	margin:0;
+	font-weight: bold;
+	padding: 0 1rem;
+}
+#hard {
+	display: inline;
+	margin:0;
+	font-weight: bold;
+	padding: 0 1rem;
+}
+#nightmare {
+	display: inline;
+	margin:0;
+	font-weight: bold;
+	padding: 0 1rem;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -88,7 +105,7 @@ h1 {
     background: steelblue;
 }
 
-button {
+button{
 	display: block;
 	margin: 3rem auto;
 	padding: 1rem;
@@ -105,7 +122,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+#reset:hover {
     color: white;
     background-color: steelblue;
 }
