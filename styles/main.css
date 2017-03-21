@@ -33,6 +33,46 @@ body {
 	padding: 0 1rem;
 }
 
+#Easy {
+	font-weight: bold;
+	color: green;
+	padding: 0 1rem;
+	padding: auto ;
+	margin: 0;
+}
+
+#Easy:hover{
+	color: white;
+	background-color: green;
+}
+
+#Hard {
+	font-weight: bold;
+	padding: 0 1rem;
+	padding: auto ;
+	color: steelblue;
+	margin: 0;
+}
+
+#Hard:hover{
+	color: white;
+	background-color: steelblue;
+}
+
+#Nightmare {
+	color: red;
+	font-weight: bold;
+	padding: 0 1rem;
+	padding: auto ;
+	margin: 0;
+}
+
+#Nightmare:hover{
+	color: white;
+	background-color: red;
+}
+
+
 #about {
 	margin-left: auto;
 	color: #bbb;
