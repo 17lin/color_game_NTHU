@@ -98,12 +98,16 @@ resetButton.addEventListener("click", function() {
 })
 
 easymode.addEventListener("click", function() {
+        clearInterval(interval);
+    time = 1000000;
     numCards = 3;
     gamemode = 0;
     reset();
 })
 
 hardmode.addEventListener("click", function() {
+        clearInterval(interval);
+    time = 1000000;
     numCards = 6;
     gamemode = 1;
     reset();
