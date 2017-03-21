@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
 	<title>Color Game</title>
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link rel="stylesheet" type="text/css" href="styles/nightmare.css">
 </head>
 
 <body>
@@ -23,19 +23,22 @@
 		</div>
 	</div>
 
-	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span></h1>
+	<h1><span id="color-picked">RGB</span><br><span id="message">What's the color?</span><span id="time"></span></h1>
 
 	<div id="card-container" class="container">
+		<div class="card"></div>
+		<div class="card"></div>
+		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
 		<div class="card"></div>
 	</div>
 
 	<div id="footer">
-		<button id="reset"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
+		<button id="reset" onclick="cntdn()"><i class="fa fa-retweet" aria-hidden="true"></i>&nbsp;&nbsp;<span>New Color</span></button>
 	</div>
 
-	<script type="text/javascript" src="scripts/main.js"></script>
+	<script type="text/javascript" src="scripts/nightmare.js"></script>
 </body>
 
 </html>
