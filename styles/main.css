@@ -109,3 +109,47 @@ button:hover {
     color: white;
     background-color: steelblue;
 }
+
+#easy {
+	color: white;
+	display: inline;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	margin: auto 0.5rem;
+	border-radius: 2rem;
+	background-color: rgb(68, 158, 215);
+	transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+}
+
+#hard {
+	/*color: white;*/
+	display: inline;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	margin: auto 0.5rem;
+	border-radius: 2rem;
+	/*background-color: rgb(68, 158, 215);*/
+	transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+}
+
+#nightmare {
+	/*color: white;*/
+	display: inline;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	margin: auto 0.5rem;
+	border-radius: 2rem;
+	/*background-color: rgb(68, 158, 215);*/
+	transition: all 0.6s;
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+}
+
+a:hover {
+	color: gray !important;
+	background: skyblue !important;
+}
