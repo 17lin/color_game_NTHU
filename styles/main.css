@@ -69,7 +69,14 @@ h1 {
 	margin: 0;
     padding: 20px 0;
 }
-
+h2 {
+	text-align: center;
+	font-weight: normal;
+	color: white;
+	text-transform: uppercase;
+margin: 0;
+	padding: 20px 0;
+}
 .card {
     width: 30%;
     background: white;
@@ -83,10 +90,6 @@ h1 {
 	cursor: pointer;
 }
 
-.selected {
-    color: white;
-    background: steelblue;
-}
 
 button {
 	display: block;
@@ -105,7 +108,15 @@ button {
 	cursor: pointer;
 }
 
+.selected {
+    color: white;
+    background: steelblue;
+		background-color: yellow;
+}
 button:hover {
     color: white;
     background-color: steelblue;
+}
+#mode button {
+	display: inline;
 }
