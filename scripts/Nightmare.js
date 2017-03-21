@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,6 +13,8 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var c = 5;
+var t
 
 function init() {
     initCards();
@@ -50,8 +52,8 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
-    resetDisplay.textContent = "New Color"
-    messageDisplay.textContent = "What's the Color?";
+    resetDisplay.textContent = ""
+    messageDisplay.textContent = "What's the Color?" ;
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -105,7 +107,12 @@ function randomColor() {
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
-function hardmode(){
-
-
-}
+function timedCount()
+ {
+ if(c>0){
+ c=c-1
+ t=setTimeout("timedCount()",1000)
+ }else {
+   clearTimeout(t)
+ }
+ }
