@@ -13,9 +13,13 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-var Mode_button=document.querySelectorAll(".mode_select");
-var count=5;
-var mode=1;//simple:1 hard:2 nightmare:3
+var Mode_button = document.querySelectorAll(".mode_select");
+var count = 5;
+var counterDisplay = document.querySelector("#counter");
+var counter;
+var mode = 1; //simple:1 hard:2 nightmare:3
+var timeout = false;
+var blink;
 function init() {
     initCards();
     reset();
@@ -36,64 +40,105 @@ function initCards() {
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                counterDisplay.textContent = " ";
+                resetButton.style.display = "block";
                 gameOver = true;
+            } else if (timeout === true) {
+
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
             }
         });
     }
-    for(var i=0; i<Mode_button.length; i++){
-       Mode_button[i].addEventListener("click", function(){
-          if(this===Mode_button[0]){
-            mode=1;
-            this.style.backgroundColor= "rgb(252,73,124)";
-            this.style.color="white";
-            Mode_button[1].style.backgroundColor="white";
-            Mode_button[2].style.backgroundColor="white";
-            Mode_button[1].style.color= "rgb(252,73,124)";
-            Mode_button[2].style.color= "rgb(252,73,124)";
-            reset();
-          }else if(this==Mode_button[1]){
-            mode=2;
-            this.style.backgroundColor= "rgb(252,73,124)";
-            this.style.color="white";
-            Mode_button[0].style.backgroundColor="white";
-            Mode_button[2].style.backgroundColor="white";
-            Mode_button[0].style.color= "rgb(252,73,124)";
-            Mode_button[2].style.color= "rgb(252,73,124)";
-            reset();
-          }else if(this==Mode_button[2]){
-            mode=3;
-            this.style.backgroundColor= "rgb(252,73,124)";
-            this.style.color="white";
-            Mode_button[0].style.backgroundColor="white";
-            Mode_button[1].style.backgroundColor="white";
-            Mode_button[0].style.color= "rgb(252,73,124)";
-            Mode_button[1].style.color= "rgb(252,73,124)";
-            reset();
+    for (var i = 0; i < Mode_button.length; i++) {
+        Mode_button[i].addEventListener("click", function() {
+            if (this === Mode_button[0]) {
+                mode = 1;
+                this.style.backgroundColor = "rgb(252,73,124)";
+                this.style.color = "white";
+                Mode_button[1].style.backgroundColor = "white";
+                Mode_button[2].style.backgroundColor = "white";
+                Mode_button[1].style.color = "rgb(252,73,124)";
+                Mode_button[2].style.color = "rgb(252,73,124)";
+                reset();
+            } else if (this == Mode_button[1]) {
+                mode = 2;
+                this.style.backgroundColor = "rgb(252,73,124)";
+                this.style.color = "white";
+                Mode_button[0].style.backgroundColor = "white";
+                Mode_button[2].style.backgroundColor = "white";
+                Mode_button[0].style.color = "rgb(252,73,124)";
+                Mode_button[2].style.color = "rgb(252,73,124)";
+                reset();
+            } else if (this == Mode_button[2]) {
+                mode = 3;
+                this.style.backgroundColor = "rgb(252,73,124)";
+                this.style.color = "white";
+                Mode_button[0].style.backgroundColor = "white";
+                Mode_button[1].style.backgroundColor = "white";
+                Mode_button[0].style.color = "rgb(252,73,124)";
+                Mode_button[1].style.color = "rgb(252,73,124)";
+                reset();
+            }
+
+        });
+        Mode_button[i].onmouseover=function(){
+          this.style.backgroundColor = "rgb(255,38,100)";
+          this.style.color = "white";
+        }
+        Mode_button[i].onmouseleave=function(){
+          if (this === Mode_button[0]) {
+              if(mode===1){
+                this.style.backgroundColor = "rgb(252,73,124)";
+                this.style.color = "white";
+              }else{
+                this.style.backgroundColor = "white";
+                this.style.color = "rgb(252,73,124)";
+              }
+          } else if (this == Mode_button[1]) {
+            if(mode===2){
+              this.style.backgroundColor = "rgb(252,73,124)";
+              this.style.color = "white";
+            }else{
+              this.style.backgroundColor = "white";
+              this.style.color = "rgb(252,73,124)";
+            }
+          } else if (this == Mode_button[2]) {
+            if(mode===3){
+              this.style.backgroundColor = "rgb(252,73,124)";
+              this.style.color = "white";
+            }else{
+              this.style.backgroundColor = "white";
+              this.style.color = "rgb(252,73,124)";
+            }
           }
-          modeDisplay();
-       });
+        }
+
     }
 }
 
 function reset() {
     gameOver = false;
-    if(mode===1)
-      colors = generateRandomColors(3);
+    timeout = true;
+    count = 5;
+    resetButton.style.display = "block";
+    clearInterval(counter);
+    clearTimeout(blink);
+    if (mode === 1)
+        colors = generateRandomColors(3);
     else
-      colors = generateRandomColors(numCards);
+        colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
     for (var i = 0; i < Mode_button.length; i++) {
-      if(i==mode-1){
-        Mode_button[i].style.backgroundColor= "rgb(252,73,124)";
-        Mode_button[i].style.color="white";
-      }else{
-        Mode_button[i].style.color= "rgb(252,73,124)";
-        Mode_button[i].style.backgroundColor="white";
-      }
+        if (i == mode - 1) {
+            Mode_button[i].style.backgroundColor = "rgb(252,73,124)";
+            Mode_button[i].style.color = "white";
+        } else {
+            Mode_button[i].style.color = "rgb(252,73,124)";
+            Mode_button[i].style.backgroundColor = "white";
+        }
 
     }
     //change colorDisplay to match picked Color
@@ -101,7 +146,33 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+    if (mode === 3) {
+        timeout=false;
+        counterDisplay.textContent = count;
+        resetButton.style.display = "none";
+        counter = setInterval(function() {
 
+            if (count > 1 && gameOver == false) {
+                blink=setTimeout(function() {
+                    body.style.display = (body.style.display == 'none' ? '' : 'none');
+                }, 10);
+                body.style.display = (body.style.display == 'none' ? '' : 'none');
+                count--;
+                counterDisplay.textContent = count;
+            } else if (count <= 1) {
+                timeout = true;
+                messageDisplay.textContent = "TIMEOUT!";
+                body.style.backgroundColor = pickedColor;
+                changeColors("#FFF");
+                counterDisplay.textContent = " ";
+                resetButton.style.display = "block";
+            }
+        }, 1000);
+    } else {
+        counterDisplay.textContent = " ";
+        clearInterval(counter);
+        clearTimeout(blink);
+    }
 
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
@@ -113,10 +184,14 @@ function reset() {
             cards[i].style.display = "none";
         }
     }
+
     body.style.backgroundColor = "#232323";
+
 }
 
 resetButton.addEventListener("click", function() {
+
+    clearInterval(counter);
     reset();
 })
 
