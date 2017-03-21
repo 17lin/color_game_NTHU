@@ -13,9 +13,15 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var modeButtons = document.querySelector(".mode");
+var selectedmode = document.querySelector(".selected");
+var timer = document.querySelector("#timer");
 
 function init() {
     initCards();
+    //testbtn();
+    //initMode();
+    initTimer();
     reset();
 }
 
@@ -42,6 +48,36 @@ function initCards() {
         });
     }
 }
+function testbtn() {
+    for(var i=0; i<modeButtons.length; i++){
+        modeButtons[i].addEventListener("click",function(){
+            if(this.textContent=="Hard")
+                this.textContent="Hello!";
+            else this.textContent="Hard"
+        });
+    }
+}
+function initMode() {
+    for(var i=0; i<modeButtons.length; i++){
+        modeButtons[i].addEventListener("click", function(){
+            for(var i=0; i<modeButtons.length; i++){
+                modeButtons[i].classList.remove("selected");
+            }
+            this.classList.add("selected");
+            if (this.textContent=="Easy"){
+                numCards=3;
+                timer.style.display="none";
+            } else if (this.textContent=="Hard") {
+                numCards=6;
+            } else {
+                numCards=6;
+
+                resetButton.style.display="none";
+            }
+            reset();
+        });
+    }
+}
 
 function reset() {
     gameOver = false;
@@ -63,6 +99,9 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+    if (selectedmode.textContent=="Nightmare"){
+        timer.style.display="inline";
+    }
 }
 
 resetButton.addEventListener("click", function() {
@@ -103,4 +142,15 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function initTimer() {
+    var counter = 5;
+    var interval = setInterval(function() {
+        counter--;
+        timer.innerHTML = counter;
+        if (counter == 0) {
+            clearInterval(interval);
+        }
+    }, 1000);
 }
