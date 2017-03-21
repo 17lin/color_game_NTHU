@@ -1,8 +1,8 @@
-window.onload = function() {
+window.onload = function () {
     init();
 };
 
-var numCards = 3;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,10 +13,19 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var easyGame = true;
+var hardGame = false;
+var nightmareGame = false;
+
+
 
 function init() {
+    
+    barColor();
+    /*numOfCards();*/
     initCards();
     reset();
+
 }
 
 function initCards() {
@@ -104,3 +113,119 @@ function randomColor() {
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
+function barColor() {
+
+    var barAction = document.getElementById('brand');
+    var barAction2 = document.getElementById('brand2');
+    var barAction3 = document.getElementById('brand3');
+
+    barAction.addEventListener('mouseover', function (e) {
+        if (!easyGame)
+            barAction.style.color = "blue";
+    }, false);
+    barAction.addEventListener('mouseout', function (e) {
+        if (!easyGame)
+            barAction.style.color = "#484848";
+    }, false);
+    barAction.addEventListener('click', function (e) {
+        barAction.style.backgroundColor = "blue";
+        barAction.style.borderRadius = '1rem';
+        barAction2.style.backgroundColor = "white";
+        barAction3.style.backgroundColor = "white";
+        barAction.style.color = "white";
+        barAction3.style.color = "#484848";
+        barAction2.style.color = "#484848";
+
+        easyGame = true;
+        hardGame = false;
+        nightmareGame = false;
+    }, false);
+
+
+    barAction2.addEventListener('mouseover', function (e) {
+        if (!hardGame)
+            barAction2.style.color = "blue";
+    }, false);
+    barAction2.addEventListener('mouseout', function (e) {
+        if (!hardGame)
+            barAction2.style.color = "#484848";
+    }, false);
+    barAction2.addEventListener('click', function (e) {
+        barAction2.style.backgroundColor = "blue";
+        barAction2.style.borderRadius = '1rem';
+        barAction.style.backgroundColor = "white";
+        barAction3.style.backgroundColor = "white";
+        barAction2.style.color = "white";
+        barAction.style.color = "#484848";
+        barAction3.style.color = "#484848";
+        nightmareGame = false;
+        easyGame = false;
+        hardGame = true;
+        numCards = 6;
+    }, false);
+
+    barAction3.addEventListener('mouseover', function (e) {
+        if (!nightmareGame)
+           barAction3.style.color = "blue";
+    }, false);
+    barAction3.addEventListener('mouseout', function (e) {
+        if (!nightmareGame)
+            barAction3.style.color = "#484848";
+    }, false);
+    barAction3.addEventListener('click', function (e) {
+        barAction3.style.backgroundColor = "blue";
+        barAction3.style.borderRadius = '1rem';
+        barAction.style.backgroundColor = "white";
+        barAction2.style.backgroundColor = "white";
+        barAction3.style.color = "white";
+        barAction.style.color = "#484848";
+        barAction2.style.color = "#484848";
+
+        nightmareGame = true;
+        easyGame = false;
+        hardGame = false;
+    }, false);
+
+    if (easyGame) {
+        barAction.style.backgroundColor = "blue";
+        barAction.style.borderRadius = '1rem';
+        barAction2.style.backgroundColor = "white";
+        barAction3.style.backgroundColor = "white";
+        barAction.style.color = "white";
+        barAction3.style.color = "#484848";
+        barAction2.style.color = "#484848";
+    }
+    else if (hardGame) {
+        barAction2.style.backgroundColor = "blue";
+        barAction2.style.borderRadius = '1rem';
+        barAction.style.backgroundColor = "white";
+        barAction3.style.backgroundColor = "white";
+        barAction2.style.color = "white";
+        barAction.style.color = "#484848";
+        barAction3.style.color = "#484848";
+    }
+    else if (nightmareGame) {
+        barAction3.style.backgroundColor = "blue";
+        barAction3.style.borderRadius = '1rem';
+        barAction.style.backgroundColor = "white";
+        barAction2.style.backgroundColor = "white";
+        barAction3.style.color = "white";
+        barAction.style.color = "#484848";
+        barAction2.style.color = "#484848";
+    }
+}
+/*
+function numOfCards() {
+
+    var el = document.getElementById("card-container");
+
+    if (numCards == 6) {
+        for (var i = 0; i < 3; i++)
+            el.innerHTML = '<div class="card"></div>';
+
+        init();
+    }
+    
+
+}*/
