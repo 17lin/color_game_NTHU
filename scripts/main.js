@@ -9,7 +9,7 @@ var mode=1;   //1=easy 2=hard 3=nightmare
 var colors = [];
 var count = 5;
 var pickedColor;
-var id=setInterval(countDown,1000);
+var id;
 var body = document.querySelector("body");
 var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
@@ -29,8 +29,7 @@ function init() {
     else if (mode==2){
     resetHard();
   }
-  else{
-  id=setInterval(countDown,1000);
+  else if (mode==3){
   resetNightmare();
   }
 }
@@ -125,6 +124,8 @@ function resetHard() {
 }
 
 function resetNightmare() {
+  clearInterval(id);
+  id=setInterval(countDown,1000);
   mode=3;
   hardButton.style.backgroundColor='white';
   hardButton.style.color='black';
@@ -176,7 +177,6 @@ resetButton.addEventListener("click", function() {
   else if (mode==2)
   resetHard();
   else{
-  id=setInterval(countDown,1000);
   resetNightmare();
   }
 })
@@ -193,6 +193,8 @@ nightmareButton.addEventListener("click", function() {
   mode=3;
   resetNightmare();
 })
+
+
 
 function changeColors(color) {
     //loop through all cards
