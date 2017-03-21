@@ -16,40 +16,19 @@ var resetDisplay = document.querySelector("#reset span");
 var Ez_Button= document.querySelector("#Ez_btn");
 var Hrd_Button= document.querySelector("#hrd_btn");
 var NM_Button= document.querySelector("#NM_btn");
-var display=document.querySelector("#card-container");
-var bool=fales;
+var second=6;
+var bool=false;
+var bool_1=false;
+var id;
+var mode=1;
+
 function init() {
     initCards();
     reset();
 }
-function mode1() {
 
-  var div = document.createElement("div");      // Create a <button> element
-  div.className ="card";
-  div.idName="hard";                          // Append the text to <button>
-document.getElementById("card-1").appendChild(div);
-var div = document.createElement("div");      // Create a <button> element
-div.className ="card";
-div.idName="hard";                         // Append the text to <button>
-document.getElementById("card-1").appendChild(div);
-var div = document.createElement("div");      // Create a <button> element
-div.className ="card";
-div.idName="hard";                         // Append the text to <button>
-document.getElementById("card-1").appendChild(div);
-bool=true;
-numCards = 6;
 
-   //numCards=6;
-}
-function mode0() {
-  if(bool===true)
-  {
-    var parent = document.getElementById("card-container");
-    var child = document.getElementById("card-1");
-    parent.removeChild(child);
-   //numCards=6;
- }
-}
+
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -61,23 +40,88 @@ function initCards() {
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
+              if(mode==3)
+               bool=true;
                 messageDisplay.textContent = "Correct!";
                 resetDisplay.textContent = "Play Again"
+                document.getElementById("reset").style.display="block";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
+                if(mode==3)
+                messageDisplay.textContent = "Try Again "+second;
             }
         });
     }
 }
 
+  Ez_Button.addEventListener("click", function mode_1() {
+    Ez_Button.style.backgroundColor="#9999FF";
+    Hrd_Button.style.backgroundColor="white";
+    NM_Button.style.backgroundColor="white";
+
+    numCards = 3;
+    reset();
+    mode=1;
+
+  });
+
+  Hrd_Button.addEventListener("click", function mode_2() {
+    Ez_Button.style.backgroundColor="white";
+    Hrd_Button.style.backgroundColor="#9955FF";
+    NM_Button.style.backgroundColor="white";
+    if(bool_1==true)
+   {
+       document.getElementById("reset").style.display="block";
+     clearInterval(id);
+     }
+    numCards = 6;
+    reset();
+    mode=2;
+  });
+
+  NM_Button.addEventListener("click", function mode_3() {
+    Ez_Button.style.backgroundColor="white";
+    Hrd_Button.style.backgroundColor="white";
+    NM_Button.style.backgroundColor="#FFFF77";
+    mode=3;
+   if(bool_1==true)
+  {
+    clearInterval(id);
+    }
+    second=6;
+    numCards = 6;
+    reset();
+    id=setInterval(count,1000);
+    bool_1=true;
+  //id=setInterval(count,1000);
+    document.getElementById("reset").style.display="none";
+  });
+
+function count(){
+    second--;
+    if(bool===false){
+    if(second>0)
+    messageDisplay.textContent = "What's the Color? "+second;
+    else if(second<=0){
+        messageDisplay.textContent = "Time Out";
+       document.getElementById("reset").style.display="block";
+        clearInterval(id);
+        changeColors("#FFF");
+        body.style.backgroundColor=pickedColor;
+    }
+
+  }
+  else {
+      clearInterval(id);
+      bool=false;
+  }
+}
 function reset() {
     gameOver = false;
-
-
     colors = generateRandomColors(numCards);
     //pick a new random color from arra
     pickedColor = pickColor();
@@ -99,7 +143,21 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+   reset();
+  if(mode===3)
+    {
+      if(bool_1==true)
+     {
+       clearInterval(id);
+       }
+       second=6;
+       numCards = 6;
+       reset();
+       id=setInterval(count,1000);
+       bool_1=true;
+     //id=setInterval(count,1000);
+       document.getElementById("reset").style.display="none";
+    }
 })
 
 function changeColors(color) {
