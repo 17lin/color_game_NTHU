@@ -33,6 +33,21 @@ body {
 	padding: 0 1rem;
 }
 
+.mode {
+	padding: 0 0.5rem;
+}
+
+.mode:hover:not(.selected) {
+	color: steelblue;
+	cursor: pointer;
+}
+
+.mode.selected {
+	color: white;
+	background-color: steelblue;
+	cursor: pointer;
+}
+
 #about {
 	margin-left: auto;
 	color: #bbb;
