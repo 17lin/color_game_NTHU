@@ -106,11 +106,18 @@ h1 {
 .selected {
     color: white;
     background: steelblue;
+		font-weight: bold;
+}
+
+:target {
+	color: white;
+	background: steelblue;
 }
 
 #easymode {
 	margin: 0rem;
 	padding: 0rem;
+	font-weight: normal;
 }
 
 #easymode:hover {
@@ -127,6 +134,7 @@ h1 {
 #hardmode {
 	margin: 0rem;
 	padding: 0rem;
+	font-weight: normal;
 }
 
 #hardmode:hover {
@@ -143,6 +151,7 @@ h1 {
 #nightmaremode {
 	margin: 0rem;
 	padding: 0rem;
+	font-weight: normal;
 }
 
 #nightmaremode:hover {
@@ -177,6 +186,10 @@ button {
 #reset:hover {
     color: white;
     background-color: steelblue;
+}
+
+.hidden{
+	display: none;
 }
 /*
 button:hover {
