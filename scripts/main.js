@@ -7,8 +7,8 @@ var gameOver = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
-var cards = document.querySelectorAll(".eam");
-var hid = document.querySelectorAll(".har");
+var btn = document.querySelector("button");
+var cards = document.querySelectorAll(".card");
 var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
@@ -16,8 +16,13 @@ var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 var bteasy = document.querySelector("#easy");
 var bthard = document.querySelector("#hard");
+var btnight = document.querySelector("#night");
 var mode = "easy";
-var test = document.getElementById("about");
+var countDown = 6;
+var count;
+var countMode = 0;
+var ans = false;
+var test = document.querySelector("#about");
 
 function init() {
     initCards();
@@ -26,9 +31,8 @@ function init() {
     bteasy.addEventListener('click', function(e){
       mode = "easy";
       numCards = 3;
-      cards = document.querySelectorAll(".eam");
-      for (var index = 0; index < 3; index++){
-        hid[index].opacity = 0;
+      for (var i = 3; i < 6; i++){
+        cards[i].style.opacity = 0;
       }
       init();
     });
@@ -36,13 +40,33 @@ function init() {
     bthard.addEventListener('click', function(e){
       mode = "hard";
       numCards = 6;
-      cards = document.querySelectorAll(".card");
+      for (var i = 3; i < 6; i++){
+        cards[i].style.opacity = 1;
+      }
+      init();
+    });
+
+    btnight.addEventListener('click', function(e){
+      resetButton.style.opacity = 0;
+      mode = "nightmare";
+      numCards = 6;
+      countDown = 6;
+      for (var i = 3; i < 6; i++){
+        cards[i].style.opacity = 1;
+      }
+
+      if (countMode === 0){
+        count = setInterval(tick, 1000);
+        countMode = 1;
+      }
+
+
       init();
     });
 }
 
 function initCards() {
-    for (var i = 0; i < cards.length; i++) {
+    for (var i = 0; i < numCards; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
             if (gameOver)
@@ -57,9 +81,12 @@ function initCards() {
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
+                ans = true;
             } else {
-                this.style.opacity = 0;
+              this.style.opacity = 0;
+              if (mode !== "nightmare"){
                 messageDisplay.textContent = "Try Again"
+              }
             }
         });
     }
@@ -85,6 +112,11 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+
+    if (mode === "nightmare"){
+      countDown = 6;
+      resetButton.style.opacity = 0;
+    }
 }
 
 resetButton.addEventListener("click", function() {
@@ -101,7 +133,7 @@ function changeColors(color) {
 }
 
 function pickColor() {
-    var random = Math.floor(Math.random() * cards.length);
+    var random = Math.floor(Math.random() * numCards);
     return colors[random];
 }
 
@@ -125,4 +157,27 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function tick() {
+  if (mode === "nightmare"){
+    countDown--;
+    messageDisplay.textContent = "What's the color? " + countDown;
+
+    if (countDown <= -1 || gameOver === true){
+      if (ans === true){
+        messageDisplay.textContent = "Correct!";
+        resetDisplay.textContent = "Play Again"
+      }else{
+        messageDisplay.textContent = "TIME OUT";
+        resetDisplay.textContent = "Play Again"
+        changeColors("#FFF");
+        body.style.backgroundColor = pickedColor;
+      }
+      gameOver = true;
+      resetButton.style.opacity = 1;
+    }else{
+      resetButton.style.opacity = 0;
+    }
+  }
 }
