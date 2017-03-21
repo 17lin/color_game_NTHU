@@ -104,6 +104,15 @@ button {
     -moz-transition: all 0.3s;
 	cursor: pointer;
 }
+.modeButton{
+	display: inline;
+	margin: 0rem auto;
+	padding: 0 0.2rem;
+}
+.modeButton:hover{
+	color: steelblue;
+	background-color: white;
+}
 
 button:hover {
     color: white;
