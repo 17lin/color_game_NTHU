@@ -8,7 +8,8 @@ var hard = document.getElementById('hard');
 var mare = document.getElementById('nightmare');
 var mode = 0;
 var counter = document.getElementById('counter');
-var time = 6;
+var time = 5;
+var outtime;
 
 
 var gameOver = false;
@@ -56,7 +57,7 @@ function modeselect() {
 }
 
 function initCards() {
-    for (var i = 0; i < cards.length; i++) {
+    for (var i = 0; i < 6; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
             if (gameOver)
@@ -71,7 +72,10 @@ function initCards() {
                   changeColors("#FFF");
                   body.style.backgroundColor = clickedColor;
                   gameOver = true;
-              } else {
+              } else if (outtime === true) {
+                  messageDisplay.textContent = "TIME OUT!";
+              }
+               else {
                   this.style.opacity = 0;
                   messageDisplay.textContent = "Try Again"
               }
@@ -83,23 +87,19 @@ function initCards() {
 function reset() {
     var ans = false;
     gameOver = false;
-    time = 5;
+    outtime = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
-    if (mode === 2)
-        messageDisplay.textContent = "What's the Color? "
-        // counter.textContent = time;
-        //  resetButton.style.display = "none"
-    else {
-        messageDisplay.textContent = "What's the Color? ";
-    }
+
     //change colors of cards
     if (mode === 0)
     {
+      counter.style.display = "none";
+      messageDisplay.textContent = "What's the Color? ";
       for (var i = 0; i < 3; i++) {
           cards[i].style.opacity = 1;
           if (colors[i]) {
@@ -122,6 +122,8 @@ function reset() {
     }
     else if (mode === 1)
     {
+        counter.style.display = "none";
+        messageDisplay.textContent = "What's the Color? ";
         for (var i = 0; i < cards.length; i++) {
             cards[i].style.opacity = 1;
             if (colors[i]) {
@@ -134,20 +136,39 @@ function reset() {
     }
     else
     {
-      for (var i = 0; i < cards.length; i++) {
-          cards[i].style.opacity = 1;
-          if (colors[i]) {
-              cards[i].style.display = "block"
-              cards[i].style.backgroundColor = colors[i];
-          }else{
-              cards[i].style.display = "none";
+      resetButton.style.display = "none";
+        counter.style.display = "inline";
+        var timer = setInterval(function(){
+            counter.textContent = time;
+            if (time === 0 || gameOver === true)
+            {
+                gameOver = true;
+                outtime = true;
+                counter.style.display = "none";
+                resetButton.style.display = "block";
+                clearInterval(timer);
+            }
+            else {
+              time--;
+              var blink = setTimeout(function(){
+                  body.style.display = (body.style.display === 'none')? '' : 'none'
+              },10)
+              body.style.display = (body.style.display === 'none')? '' : 'none'
+            }
+        },1000)
+        time = 5;
+        messageDisplay.textContent = "What's the Color? ";
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].style.opacity = 1;
+            if (colors[i]) {
+                cards[i].style.display = "block"
+                cards[i].style.backgroundColor = colors[i];
+              }else{
+                cards[i].style.display = "none";
+              }
+            }
           }
-      }
-      // var timer = setInterval(function(){
-      //
-      // },1000)
-    }
-    body.style.backgroundColor = "#232323";
+          body.style.backgroundColor = "#232323";
 }
 
 
@@ -158,7 +179,7 @@ resetButton.addEventListener("click", function() {
 
 function changeColors(color) {
     //loop through all cards
-    if (mode === 1) {
+    if (mode === 0) {
       for (var i = 0; i < 3; i++) {
           //change each color to match given color
           cards[i].style.opacity = 1;
