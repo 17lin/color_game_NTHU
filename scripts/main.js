@@ -16,10 +16,11 @@ var resetDisplay = document.querySelector("#reset span");
 var cntdSecs=5;
 var easyButton = document.querySelector("#easymode");
 var hardButton = document.querySelector("#hardmode");
+var nightmaremodeButton = document.querySelector("#nightmaremode");
 
 
 function init() {
-    numCards = 6;
+    numCards = 3;
     initCards();
     reset();
     initial();
@@ -32,12 +33,23 @@ function init2() {
     initial();
 }
 
+function init3() {
+    numCards = 6;
+    initCards();
+    reset();
+    initial();
+}
+
 easyButton.addEventListener("click", function() {
-  init()
+  init();
 })
 
 hardButton.addEventListener("click", function() {
-  init()
+  init2();
+})
+
+nightmaremodeButton.addEventListener("click", function() {
+  init3();
 })
 
 
