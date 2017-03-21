@@ -121,7 +121,10 @@ resetButton.addEventListener("click", function() {
 })
 
 function countDown() {
+
   if (count > 1) {
+    body.style.backgroundColor = "#FFF";
+    setTimeout(bgReset, 200);
     count--;
     messageDisplay.textContent = "What's the Color? " + count;
   } else {
@@ -132,6 +135,10 @@ function countDown() {
     body.style.backgroundColor = pickedColor;
     gameOver = true;
   }
+}
+
+function bgReset() {
+  body.style.backgroundColor = "#232323";
 }
 
 function changeColors(color) {
