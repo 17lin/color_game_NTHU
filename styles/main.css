@@ -22,7 +22,7 @@ body {
 	color: #484848;
 }
 
-#navbar {
+#navbar{
 	display: -webkit-flex;
     display: flex;
 	flex-direction: row;
@@ -55,6 +55,16 @@ body {
 	font-size: 120%;
 }
 
+.mode {
+    display: inline;
+    color: blue;
+    background: white;
+}
+.selected {
+    color: white;
+    background: indianred;
+}
+
 @media (min-width: 576px) {
 	#color-picked {
 	    font-size: 200%;
@@ -85,11 +95,11 @@ h1 {
 
 .selected {
     color: white;
-    background: steelblue;
+    background: crimson;
 }
 
 button {
-	display: block;
+	display: inline;
 	margin: 3rem auto;
 	padding: 1rem;
 	outline: none;
@@ -108,4 +118,26 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+.blink {
+  animation: blink-animation 1s steps(900, start) infinite;
+  -webkit-animation: blink-animation 1s steps(900, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+    background: grey;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+    background: grey;
+  }
+}
+
+#re {
+    align-items: center;
+    margin: 0 auto;
 }

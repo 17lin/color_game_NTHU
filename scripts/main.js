@@ -13,11 +13,118 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var modeButtons = document.querySelectorAll(".mode");
+var countdown = document.querySelector("#countdown");
 
 function init() {
     initCards();
+    selectMode();
     reset();
 }
+var n = 5;
+/*
+function selectMode(){
+    for(var i = 0;i < modeButtons.length;i ++){
+        modeButtons[i].addEventListener("click", function(){
+            for(var i = 0;i < modeButtons.length;i ++){
+                modeButtons[i].classList.remove("selected");
+            }
+            this.classList.add("selected");
+            //numCards = 6;
+            if(this.textContent ==="Easy") numCards = 3;
+            else if(this.textContent ==="Hard")numCards = 6;
+            else if(this.textContent ==="Noghtmare"){
+                resetButton.style.display="none";
+                numCards = 6;
+                n = 5;
+                countdown.textContent = " 5";
+                var x = setInterval(timing, 1000);
+                function timing(){
+                    countdown.textContent = " " + --n;
+                    if(n <= 0){
+                        resetButton.style.display="block";
+                        body.style.backgroundColor = pickedColor;
+                            messageDisplay.textContent = "TIMEOUT!";
+                            countdown.textContent = "";
+                            clearInterval(x);
+                            n = 5;    
+                        }
+                    }
+            }
+            reset();
+        })
+    }
+}*/
+
+function selectMode() {
+	for(var i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", function() {
+			for (var i = 0; i < modeButtons.length; i++) {
+				modeButtons[i].classList.remove("selected");
+			}
+			this.classList.add("selected");
+			if (this.textContent === "Easy") {
+				numCards = 3;
+			}
+			else if(this.textContent==="Hard"){
+				numCards = 6;
+			}else{
+                resetButton.style.display="none";
+                n = 5;
+                countdown.textContent = " 5";
+                mode = 3;
+                numCards = 6;
+                resetButton.style.display="none";
+                setInterval(timing, 1000);
+            }
+			reset();
+		});
+	}
+}/*
+var mode = 1;
+function selectMode(){
+    for(var i = 0;i < modeButtons.length;i ++){
+        modeButtons[i].addEventListener("click", function(){
+            for(var i = 0;i < modeButtons.length;i ++){
+                modeButtons[i].classList.remove("selected");
+            }
+            this.classList.add("selected");
+            if(this.textContent==="Easy"){ numCards = 3; mode = 1;}
+            if(this.textContent==="Hard"){numCards = 6; mode = 2;}
+            else{
+                resetButton.style.display="none";
+                n = 5;
+                countdown.textContent = " 5";
+                mode = 3;
+                numCards = 6;
+                resetButton.style.display="none";
+                setInterval(timing, 1000);
+            }
+            reset();
+        })
+    }
+}
+*/
+function timing(){
+                    countdown.textContent = " " + --n;
+                    if(n <= 0 || gameOver){
+                        resetButton.style.display="block";
+                        body.style.backgroundColor = pickedColor;
+                            if(gameOver){
+                                countdown.textContent = "";
+                                messageDisplay.textContent = "Correct!";
+                            }
+                            else{
+                                countdown.textContent = "";
+                                messageDisplay.textContent = "TIMEOUT!";
+                                gameOver = true;
+                            }
+                            
+                            clearInterval(x);
+                            n = 5;    
+                        }
+                    }
+        
 
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
