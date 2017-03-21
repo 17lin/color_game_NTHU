@@ -83,15 +83,10 @@ h1 {
 	cursor: pointer;
 }
 
-.selected {
-    color: white;
-    background: steelblue;
-}
-
 button {
 	display: block;
-	margin: 3rem auto;
-	padding: 1rem;
+	margin: 2rem auto;
+	padding: 2rem;
 	outline: none;
 	border: none;
     border-radius: 999rem;
@@ -108,4 +103,16 @@ button {
 button:hover {
     color: white;
     background-color: steelblue;
+}
+
+
+button.select{
+    font-weight: bold;
+    padding: 0 1rem;
+    padding: 0rem;
+    font-weight: 0rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
