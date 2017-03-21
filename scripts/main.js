@@ -130,6 +130,7 @@ function setupMode() {
 
 function timedCount() {
     countDown.textContent = c.toString();
+    body.classList.add("blink");
     if(c>0)c = c - 1;
     else {
       timeOut = 1;
@@ -139,6 +140,7 @@ function timedCount() {
       body.style.backgroundColor = pickedColor;
       messageDisplay.textContent = "Time out!";
       changeColors("#FFF");
+      body.classList.remove("blink");
       return;
     }
     t = setTimeout(function(){ timedCount() }, 1000);
