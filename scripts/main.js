@@ -14,9 +14,55 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var modeButtons = document.querySelectorAll(".mode-button");
+var mode = 0;
+var count = 5;
+var counterId = 0;
+
 function init() {
+    initModeButtons();
     initCards();
     reset();
+}
+
+function initModeButtons() {
+  modeButtons[0].addEventListener("click", function() {
+    numCards = 3;
+    mode = 0;
+    if (counterId != 0) {
+      clearInterval(counterId);
+      counterId = 0;
+    }
+  })
+  modeButtons[1].addEventListener("click", function() {
+    numCards = 6;
+    mode = 1;
+    if (counterId != 0) {
+      clearInterval(counterId);
+      counterId = 0;
+    }
+  })
+  modeButtons[2].addEventListener("click", function() {
+    numCards = 6;
+    mode = 2;
+    if (counterId == 0) {
+      counterId = setInterval(countDown, 1000);
+    }
+  })
+  for (var i=0; i<modeButtons.length; i++) {
+    modeButtons[i].addEventListener("click", function() {
+      // refresh all other mode buttons
+      refreshModeButtons();
+      this.classList.add("selected-mode-button");
+      reset();
+    })
+  }
+}
+
+function refreshModeButtons() {
+  for (var i=0; i<modeButtons.length; i++) {
+    modeButtons[i].classList.remove("selected-mode-button");
+  }
 }
 
 function initCards() {
@@ -52,6 +98,13 @@ function reset() {
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
+    count = 5;
+    if (mode == 2) {
+      messageDisplay.textContent += " " + count;
+      resetButton.style.display = "none";
+    } else {
+      resetButton.style.display = "block";
+    }
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -68,6 +121,27 @@ function reset() {
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+function countDown() {
+
+  if (count > 1) {
+    body.style.backgroundColor = "#FFF";
+    setTimeout(bgReset, 100);
+    count--;
+    messageDisplay.textContent = "What's the Color? " + count;
+  } else {
+    messageDisplay.textContent = "TIMEOUT!";
+    resetButton.style.display = "block";
+    resetDisplay.textContent = "Play Again"
+    changeColors("#FFF");
+    body.style.backgroundColor = pickedColor;
+    gameOver = true;
+  }
+}
+
+function bgReset() {
+  body.style.backgroundColor = "#232323";
+}
 
 function changeColors(color) {
     //loop through all cards
