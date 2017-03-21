@@ -1,8 +1,10 @@
 window.onload = function() {
+	
     init();
 };
-
-var numCards = 3;
+var countdownnumber=5;
+var countdownid,x;
+var numCards = 6;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -14,11 +16,34 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
-function init() {
-    initCards();
-    reset();
+resetButton.style.visibility="hidden";
+var mobtn = document.querySelector("#mode");
+mobtn.addEventListener("mouseover",function(){
+	var OriginalFont=document.querySelector("#mode").innerHTML;
+    document.querySelector("#mode").innerHTML='<font background-color="green">'+OriginalFont+'</font>';
+})
+mobtn.addEventListener("mouseout",function(){
+	mobtn.style.color = gray;
+})
+var modeValue=1;
+var el = document.getElementById("bw");
+el.addEventListener("mouseover", f1);
+el.addEventListener("mouseout", f2);
+
+
+function f1() {
+   el.innerHTML = "Click me";
+}
+function f2() {
+    el.innerHTML = "New Color";
 }
 
+function init() {
+	
+    initCards();
+    reset();
+	initial();
+}
 function initCards() {
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
@@ -31,7 +56,9 @@ function initCards() {
             //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
+				clearInterval(countdownid);
                 resetDisplay.textContent = "Play Again"
+				resetButton.style.visibility="visible";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
@@ -46,6 +73,7 @@ function initCards() {
 function reset() {
     gameOver = false;
     colors = generateRandomColors(numCards);
+	countdownnumber=5;
     //pick a new random color from array
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
@@ -66,7 +94,7 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
-    reset();
+    init();
 })
 
 function changeColors(color) {
@@ -103,4 +131,26 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+function initial(){
+	clearInterval(countdownid);
+	countdownnumber=5;
+	x=document.getElementById("countdown");
+	x.innerHTML=countdownnumber;
+	countdownnumber--;
+	countdownid=window.setInterval(countdownfunc,1000);
+}
+
+function countdownfunc(){ 
+	x.innerHTML=countdownnumber;
+	//var cc = this.style.backgroundColor;
+	if(countdownnumber==0){
+		messageDisplay.textContent = "Time out!";
+		resetButton.style.visibility="visible";
+		body.style.backgroundColor = pickedColor;
+		changeColors("#FFF");
+		clearInterval(countdownid);
+		countdownnumber+=6;
+  }
+  countdownnumber--;
 }
