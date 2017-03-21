@@ -16,11 +16,12 @@ var resetDisplay = document.querySelector("#reset span");
 var Ez_Button= document.querySelector("#Ez_btn");
 var Hrd_Button= document.querySelector("#hrd_btn");
 var NM_Button= document.querySelector("#NM_btn");
-var second=6;
+var second=5;
 var bool=false;
 var bool_1=false;
 var id;
 var mode=1;
+var bool_color=false;
 
 function init() {
     initCards();
@@ -92,7 +93,7 @@ function initCards() {
   {
     clearInterval(id);
     }
-    second=6;
+    second=5;
     numCards = 6;
     reset();
     id=setInterval(count,1000);
@@ -102,16 +103,30 @@ function initCards() {
   });
 
 function count(){
-    second--;
+
     if(bool===false){
-    if(second>0)
+    if(second>0){
     messageDisplay.textContent = "What's the Color? "+second;
+    second--;
+      if(bool_color===false)
+      {
+        body.style.backgroundColor="#DDDDDD";
+        bool_color=true;
+      }
+      else if(bool_color===true)
+      {
+        body.style.backgroundColor="#232323";
+        bool_color=false;
+
+      }
+    }
     else if(second<=0){
         messageDisplay.textContent = "Time Out";
        document.getElementById("reset").style.display="block";
         clearInterval(id);
         changeColors("#FFF");
         body.style.backgroundColor=pickedColor;
+        gameOver = true;
     }
 
   }
@@ -150,7 +165,7 @@ resetButton.addEventListener("click", function() {
      {
        clearInterval(id);
        }
-       second=6;
+       second=5;
        numCards = 6;
        reset();
        id=setInterval(count,1000);
