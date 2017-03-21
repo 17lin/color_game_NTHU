@@ -1,9 +1,10 @@
 window.onload = function() {
-    init();
+    init(3, false);
 };
 
 var numCards = 3;
 var gameOver = false;
+var mode = false;
 var colors = [];
 var pickedColor;
 var body = document.querySelector("body");
@@ -13,13 +14,17 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
-
-function init() {
-    initCards();
-    reset();
+var easyButton = document.querySelector("#easy");
+var hardButton = document.querySelector("#hard");
+var nightmareButton = document.querySelector("#nightmare");
+function init(num, mode) {
+    initCards(num, mode);
+    reset(mode);
 }
 
-function initCards() {
+function initCards(num, mode) {
+    numCards = num;
+    
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -29,21 +34,32 @@ function initCards() {
             var clickedColor = this.style.backgroundColor;
             // alert(this.style.backgroundColor);
             //compare color to pickedColor
+            
             if (clickedColor === pickedColor) {
-                messageDisplay.textContent = "Correct!";
+                messageDisplay.textContent = "Correct!"
                 resetDisplay.textContent = "Play Again"
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
+                if(mode){
+                    messageDisplay.textContent = "What's the Color?" + " " + counter;
+                } 
+                else{
+                    messageDisplay.textContent = "Try Again"
+                }
             }
         });
     }
 }
-
-function reset() {
+////
+function tick() {
+  var time = new Date().getSeconds();
+}
+var counter = setInterval(tick, 1000);
+////
+function reset(mode) {
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -51,7 +67,13 @@ function reset() {
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
     resetDisplay.textContent = "New Color"
-    messageDisplay.textContent = "What's the Color?";
+    if(mode){
+        messageDisplay.textContent = "What's the Color?" + " " + counter;
+    }
+    else{
+        messageDisplay.textContent = "What's the Color?";
+    }
+    
     //change colors of cards
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
@@ -65,6 +87,17 @@ function reset() {
     body.style.backgroundColor = "#232323";
 }
 
+easyButton.addEventListener("click", function(){
+    init(3, false);
+})
+
+hardButton.addEventListener("click", function(){
+    init(6, false);
+})
+
+nightmareButton.addEventListener("click", function(){
+    init(6, true);
+})
 resetButton.addEventListener("click", function() {
     reset();
 })

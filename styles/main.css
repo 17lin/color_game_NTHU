@@ -33,6 +33,46 @@ body {
 	padding: 0 1rem;
 }
 
+/*added mode button*/
+#easy {
+    font-weight: normal;
+    display: inline;
+    padding: 0.3rem;
+    margin: 0rem auto;
+    background-color: white;
+}
+
+#hard {
+    font-weight: normal;
+    display: inline;
+    padding: 0.3rem;
+    margin: 0rem auto;
+    background-color: white;
+}
+
+#nightmare {
+    font-weight: normal;
+    display: inline;
+    padding: 0.3rem;
+    margin: 0rem auto;
+    background-color: white;
+}
+#easy:hover{
+    color: steelblue;
+    /*background-color: red;*/
+}
+#easy:visited{
+    background: steelblue;
+}
+#hard:hover{
+    color: steelblue;
+}
+
+#nightmare:hover{
+    color: steelblue;
+}
+
+
 #about {
 	margin-left: auto;
 	color: #bbb;
