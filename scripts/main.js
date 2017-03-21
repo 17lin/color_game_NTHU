@@ -2,7 +2,7 @@ window.onload = function() {
     init();
 };
 
-var numCards = 3;
+var numCards;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -13,6 +13,7 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var Timer = ;
 
 function init() {
     initCards();
@@ -20,6 +21,7 @@ function init() {
 }
 
 function initCards() {
+    Easy_G();
     for (var i = 0; i < cards.length; i++) {
         //add click listeners to cards
         cards[i].addEventListener("click", function() {
@@ -103,4 +105,30 @@ function randomColor() {
     //pick a "blue" from  0 -255
     var b = Math.floor(Math.random() * 256);
     return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+
+function Easy_G(){
+    document.getElementById('Easy').setAttribute("class", "clicked");
+    document.getElementById('Hard').setAttribute("class", "unclicked");
+    document.getElementById('Nightmare').setAttribute("class", "unclicked");
+    numCards = 3;
+    reset();
+}
+
+function Hard_G(){
+    document.getElementById('Hard').setAttribute("class", "clicked");
+    document.getElementById('Easy').setAttribute("class", "unclicked");
+    document.getElementById('Nightmare').setAttribute("class", "unclicked");
+    numCards = 6;
+    reset();
+
+}
+
+function Nightmare_G(){
+    document.getElementById('Nightmare').setAttribute("class", "clicked");
+    document.getElementById('Hard').setAttribute("class", "unclicked");
+    document.getElementById('Easy').setAttribute("class", "unclicked");
+    numCards = 6;
+    reset();
+    setTimeout("Failed()",10000);
 }
