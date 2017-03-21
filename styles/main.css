@@ -24,13 +24,15 @@ body {
 
 #navbar {
 	display: -webkit-flex;
-    display: flex;
+  display: flex;
 	flex-direction: row;
 }
 
 #brand {
 	font-weight: bold;
-	padding: 0 1rem;
+	padding: 0 2rem;
+	display: flex;
+	flex-direction: row;
 }
 
 #about {
@@ -106,6 +108,14 @@ button {
 }
 
 button:hover {
-    color: white;
-    background-color: steelblue;
+    color: lightblue;
+    background-color: white;
+}
+
+#add {
+	display: none;
+}
+
+.mode {
+	font-size: 1rem;
 }
