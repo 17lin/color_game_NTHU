@@ -1,8 +1,9 @@
 window.onload = function() {
     init();
 };
-
-var numCards = 6;
+var nightornot = 0;
+var gameovernumber = 0;
+var numCards = 3;
 var gameOver = false;
 var colors = [];
 var pickedColor;
@@ -21,89 +22,72 @@ var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
+var t1;
+
 
 function init() {
-    night.addEventListener("click", function() {
-        easy.textContent = "easy";
-        hard.textContent = "hard";
-        night.textContent = "here";
-        reset();
-        var t1 = setTimeout("time.textContent = '4'", 1000);
-        var t2 = setTimeout("time.textContent = '3'", 2000);
-        var t3 = setTimeout("time.textContent = '2'", 3000);
-        var t4 = setTimeout("time.textContent = '1'", 4000);
-        var t5 = setTimeout("messageDisplay.textContent='Timeout'", 5000);
-        var t6 = setTimeout("time.textContent=''", 5000);
-        initCardsnight();
-    });
-    easy.addEventListener("click", function() {
-        easy.textContent = "here";
-        hard.textContent = "hard";
-        night.textContent = "nightmare";
-        messageDisplay.textContent = "What's the color?";
-        time.textContent = "5";
-        reset();
-        initCards();
-    });
-    hard.addEventListener("click", function() {
-        easy.textContent = "easy";
-        hard.textContent = "here";
-        night.textContent = "nightmare";
-        messageDisplay.textContent = "What's the color?";
-        time.textContent = "5";
-        reset();
-        initCards();
-    });
-
-
     reset();
     initCards();
 }
 
-
-
-
-function initCardsnight() {
-    time.style.opacity = 1;
-    for (var i = 0; i < cards.length; i++) {
-        //add click listeners to cards
-        cards[i].addEventListener("click", function() {
-            if (gameOver)
-                return;
-            //grab color of clicked card
-            var clickedColor = this.style.backgroundColor;
-            // alert(this.style.backgroundColor);
-            //compare color to pickedColor
-            if (clickedColor === pickedColor) {
-                messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
-                changeColors("#FFF");
-                body.style.backgroundColor = clickedColor;
-                gameOver = true;
-            } else {
-                this.style.opacity = 0;
-                messageDisplay.textContent = "Try Again"
-            }
-        });
-    }
-}
+night.addEventListener("click", function() {
+    resetButton.style.visibility = "hidden";
+    easy.textContent = "easy";
+    hard.textContent = "hard";
+    night.textContent = "here";
+    night.style.backgroundColor = "blue";
+    easy.style.backgroundColor = "white";
+    hard.style.backgroundColor = "white";
+    nightornot = 1;
+    gameovernumber = 0;
+    numCards = 6;
+    reset();
+    clearInterval(t1);
+    Timeoutmachine(5);
+});
+easy.addEventListener("click", function() {
+    easy.textContent = "here";
+    hard.textContent = "hard";
+    night.textContent = "nightmare";
+    messageDisplay.textContent = "What's the color?";
+    resetButton.style.visibility = "visible";
+    night.style.backgroundColor = "white";
+    easy.style.backgroundColor = "blue";
+    hard.style.backgroundColor = "white";
+    nightornot = 0;
+    gameovernumber = 0;
+    numCards = 3;
+    reset();
+});
+hard.addEventListener("click", function() {
+    easy.textContent = "easy";
+    hard.textContent = "here";
+    night.textContent = "nightmare";
+    messageDisplay.textContent = "What's the color?";
+    resetButton.style.visibility = "visible";
+    night.style.backgroundColor = "white";
+    easy.style.backgroundColor = "white";
+    hard.style.backgroundColor = "blue";
+    nightornot = 0;
+    gameovernumber = 0;
+    numCards = 6;
+    reset();
+});
 
 function initCards() {
     time.style.opacity = 0;
     for (var i = 0; i < cards.length; i++) {
-        //add click listeners to cards
         cards[i].addEventListener("click", function() {
             if (gameOver)
                 return;
-            //grab color of clicked card
             var clickedColor = this.style.backgroundColor;
-            // alert(this.style.backgroundColor);
-            //compare color to pickedColor
             if (clickedColor === pickedColor) {
                 messageDisplay.textContent = "Correct!";
-                resetDisplay.textContent = "Play Again"
+                resetDisplay.textContent = "Play Again";
+                resetButton.style.visibility = "visible";
                 changeColors("#FFF");
                 body.style.backgroundColor = clickedColor;
+                time.style.opacity = 0;
                 gameOver = true;
             } else {
                 this.style.opacity = 0;
@@ -120,9 +104,16 @@ function reset() {
     pickedColor = pickColor();
     //change colorDisplay to match picked Color
     colorDisplay.textContent = pickedColor;
+    time.textContent = "5";
     resetDisplay.textContent = "New Color"
     messageDisplay.textContent = "What's the Color?";
     //change colors of cards
+    if (nightornot === 1) {
+        clearInterval(t1);
+        Timeoutmachine(5);
+    } else {
+        time.textContent = "";
+    }
     for (var i = 0; i < cards.length; i++) {
         cards[i].style.opacity = 1;
         if (colors[i]) {
@@ -133,11 +124,45 @@ function reset() {
         }
     }
     body.style.backgroundColor = "#232323";
+
 }
 
 resetButton.addEventListener("click", function() {
     reset();
 })
+
+function Timeoutmachine(a) {
+    time.style.opacity = 1;
+    var i = 0;
+    t1 = setInterval(function() {
+        if (gameOver === false) {
+            if (nightornot === 1 && (i % 10 === 0)) {
+                time.textContent = a;
+                body.style.backgroundColor = "black";
+                resetButton.style.visibility = "hidden";
+                if (a === 0) {
+                    messageDisplay.textContent = "Time out!";
+                    resetDisplay.textContent = "play again"
+                    changeColors("#FFF");
+                    body.style.backgroundColor = pickedColor;
+                    resetButton.style.visibility = "visible";
+                    time.textContent = '';
+                    gameOver = true;
+
+                }
+                i++;
+                a-- || clearInterval(t1);
+            } else if (nightornot === 1 && (i % 10) === 9) {
+                body.style.backgroundColor = "white";
+                i++;
+            } else {
+                i++;
+            }
+        } else {
+            clearInterval(t1);
+        }
+    }, 100);
+}
 
 function changeColors(color) {
     //loop through all cards

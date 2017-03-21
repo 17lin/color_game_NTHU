@@ -114,6 +114,14 @@ h1 {
     display: inline;
 }
 
-#easy #night #hard:hover {
+#hard:hover {
+    color: red;
+}
+
+#easy:hover {
+    color: red;
+}
+
+#night:hover {
     color: red;
 }
