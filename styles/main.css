@@ -105,7 +105,24 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+button :hover {
     color: white;
     background-color: steelblue;
 }
+#brand button :hover{
+    color: green;
+    
+}
+#brand{
+    height: 10px !important;
+}
+#brand button{
+    
+    margin-top: 0px !important;
+    margin-bottom:  0px !important;
+    height: 10px !important;
+}
+
+
+
+
