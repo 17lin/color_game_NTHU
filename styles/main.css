@@ -141,3 +141,10 @@ button:hover {
     margin: 0;
     padding: 20px 0;
 }
+
+@keyframes blink {
+0% {opacity: 1; }
+0.1% {opacity: 0;}
+100% {opacity: 1;} 
+} 
+ 

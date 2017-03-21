@@ -21,6 +21,7 @@ var card_container = document.getElementById("card-container");
 var card = document.querySelector("#card");
 var timer = document.getElementById("timer");
 var time = 5;
+var blink = document.getElementById("blink");
 
 easy_mode_button.style.backgroundColor = "green";
 
@@ -48,6 +49,7 @@ function initCards() {
                 time = 6;
                 resetButton.style.visibility = 'visible';
                 timer.style.visibility = 'hidden';
+                blink.style.animation = '';
             } else {
                 this.style.opacity = 0;
                 messageDisplay.textContent = "Try Again"
@@ -141,6 +143,7 @@ function tick() {
         timer.textContent = time;
         resetButton.style.visibility = 'hidden';
         timer.style.visibility = 'visible';
+        blink.style.animation = 'blink 1s infinite';
     }
     if(time == 0 && mode == 2){
         timer.textContent = 5;
@@ -151,6 +154,7 @@ function tick() {
         time = 6;
         resetButton.style.visibility = 'visible';
         messageDisplay.textContent = 'timeout!';
+        blink.style.animation = '';
     }
 }
 
