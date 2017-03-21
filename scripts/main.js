@@ -14,6 +14,35 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var resetDisplay = document.querySelector("#reset span");
 
+var hardButton = document.querySelector("#hard");
+var easyButton = document.querySelector("#easy");
+var nightButton = document.querySelector("#nightmare");
+hardButton.addEventListener("click", function() {
+    numCards = 6;
+    reset();
+})
+
+easyButton.addEventListener("click", function() {
+    numCards = 3;
+    reset();
+})
+
+nightButton.addEventListener("click", function() {
+    numCards = 6;
+    reset();
+    var counter = 5;
+    messageDisplay.textContent = "It is Nightmare"+counter;
+    var interval = setInterval(function() {
+    counter++;
+    // Display 'counter' wherever you want to display it.
+    if (counter == 0) {
+        // Display a login box
+        clearInterval(interval);
+    }
+    }, 1000);
+})
+
+
 function init() {
     initCards();
     reset();
