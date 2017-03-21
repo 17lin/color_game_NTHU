@@ -12,7 +12,16 @@ var colorDisplay = document.getElementById("color-picked");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
+var footer = document.querySelector("#footer");
 var resetDisplay = document.querySelector("#reset span");
+var gamemode = 0;
+var easymode = document.getElementById("easymode")
+var hardmode = document.getElementById("hardmode")
+var nightmare = document.getElementById("nightmare")
+var currentDate;
+var eventDate;
+var time;
+var interval;
 
 function init() {
     initCards();
@@ -43,7 +52,26 @@ function initCards() {
     }
 }
 
+function nightmareReset(){
+    time--;
+    messageDisplay.textContent = "What's the Color?   " + time;
+    if(time <= 0){
+        messageDisplay.textContent = "Time Out!!!";
+        changeColors("#FFF");
+        document.body.style.backgroundColor = pickedColor;
+        clearInterval(interval);
+        footer.style.display="block";
+        resetDisplay.textContent = "Play Again"
+    }
+}
+
 function reset() {
+    if(gamemode==2){
+        time = 7;
+        footer.style.display="none";
+        nightmareReset();
+        interval = setInterval(nightmareReset, 1000);
+    }
     gameOver = false;
     colors = generateRandomColors(numCards);
     //pick a new random color from array
@@ -66,6 +94,24 @@ function reset() {
 }
 
 resetButton.addEventListener("click", function() {
+    reset();
+})
+
+easymode.addEventListener("click", function() {
+    numCards = 3;
+    gamemode = 0;
+    reset();
+})
+
+hardmode.addEventListener("click", function() {
+    numCards = 6;
+    gamemode = 1;
+    reset();
+})
+
+nightmare.addEventListener("click", function() {
+    numCards = 6;
+    gamemode = 2;
     reset();
 })
 
