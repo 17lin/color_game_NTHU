@@ -11,7 +11,7 @@ body {
     background-color: #232323;
     margin: 0;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	transition: background 0.6s;
+	transition: background 0.6s; /* animate of background*/
     -webkit-transition: background 0.6s;
     -moz-transition: background 0.6s;
 }
@@ -24,7 +24,7 @@ body {
 
 #navbar {
 	display: -webkit-flex;
-    display: flex;
+    display: flex;  /* box level flex container of child*/
 	flex-direction: row;
 }
 
@@ -32,7 +32,42 @@ body {
 	font-weight: bold;
 	padding: 0 1rem;
 }
-
+#easy{
+	/*margin-left: 1rem;*/
+	color: black;
+	font-weight: bold;
+	border-radius: 999rem;
+	margin:0;
+	padding:0 1rem;
+	height:24px;
+}
+#hard{
+	/*margin-left: 1rem;*/
+	color: black;
+	border-radius: 999rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 1rem;
+	height:24px;
+}
+#nightmare{
+	/*margin-left: 1rem;*/
+	color: black;
+	border-radius: 999rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0 1rem;
+	height:24px;
+}
+#hard:hover{
+	background-color: white;
+}
+#easy:hover{
+	background-color: white;
+}
+#nightmare:hover{
+	background-color: white;
+}
 #about {
 	margin-left: auto;
 	color: #bbb;
@@ -47,8 +82,8 @@ body {
 #card-container::after {
 	content: "";
 	display: block;
-	clear: both;
-}
+	clear: both; /* nothing element allowed appear in the left and write*/
+}  /* last part*/
 
 #color-picked {
     font-weight: bold;
@@ -58,7 +93,7 @@ body {
 @media (min-width: 576px) {
 	#color-picked {
 	    font-size: 200%;
-	}
+	} /* Larger than 576px*/
 }
 
 h1 {
@@ -74,13 +109,13 @@ h1 {
     width: 30%;
     background: white;
     padding-bottom: 30%;
-    float: left;
+    float: left;  /* make it to the left*/
     margin: 1.66%;
 	border-radius: 1rem;
     transition: all 0.6s;
     -webkit-transition: all 0.6s;
     -moz-transition: all 0.6s;
-	cursor: pointer;
+	cursor: pointer;  /* change the mouse*/
 }
 
 .selected {
@@ -94,7 +129,7 @@ button {
 	padding: 1rem;
 	outline: none;
 	border: none;
-    border-radius: 999rem;
+    border-radius: 999rem;   /* shape*/
     background-color: white;
 	font-size: 1rem;
     font-weight: 700;
@@ -105,7 +140,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
+button:hover {      /* action*/
     color: white;
     background-color: steelblue;
 }
